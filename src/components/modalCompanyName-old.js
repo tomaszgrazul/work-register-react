@@ -21,6 +21,7 @@ function ModalCompanyName({setModalCompanyName, handleAddCompanyName, companyNum
     const readCompanyList = () => {
 
         axios
+        // .post("http://127.0.0.1:8080/read") 
         .get("http://127.0.0.1:8080/index") 
         .then((res) => { 
             setRegister(res.data);       
@@ -34,16 +35,27 @@ function ModalCompanyName({setModalCompanyName, handleAddCompanyName, companyNum
 
         readCompanyList();  
     }, []);
-   
+
+    // useEffect(() => {
+        
+    //     console.log("isChecked=", isChecked); 
+    //     // console.log("registerLength=", registerLength); 
+    //     // console.log("companyNumber z modala=", companyNumber); 
+    // }, [isChecked, companyNumber]);
+
+
+    
 
     return (
             <div className="modalCompanyName">
                 <div className='topModal'>
                     <h3>Lista firm</h3>
                     <div>
+                        {/* <p className='ex-modal' onClick={() => {setModalCompanyName(false); setRegisterIsChecked([]);}}>X</p> */}
                         <p className='ex-modal' onClick={() => {setModalCompanyName(false)}}>X</p>
                     </div>                  
                 </div>
+                {/* {error && <p className="error">Wystąpił błąd. Spróbuj jeszcze raz!</p>} */}
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>
                     <tbody>
@@ -64,8 +76,10 @@ function ModalCompanyName({setModalCompanyName, handleAddCompanyName, companyNum
                                         <button onClick={() => {
 
                                                 axios
+                                                // .post("http://127.0.0.1:8080/delete", {id: item._id}) 
                                                 .delete(`http://127.0.0.1:8080/delete/${item._id}`) 
                                                 .then((res) => {       
+                                                    // console.log(res.data.error);
                                                     if (!res.data.error) {
                                                         var filtered = register.filter((el, i) =>
                                                             i !== register.findIndex((el) => el === item)
@@ -80,11 +94,13 @@ function ModalCompanyName({setModalCompanyName, handleAddCompanyName, companyNum
                                                 });       
                                             }}
                                             className="btn-delete">Usuń
+                                        {/* </button><button onClick={(e) => {handleAddCompanyName(item.companyName)}}>Wybierz</button></td></tr> */}
                                         </button></td></tr>
                                 )      
                             })}    
                     </tbody>
                 </table>
+                {/* <button className="btn-modal" onClick={() => setModalCompanyName(false)} >Anuluj</button> */}
             </div>
         )
 }

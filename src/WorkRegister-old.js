@@ -14,20 +14,26 @@ const WorkRegister = () => {
     const [companyNumber, setCompanyNumber] = useState();
 
 
-    const handleCompanyList = (e) => {       
+
+    const handleCompanyList = (e) => {
+        
         setCompanyName(e.target.value);
     }
 
-    const handleAddCompanyName = (addCompanyName, isChecked, i) => {            
+    const handleAddCompanyName = (addCompanyName, isChecked, i) => {
+                
         !isChecked[i]? setCompanyName(addCompanyName) : setCompanyName('');    
     }
 
     const handleReadCompanyNumber = () => {
+
         readCompanyNumber(); 
     }
 
     const readCompanyNumber = () => {
+
         axios
+        // .post("http://127.0.0.1:8080/readCount") 
         .get("http://127.0.0.1:8080/readCount")
         .then((res) => { 
             setCompanyNumber(res.data);       
@@ -38,12 +44,17 @@ const WorkRegister = () => {
     }
 
     useEffect(() => {
+
         readCompanyNumber(); 
+        // console.log("companyNumber",companyNumber );
     }, []);
 
 
     const addCompany = () => {
+       
+ 
         let newCompany = {
+            // _id: Date.now(),
             companyName: companyName
         }
 
@@ -178,11 +189,20 @@ const WorkRegister = () => {
                     <label htmlFor="zakonczeniePracy">Zakończenie pracy (data, godzina)</label>
                     <input type="datetime-local" placeholder="" name="zakonczeniePracy" />
                 </div>
+
+
+
+                
+                
+
             </form>
             {openModalCompanyName && <ModalCompanyName setModalCompanyName={setOpenModalCompanyName} handleAddCompanyName={handleAddCompanyName} companyNumber={companyNumber} handleReadCompanyNumber={handleReadCompanyNumber}/>}
         </div>
 
     )
 }
+
+
+
 
 export default WorkRegister;
