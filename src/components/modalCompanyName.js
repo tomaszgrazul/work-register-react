@@ -2,8 +2,8 @@ import './modalCompanyName.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-function ModalCompanyName({setModalCompanyName, handleAddCompanyName, companyNumber, handleReadCompanyNumber}) {
-
+const ModalCompanyName = ({setModalCompanyName, handleAddCompanyName, companyNumber, handleReadCompanyNumber}) => {
+// function ModalCompanyName({setModalCompanyName, handleAddCompanyName, companyNumber, handleReadCompanyNumber}) {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState(new Array(companyNumber).fill(false));
@@ -52,7 +52,7 @@ function ModalCompanyName({setModalCompanyName, handleAddCompanyName, companyNum
                                 return (
                                     <tr key={i}><td><input type="checkbox" className="checkbox" checked={isChecked[i]}
                                         onChange={() => {
-                                            isChecked.map((item, index) => {
+                                            isChecked.map((item) => {
                                                 if( item ) {
                                                     isChecked[i] = true;
                                                 } 
@@ -67,13 +67,15 @@ function ModalCompanyName({setModalCompanyName, handleAddCompanyName, companyNum
                                                 .delete(`http://127.0.0.1:8080/delete/${item._id}`) 
                                                 .then((res) => {       
                                                     if (!res.data.error) {
-                                                        var filtered = register.filter((el, i) =>
+                                                        const filtered = register.filter((el, i) =>
                                                             i !== register.findIndex((el) => el === item)
                                                         );
-                                                        setRegister(filtered);
-                                                        setError(false);
-                                                        } else setError(true);
-                                                        handleReadCompanyNumber();
+                                                    setRegister(filtered);
+                                                    setError(false);
+                                                    } else {
+                                                        setError(true);
+                                                    }
+                                                    handleReadCompanyNumber();
                                                 })
                                                 .catch((error) => {
                                                     console.error(error);
