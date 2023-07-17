@@ -2,23 +2,35 @@ import { useState, useEffect} from "react";
 import './WorkRegister.css';
 import axios from "axios";
 import ModalCompanyName from "./components/ModalCompanyName";
-
+import ModalNumberOfAgreement from "./components/ModalNumberOfAgreement";
 
 const WorkRegister = () => {
 
-     const [openModalCompanyName, setOpenModalCompanyName] = useState(false);
+    const [openModalCompanyName, setOpenModalCompanyName] = useState(false);
     const [companyName, setCompanyName] = useState('');
-    const [errors, setErrors] = useState({
+    const [errorsCompanyName, setErrorsCompanyName] = useState({
         companyName: ''
+    });
+
+    const [openModalNumberOfAgreement, setOpenModalNumberOfAgreement] = useState(false);
+    const [numberOfAgreemnet, setnumberOfAgreemnet] = useState('');
+    const [errorsNumberOfAgreemnet, setErrorsNumberOfAgreemnet] = useState({
+        numberOfAgreemnet: ''
     });
  
 
     const handleCompanyList = (e) => {       
         setCompanyName(e.target.value);
     }
-
     const handleAddCompanyName = (addCompanyName) => {            
         setCompanyName(addCompanyName);    
+    }
+
+    const handleNumberOfAgreemnet = (e) => {       
+        setnumberOfAgreemnet(e.target.value);
+    }
+    const handleAddNumberOfAgreemnet = (addNmberOfAgreemnet) => {            
+        setnumberOfAgreemnet(addNmberOfAgreemnet);    
     }
 
   
@@ -28,18 +40,44 @@ const WorkRegister = () => {
         }
 
         if (newCompany.companyName === '') {    
-            setErrors(() => {
+            setErrorsCompanyName(() => {
                 return {
                     companyName: "Wpisz nazwę firmy !!!"
                 };
             });
             return;
-        } else setErrors('');
+        } else setErrorsCompanyName('');
 
         setCompanyName('');
 
         axios
         .post("http://127.0.0.1:8080/create", newCompany)
+        .then(() => {
+            
+         })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
+
+    const addNmberOfAgreemnet = () => {
+        let newNumberOfAgreemnet = {
+            numberOfAgreemnet: numberOfAgreemnet
+        }
+
+        if (newNumberOfAgreemnet.numberOfAgreemnet === '') {    
+            setErrorsNumberOfAgreemnet(() => {
+                return {
+                    numberOfAgreemnet: "Wpisz numer porozumienia !!!"
+                };
+            });
+            return;
+        } else setErrorsNumberOfAgreemnet('');
+
+        setnumberOfAgreemnet('');
+
+        axios
+        .post("http://127.0.0.1:8080/create", newNumberOfAgreemnet)
         .then(() => {
             
          })
@@ -66,8 +104,16 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="nrPorozumienia">Nr porozumienia</label>
                     </div> 
-                    <input type="text" placeholder="" name="nrPorozumienia" />
-                    <button>Wybierz</button>
+                    <input onChange={handleNumberOfAgreemnet}  value={numberOfAgreemnet} type="text" placeholder="" name="nrPorozumienia" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        addNmberOfAgreemnet();
+                    }}>Dodaj</button>
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModalNumberOfAgreement(true);
+                    }}>Wybierz</button>
+                    {errorsNumberOfAgreemnet.numberOfAgreemnet && <p className="error">{errorsNumberOfAgreemnet.numberOfAgreemnet}</p>}
                 </div>
                 
                 <div>
@@ -90,7 +136,7 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModalCompanyName(true);
                     }}>Wybierz</button>
-                    {errors.companyName && <p className="error">{errors.companyName}</p>}
+                    {errorsCompanyName.companyName && <p className="error">{errorsCompanyName.companyName}</p>}
                 </div>
 
                 <div>
@@ -160,6 +206,8 @@ const WorkRegister = () => {
                 </div>
             </form>
             {openModalCompanyName && <ModalCompanyName setModalCompanyName={setOpenModalCompanyName} handleAddCompanyName={handleAddCompanyName}/>}
+
+            {openModalNumberOfAgreement && <ModalNumberOfAgreement setModalNumberOfAgreement={setOpenModalNumberOfAgreement} handleAddNumberOfAgreement={handleAddNumberOfAgreemnet}/>}
         </div>
 
     )

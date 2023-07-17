@@ -1,14 +1,14 @@
-import './ModalCompanyName.css'
+import './ModalNumberOfAgreement.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalCompanyName = ({setModalCompanyName, handleAddCompanyName}) => {
+const ModalNumberOfAgreement = ({setModalNumberOfAgreement, handleNumberOfAgreement}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
 
-    const readCompanyList = () => {
+    const readNumberOfAgreement= () => {
 
         axios
         .get("http://127.0.0.1:8080/index") 
@@ -21,10 +21,10 @@ const ModalCompanyName = ({setModalCompanyName, handleAddCompanyName}) => {
     }
 
     useEffect(() => {
-        readCompanyList();  
+        readNumberOfAgreement();  
     }, []);
    
-    const deleteCompanyList = (item) => {
+    const deleteNumberOfAgreement = (item) => {
         axios
         .delete(`http://127.0.0.1:8080/delete/${item._id}`) 
         .then((res) => {       
@@ -44,27 +44,27 @@ const ModalCompanyName = ({setModalCompanyName, handleAddCompanyName}) => {
     }
 
     return (
-            <div className="modalCompanyName">
+            <div className="modalNumberOfAgreement">
                 <div className='topModal'>
                     <h3>Lista firm</h3>
                     <div>
-                        <p className='ex-modal' onClick={() => {setModalCompanyName(false)}}>X</p>
+                        <p className='ex-modal' onClick={() => {setModalNumberOfAgreement(false)}}>X</p>
                     </div>                  
                 </div>
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>
                     <tbody>
-                        <tr><th></th><th className="name">Firma</th><th className="action">Czynność</th></tr>
+                        <tr><th></th><th className="name">Numer porozumienia</th><th className="action">Czynność</th></tr>
                         {register.map((item, i) => {
                                 return (
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddCompanyName(item.companyName); 
+                                            handleNumberOfAgreement(item.numberOfAgreemnet); 
                                         }} 
-                                        /></td><td className="name">{item.companyName}</td><td className="action">
+                                        /></td><td className="name">{item.numberOfAgreemnet}</td><td className="action">
                                         <button onClick={() => {
-                                            deleteCompanyList(item);             
+                                            deleteNumberOfAgreement(item);             
                                         }}
                                         className="btn-delete">Usuń
                                         </button></td></tr>
@@ -76,4 +76,4 @@ const ModalCompanyName = ({setModalCompanyName, handleAddCompanyName}) => {
         )
 }
 
-export default ModalCompanyName;
+export default ModalNumberOfAgreement;
