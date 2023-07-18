@@ -1,8 +1,9 @@
-import { useState, useEffect} from "react";
+import { useState} from "react";
 import './WorkRegister.css';
 import axios from "axios";
 import ModalCompanyName from "./components/ModalCompanyName";
 import ModalNumberOfAgreement from "./components/ModalNumberOfAgreement";
+import ModalOfficeName from "./components/ModalOfficeName";
 
 const WorkRegister = () => {
 
@@ -18,6 +19,11 @@ const WorkRegister = () => {
         numberOfAgreemnet: ''
     });
  
+    const [openModalOfficeName, setOpenModalOfficeName] = useState(false);
+    const [officeName, setOfficeName] = useState('');
+    const [errorsOfficeName, setErrorsOfficeName] = useState({
+        companyName: ''
+    });
 
     const handleCompanyList = (e) => {       
         setCompanyName(e.target.value);
@@ -33,6 +39,13 @@ const WorkRegister = () => {
         setNumber(addNumber);    
     }
 
+    const handleOfficeList = (e) => {       
+        setOfficeName(e.target.value);
+    }
+    const handleAddOfficeName = (addOfficeName) => {            
+        setOfficeName(addOfficeName);    
+    }
+    
   
     const addCompany = () => {
         let newCompany = {
@@ -86,6 +99,32 @@ const WorkRegister = () => {
         });
     };
 
+    const addOffice = () => {
+        let newOffice = {
+            officeName: officeName
+        }
+
+        if (newOffice.officeName === '') {    
+            setErrorsOfficeName(() => {
+                return {
+                    officeName: "Wpisz nazwę biura !!!"
+                };
+            });
+            return;
+        } else setErrorsOfficeName('');
+
+        setOfficeName('');
+
+        axios
+        .post("http://127.0.0.1:8080/addNewOfficeName", newOffice)
+        .then(() => {
+            
+         })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
+
 
     return (
         <div className="register-main">
@@ -104,7 +143,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="nrPorozumienia">Nr porozumienia</label>
                     </div> 
-                    <input onChange={handleNumberOfAgreemnetList}  value={number} type="text" placeholder="" name="nrPorozumienia" />
+                    <input onChange={handleNumberOfAgreemnetList} value={number} type="text" placeholder="" name="nrPorozumienia" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addNmberOfAgreemnet();
@@ -127,7 +166,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="companyName">Nazwa firmy</label>
                     </div> 
-                    <input onChange={handleCompanyList}  value={companyName} type="text" placeholder="" name="companyName" />
+                    <input onChange={handleCompanyList} value={companyName} type="text" placeholder="" name="companyName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCompany();
@@ -143,8 +182,16 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="nazwaBiura">Nazwa biura</label>
                     </div>  
-                    <input type="text" placeholder="" name="nazwaBiura" />
-                    <button>Wybierz</button>
+                    <input onChange={handleOfficeList} value={officeName} type="text" placeholder="" name="nazwaBiura" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        addOffice();
+                    }}>Dodaj</button>
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModalOfficeName(true);
+                    }}>Wybierz</button>
+                    {errorsOfficeName.officeName && <p className="error">{errorsOfficeName.officeName}</p>}
                 </div>
 
                 <div>
@@ -208,6 +255,8 @@ const WorkRegister = () => {
             {openModalCompanyName && <ModalCompanyName setModalCompanyName={setOpenModalCompanyName} handleAddCompanyName={handleAddCompanyName}/>}
 
             {openModalNumberOfAgreement && <ModalNumberOfAgreement setModalNumberOfAgreement={setOpenModalNumberOfAgreement} handleAddNumberOfAgreement={handleAddNumberOfAgreement}/>}
+
+            {openModalOfficeName && <ModalOfficeName setModalOfficeName={setOpenModalOfficeName} handleAddOfficeName={handleAddOfficeName}/>}
         </div>
 
     )
