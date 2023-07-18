@@ -13,7 +13,7 @@ const WorkRegister = () => {
     });
 
     const [openModalNumberOfAgreement, setOpenModalNumberOfAgreement] = useState(false);
-    const [numberOfAgreemnet, setnumberOfAgreemnet] = useState('');
+    const [number, setNumber] = useState('');
     const [errorsNumberOfAgreemnet, setErrorsNumberOfAgreemnet] = useState({
         numberOfAgreemnet: ''
     });
@@ -26,11 +26,11 @@ const WorkRegister = () => {
         setCompanyName(addCompanyName);    
     }
 
-    const handleNumberOfAgreemnet = (e) => {       
-        setnumberOfAgreemnet(e.target.value);
+    const handleNumberOfAgreemnetList = (e) => {       
+        setNumber(e.target.value);
     }
-    const handleAddNumberOfAgreemnet = (addNmberOfAgreemnet) => {            
-        setnumberOfAgreemnet(addNmberOfAgreemnet);    
+    const handleAddNumberOfAgreement = (addNumber) => {        
+        setNumber(addNumber);    
     }
 
   
@@ -51,7 +51,7 @@ const WorkRegister = () => {
         setCompanyName('');
 
         axios
-        .post("http://127.0.0.1:8080/create", newCompany)
+        .post("http://127.0.0.1:8080/addNewCompany", newCompany)
         .then(() => {
             
          })
@@ -62,7 +62,7 @@ const WorkRegister = () => {
 
     const addNmberOfAgreemnet = () => {
         let newNumberOfAgreemnet = {
-            numberOfAgreemnet: numberOfAgreemnet
+            number: number
         }
 
         if (newNumberOfAgreemnet.numberOfAgreemnet === '') {    
@@ -74,12 +74,12 @@ const WorkRegister = () => {
             return;
         } else setErrorsNumberOfAgreemnet('');
 
-        setnumberOfAgreemnet('');
+        setNumber('');
 
         axios
-        .post("http://127.0.0.1:8080/create", newNumberOfAgreemnet)
+        .post("http://127.0.0.1:8080/addNumberOfAgreemnet", newNumberOfAgreemnet)
         .then(() => {
-            
+
          })
         .catch((error) => {
             console.error(error);
@@ -104,7 +104,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="nrPorozumienia">Nr porozumienia</label>
                     </div> 
-                    <input onChange={handleNumberOfAgreemnet}  value={numberOfAgreemnet} type="text" placeholder="" name="nrPorozumienia" />
+                    <input onChange={handleNumberOfAgreemnetList}  value={number} type="text" placeholder="" name="nrPorozumienia" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addNmberOfAgreemnet();
@@ -207,7 +207,7 @@ const WorkRegister = () => {
             </form>
             {openModalCompanyName && <ModalCompanyName setModalCompanyName={setOpenModalCompanyName} handleAddCompanyName={handleAddCompanyName}/>}
 
-            {openModalNumberOfAgreement && <ModalNumberOfAgreement setModalNumberOfAgreement={setOpenModalNumberOfAgreement} handleAddNumberOfAgreement={handleAddNumberOfAgreemnet}/>}
+            {openModalNumberOfAgreement && <ModalNumberOfAgreement setModalNumberOfAgreement={setOpenModalNumberOfAgreement} handleAddNumberOfAgreement={handleAddNumberOfAgreement}/>}
         </div>
 
     )

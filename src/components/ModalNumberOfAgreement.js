@@ -2,7 +2,7 @@ import './ModalNumberOfAgreement.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalNumberOfAgreement = ({setModalNumberOfAgreement, handleNumberOfAgreement}) => {
+const ModalNumberOfAgreement = ({setModalNumberOfAgreement, handleAddNumberOfAgreement}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
@@ -11,9 +11,9 @@ const ModalNumberOfAgreement = ({setModalNumberOfAgreement, handleNumberOfAgreem
     const readNumberOfAgreement= () => {
 
         axios
-        .get("http://127.0.0.1:8080/index") 
+        .get("http://127.0.0.1:8080/readNumberOfAgreemnet") 
         .then((res) => { 
-            setRegister(res.data);       
+            setRegister(res.data);      
         })
         .catch((error) => {
             console.error(error);
@@ -26,7 +26,7 @@ const ModalNumberOfAgreement = ({setModalNumberOfAgreement, handleNumberOfAgreem
    
     const deleteNumberOfAgreement = (item) => {
         axios
-        .delete(`http://127.0.0.1:8080/delete/${item._id}`) 
+        .delete(`http://127.0.0.1:8080/deleteNumberOfAgreemnet/${item._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
@@ -46,7 +46,7 @@ const ModalNumberOfAgreement = ({setModalNumberOfAgreement, handleNumberOfAgreem
     return (
             <div className="modalNumberOfAgreement">
                 <div className='topModal'>
-                    <h3>Lista firm</h3>
+                    <h3>Lista porozumień</h3>
                     <div>
                         <p className='ex-modal' onClick={() => {setModalNumberOfAgreement(false)}}>X</p>
                     </div>                  
@@ -60,9 +60,9 @@ const ModalNumberOfAgreement = ({setModalNumberOfAgreement, handleNumberOfAgreem
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleNumberOfAgreement(item.numberOfAgreemnet); 
+                                            handleAddNumberOfAgreement(item.number); 
                                         }} 
-                                        /></td><td className="name">{item.numberOfAgreemnet}</td><td className="action">
+                                        /></td><td className="name">{item.number}</td><td className="action">
                                         <button onClick={() => {
                                             deleteNumberOfAgreement(item);             
                                         }}

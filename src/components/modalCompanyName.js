@@ -11,7 +11,7 @@ const ModalCompanyName = ({setModalCompanyName, handleAddCompanyName}) => {
     const readCompanyList = () => {
 
         axios
-        .get("http://127.0.0.1:8080/index") 
+        .get("http://127.0.0.1:8080/readNewCompany") 
         .then((res) => { 
             setRegister(res.data);       
         })
@@ -26,7 +26,7 @@ const ModalCompanyName = ({setModalCompanyName, handleAddCompanyName}) => {
    
     const deleteCompanyList = (item) => {
         axios
-        .delete(`http://127.0.0.1:8080/delete/${item._id}`) 
+        .delete(`http://127.0.0.1:8080/deleteNewCompany/${item._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
