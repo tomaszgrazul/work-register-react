@@ -4,6 +4,7 @@ import axios from "axios";
 import ModalCompanyName from "./components/ModalCompanyName";
 import ModalNumberOfAgreement from "./components/ModalNumberOfAgreement";
 import ModalOfficeName from "./components/ModalOfficeName";
+import ModalPrincipal from "./components/ModalPrincipal";
 
 const WorkRegister = () => {
 
@@ -22,8 +23,15 @@ const WorkRegister = () => {
     const [openModalOfficeName, setOpenModalOfficeName] = useState(false);
     const [officeName, setOfficeName] = useState('');
     const [errorsOfficeName, setErrorsOfficeName] = useState({
-        companyName: ''
+        officeName: ''
     });
+
+    const [openModalPrincipal, setOpenModalPrincipal] = useState(false);
+    const [principal, setPrincipal] = useState('');
+    const [errorsPrincipal, setErrorsPrincipal] = useState({
+        principalName: ''
+    });
+    
 
     const handleCompanyList = (e) => {       
         setCompanyName(e.target.value);
@@ -44,6 +52,13 @@ const WorkRegister = () => {
     }
     const handleAddOfficeName = (addOfficeName) => {            
         setOfficeName(addOfficeName);    
+    }
+
+    const handlePrincipalList = (e) => {       
+        setPrincipal(e.target.value);
+    }
+    const handleAddPrincipal = (addPrincipal) => {            
+        setPrincipal(addPrincipal);    
     }
     
   
@@ -125,6 +140,32 @@ const WorkRegister = () => {
         });
     };
 
+    const addPrincipal = () => {
+        let newPrincipal = {
+            principalName: principal,
+            principalCompany: companyName
+        }
+
+        if (newPrincipal.principalName === '') {    
+            setErrorsPrincipal(() => {
+                return {
+                    principalName: "Wpisz poleceniodawcę !!!"
+                };
+            });
+            return;
+        } else setErrorsPrincipal('');
+
+        setPrincipal('');
+
+        axios
+        .post("http://127.0.0.1:8080/addNewPrincipal", newPrincipal)
+        .then(() => {
+            
+         })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
 
     return (
         <div className="register-main">
@@ -198,8 +239,16 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="poleceniodawca">Poleceniodawca</label>
                     </div>   
-                    <input type="text" placeholder="" name="poleceniodawca" />
-                    <button>Wybierz</button>
+                    <input onChange={handlePrincipalList} value={principal} type="text" placeholder="" name="poleceniodawca" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        addPrincipal();
+                    }}>Dodaj</button>
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModalPrincipal(true);
+                    }}>Wybierz</button>
+                    {errorsPrincipal.principalName && <p className="error">{errorsPrincipal.principalName}</p>}
                 </div>
 
                 <div>
@@ -257,6 +306,8 @@ const WorkRegister = () => {
             {openModalNumberOfAgreement && <ModalNumberOfAgreement setModalNumberOfAgreement={setOpenModalNumberOfAgreement} handleAddNumberOfAgreement={handleAddNumberOfAgreement}/>}
 
             {openModalOfficeName && <ModalOfficeName setModalOfficeName={setOpenModalOfficeName} handleAddOfficeName={handleAddOfficeName}/>}
+
+            {openModalPrincipal && <ModalPrincipal setModalPrincipal={setOpenModalPrincipal} handleAddPrincipal={handleAddPrincipal}/>}
         </div>
 
     )
