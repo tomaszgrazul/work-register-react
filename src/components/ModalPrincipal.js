@@ -2,7 +2,7 @@ import './ModalPrincipal.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalCompanyName = ({setModalPrincipal, handleAddPrincipal}) => {
+const ModalCompanyName = ({setModalPrincipal, handleAddPrincipal, companyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
@@ -87,6 +87,12 @@ const ModalCompanyName = ({setModalPrincipal, handleAddPrincipal}) => {
                     <tbody>
                         <tr><th></th><th className="name">Poleceniodawca</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
                         {register.map((item, i) => { 
+                            // if(item.principalCompany === companyName) { 
+                                // const filtered = register.filter((el, i) =>
+                                //     i !== register.find((principalCompany) => principalCompany === companyName)
+                                // );
+                                const filtered = register.find(({principalCompany}) => principalCompany === companyName);
+                                console.log(filtered);
                                 return ( 
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
@@ -115,7 +121,7 @@ const ModalCompanyName = ({setModalPrincipal, handleAddPrincipal}) => {
                                         }}
                                         className="btn-update">Edytuj
                                         </button></td></tr>
-                                )      
+                                )     
                             })}    
                     </tbody>
                 </table>

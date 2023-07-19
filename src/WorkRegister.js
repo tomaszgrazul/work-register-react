@@ -307,7 +307,7 @@ const WorkRegister = () => {
 
             {openModalOfficeName && <ModalOfficeName setModalOfficeName={setOpenModalOfficeName} handleAddOfficeName={handleAddOfficeName}/>}
 
-            {openModalPrincipal && <ModalPrincipal setModalPrincipal={setOpenModalPrincipal} handleAddPrincipal={handleAddPrincipal}/>}
+            {openModalPrincipal && <ModalPrincipal setModalPrincipal={setOpenModalPrincipal} handleAddPrincipal={handleAddPrincipal} companyName={companyName}/>}
         </div>
 
     )
