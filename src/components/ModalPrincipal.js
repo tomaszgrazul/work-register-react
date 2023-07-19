@@ -28,6 +28,9 @@ const ModalCompanyName = ({setModalPrincipal, handleAddPrincipal, companyName}) 
 
     useEffect(() => {
         setInputDisabled(new Array(register.length).fill(false));
+        // const filtered = register.find(({principalCompany}) => principalCompany === companyName);
+        // const filtered = register.filter((el, i) => el.principalCompany === companyName);
+        // console.log("companyName", companyName);
     }, [register]);
    
    
@@ -74,6 +77,15 @@ const ModalCompanyName = ({setModalPrincipal, handleAddPrincipal, companyName}) 
         }));
       }
 
+      const test = (el) => {
+        if(el.principalCompany === companyName) {
+            return el;
+        } 
+        if(el.principalCompany === "") {
+            
+        } 
+      }
+
     return (
             <div className="modalPrincipal">
                 <div className='topModal'>
@@ -86,13 +98,8 @@ const ModalCompanyName = ({setModalPrincipal, handleAddPrincipal, companyName}) 
                 <table>
                     <tbody>
                         <tr><th></th><th className="name">Poleceniodawca</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
-                        {register.map((item, i) => { 
-                            // if(item.principalCompany === companyName) { 
-                                // const filtered = register.filter((el, i) =>
-                                //     i !== register.find((principalCompany) => principalCompany === companyName)
-                                // );
-                                const filtered = register.find(({principalCompany}) => principalCompany === companyName);
-                                console.log(filtered);
+                        {/* {register.filter((el) => el.principalCompany === companyName).map((item, i) => {  */}
+                        {register.filter(test).map((item, i) => {
                                 return ( 
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
@@ -122,7 +129,8 @@ const ModalCompanyName = ({setModalPrincipal, handleAddPrincipal, companyName}) 
                                         className="btn-update">Edytuj
                                         </button></td></tr>
                                 )     
-                            })}    
+                            })
+                        }    
                     </tbody>
                 </table>
             </div>
