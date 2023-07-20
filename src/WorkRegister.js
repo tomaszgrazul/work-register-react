@@ -1,10 +1,11 @@
-import { useState} from "react";
+import {useState} from "react";
 import './WorkRegister.css';
 import axios from "axios";
 import ModalCompanyName from "./components/ModalCompanyName";
 import ModalNumberOfAgreement from "./components/ModalNumberOfAgreement";
 import ModalOfficeName from "./components/ModalOfficeName";
 import ModalPrincipal from "./components/ModalPrincipal";
+import ModalCoordinating from "./components/ModalCoordinating";
 
 const WorkRegister = () => {
 
@@ -30,6 +31,12 @@ const WorkRegister = () => {
     const [principal, setPrincipal] = useState('');
     const [errorsPrincipal, setErrorsPrincipal] = useState({
         principalName: ''
+    });
+
+    const [openModalCoordinating, setOpenModalCoordinating] = useState(false);
+    const [coordinating, setCoordinating] = useState('');
+    const [errorsCoordinating, setErrorsCoordinating] = useState({
+        coordinatingName: ''
     });
     
 
@@ -59,6 +66,13 @@ const WorkRegister = () => {
     }
     const handleAddPrincipal = (addPrincipal) => {            
         setPrincipal(addPrincipal);    
+    }
+
+    const handleCoordinatingList = (e) => {       
+        setCoordinating(e.target.value);
+    }
+    const handleAddCoordinating = (addCoordinating) => {            
+        setCoordinating(addCoordinating);    
     }
     
   
@@ -167,6 +181,33 @@ const WorkRegister = () => {
         });
     };
 
+    const addCoordinating = () => {
+        let newCoordinating  = {
+            coordinatingName: coordinating,
+            coordinatingCompany: companyName
+        }
+
+        if (newCoordinating .coordinatingName === '') {    
+            setErrorsCoordinating (() => {
+                return {
+                    coordinatingName: "Wpisz koordynującego !!!"
+                };
+            });
+            return;
+        } else setErrorsCoordinating ('');
+
+        setCoordinating ('');
+
+        axios
+        .post("http://127.0.0.1:8080/addNewCoordinating ", newCoordinating )
+        .then(() => {
+
+         })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
+
     return (
         <div className="register-main">
             <header>
@@ -255,8 +296,16 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="koordynujący">Koordynujący</label>
                     </div>    
-                    <input type="text" placeholder="" name="koordynujący" />
-                    <button>Wybierz</button>
+                    <input onChange={handleCoordinatingList} value={coordinating} type="text" placeholder="" name="koordynujący" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        addCoordinating();
+                    }}>Dodaj</button>
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModalCoordinating(true);
+                    }}>Wybierz</button>
+                    {errorsCoordinating.coordinatingName && <p className="error">{errorsCoordinating.coordinatingName}</p>}
                 </div>
 
                 <div>
@@ -308,6 +357,8 @@ const WorkRegister = () => {
             {openModalOfficeName && <ModalOfficeName setModalOfficeName={setOpenModalOfficeName} handleAddOfficeName={handleAddOfficeName}/>}
 
             {openModalPrincipal && <ModalPrincipal setModalPrincipal={setOpenModalPrincipal} handleAddPrincipal={handleAddPrincipal} companyName={companyName}/>}
+
+            {openModalCoordinating && <ModalCoordinating setModalCoordinating={setOpenModalCoordinating} handleAddCoordinating={handleAddCoordinating} companyName={companyName}/>}
         </div>
 
     )

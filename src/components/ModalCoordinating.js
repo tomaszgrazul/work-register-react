@@ -1,19 +1,19 @@
-import './ModalPrincipal.css'
+import './ModalCoordinating.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalPrincipal = ({setModalPrincipal, handleAddPrincipal, companyName}) => {
+const ModalCoordinating = ({setModalCoordinating, handleAddCoordinating, companyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
-    const [updatePrincipalCompany, setUpdatePrincipalCompany] = useState('');
+    const [updateCoordinatingCompany, setUpdateCoordinatingCompany] = useState('');
 
-    const readPrincipalList = () => {
+    const readCoordinatingList = () => {
 
         axios
-        .get("http://127.0.0.1:8080/readNewPrincipal") 
+        .get("http://127.0.0.1:8080/readNewCoordinating") 
         .then((res) => { 
             setRegister(res.data);       
         })
@@ -23,20 +23,17 @@ const ModalPrincipal = ({setModalPrincipal, handleAddPrincipal, companyName}) =>
     }
 
     useEffect(() => {
-        readPrincipalList();   
+        readCoordinatingList();   
     }, []);
 
     useEffect(() => {
         setInputDisabled(new Array(register.length).fill(false));
-        // const filtered = register.find(({principalCompany}) => principalCompany === companyName);
-        // const filtered = register.filter((el, i) => el.principalCompany === companyName);
-        // console.log("companyName", filtered);
     }, [register]);
    
    
-    const deletePrincipalList = (item) => {
+    const deleteCoordinatingList = (item) => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewPrincipal/${item._id}`) 
+        .delete(`http://127.0.0.1:8080/deleteNewCoordinating/${item._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
@@ -54,12 +51,12 @@ const ModalPrincipal = ({setModalPrincipal, handleAddPrincipal, companyName}) =>
     }
 
     const handleInputCompany = (e) => {
-        setUpdatePrincipalCompany(e.target.value);
+        setUpdateCoordinatingCompany(e.target.value);
     }
 
-    const updatePrincipalList = (item, dataCompany) => {
+    const updateCoordinatingList = (item, dataCompany) => {
         axios
-        .post(`http://127.0.0.1:8080/editNewPrincipal/${item._id}`, {principalCompany: dataCompany}) 
+        .post(`http://127.0.0.1:8080/editNewCoordinating/${item._id}`, {coordinatingCompany: dataCompany}) 
         .then(() => {       
 
         })
@@ -70,19 +67,12 @@ const ModalPrincipal = ({setModalPrincipal, handleAddPrincipal, companyName}) =>
 
     const checkHandler = (i) => {
         setInputDisabled(inputDisabled.map((item, index) => {
-            // if( index === i) {
-            //     return item = !item;
-            // } else {
-            //     return item = item;
-            // }
-                
-                // index === i ? item = !item : item = item;
               return item = index === i ? !item : item;
         }));
       }
 
       const filtered = (el) => {
-        if(el.principalCompany === companyName) {
+        if(el.coordinatingCompany === companyName) {
             return el;
         } 
         if(companyName === "") {
@@ -91,39 +81,38 @@ const ModalPrincipal = ({setModalPrincipal, handleAddPrincipal, companyName}) =>
       }
 
     return (
-            <div className="modalPrincipal">
+            <div className="modalCoordinating">
                 <div className='topModal'>
-                    <h3>Poleceniodawca</h3>
+                    <h3>koordynujący</h3>
                     <div>
-                        <p className='ex-modal' onClick={() => {setModalPrincipal(false)}}>X</p>
+                        <p className='ex-modal' onClick={() => {setModalCoordinating(false)}}>X</p>
                     </div>                  
                 </div>
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>
                     <tbody>
-                        <tr><th></th><th className="name">Poleceniodawca</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
-                        {/* {register.filter((el) => el.principalCompany === companyName).map((item, i) => {  */}
+                        <tr><th></th><th className="name">Koordynujący</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
                         {register.filter(filtered).map((item, i) => {
                                 return ( 
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddPrincipal(item.principalName); 
+                                            handleAddCoordinating(item.coordinatingName); 
                                         }} 
-                                        /></td><td className="name">{item.principalName}</td>
-                                        <td className="companyName">{item.principalCompany} 
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={updatePrincipalCompany} className='companyInput'/>}
+                                        /></td><td className="name">{item.coordinatingName}</td>
+                                        <td className="companyName">{item.coordinatingCompany} 
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={updateCoordinatingCompany} className='companyInput'/>}
                                         {inputDisabled[i] && <button onClick={() => {
-                                            updatePrincipalList(item, updatePrincipalCompany); 
+                                            updateCoordinatingList(item, updateCoordinatingCompany); 
                                             setInputDisabled(false);   
-                                            readPrincipalList();    
-                                            setUpdatePrincipalCompany('');      
+                                            readCoordinatingList();    
+                                            setUpdateCoordinatingCompany('');      
                                         }}
                                         className="btn-wyślij">Wyślij
                                         </button>}</td>
                                         <td className="action">
                                         <button onClick={() => {
-                                            deletePrincipalList(item);             
+                                            deleteCoordinatingList(item);             
                                         }}
                                         className="btn-delete">Usuń
                                         </button>
@@ -141,4 +130,4 @@ const ModalPrincipal = ({setModalPrincipal, handleAddPrincipal, companyName}) =>
         )
 }
 
-export default ModalPrincipal;
+export default ModalCoordinating;
