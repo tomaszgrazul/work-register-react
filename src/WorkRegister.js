@@ -8,6 +8,8 @@ import ModalPrincipal from "./components/ModalPrincipal";
 import ModalCoordinating from "./components/ModalCoordinating";
 import ModalCoordinator from "./components/ModalCoordinator";
 
+import ModalManager from "./components/ModalManager";
+
 const WorkRegister = () => {
 
     const [openModalCompanyName, setOpenModalCompanyName] = useState(false);
@@ -44,6 +46,12 @@ const WorkRegister = () => {
     const [coordinator, setCoordinator] = useState('');
     const [errorsCoordinator, setErrorsCoordinator] = useState({
         coordinatorName: ''
+    });
+
+    const [openModalManager, setOpenModalManager] = useState(false);
+    const [manager, setManager] = useState('');
+    const [errorsManager, setErrorsManager] = useState({
+        managerName: ''
     });
     
 
@@ -87,6 +95,13 @@ const WorkRegister = () => {
     }
     const handleAddCoordinator = (addCoordinator) => {            
         setCoordinator(addCoordinator);    
+    }
+
+    const handleManagerList = (e) => {       
+        setManager(e.target.value);
+    }
+    const handleAddManager = (addManager) => {            
+        setManager(addManager);    
     }
     
   
@@ -249,6 +264,33 @@ const WorkRegister = () => {
         });
     };
 
+    const addManager = () => {
+        let newManager  = {
+            managerName: manager,
+            managerCompany: companyName
+        }
+
+        if (newManager.managerName === '') {    
+            setErrorsManager (() => {
+                return {
+                    managerName: "Wpisz kierującego zespołem !!!"
+                };
+            });
+            return;
+        } else setErrorsManager ('');
+
+        setManager ('');
+
+        axios
+        .post("http://127.0.0.1:8080/addNewManager ", newManager )
+        .then(() => {
+
+         })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
+
 
     return (
         <div className="register-main">
@@ -378,8 +420,16 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="kierującyZespołem">Kierujący zespołem</label>
                     </div> 
-                    <input type="text" placeholder="" name="kierującyZespołem" />
-                    <button>Wybierz</button>
+                    <input onChange={handleManagerList} value={manager} type="text" placeholder="" name="kierującyZespołem" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        addManager();
+                    }}>Dodaj</button>
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModalManager(true);
+                    }}>Wybierz</button>
+                    {errorsManager.managerName && <p className="error">{errorsManager.managerName}</p>}
                 </div>
 
                 <div>
@@ -411,6 +461,8 @@ const WorkRegister = () => {
             {openModalCoordinating && <ModalCoordinating setModalCoordinating={setOpenModalCoordinating} handleAddCoordinating={handleAddCoordinating} companyName={companyName}/>}
 
             {openModalCoordinator && <ModalCoordinator setModalCoordinator={setOpenModalCoordinator} handleAddCoordinator={handleAddCoordinator} companyName={companyName}/>}
+
+            {openModalManager && <ModalManager setModalManager={setOpenModalManager} handleAddManager={handleAddManager} companyName={companyName}/>}
         </div>
 
     )
