@@ -6,6 +6,7 @@ import ModalNumberOfAgreement from "./components/ModalNumberOfAgreement";
 import ModalOfficeName from "./components/ModalOfficeName";
 import ModalPrincipal from "./components/ModalPrincipal";
 import ModalCoordinating from "./components/ModalCoordinating";
+import ModalCoordinator from "./components/ModalCoordinator";
 
 const WorkRegister = () => {
 
@@ -37,6 +38,12 @@ const WorkRegister = () => {
     const [coordinating, setCoordinating] = useState('');
     const [errorsCoordinating, setErrorsCoordinating] = useState({
         coordinatingName: ''
+    });
+
+    const [openModalCoordinator, setOpenModalCoordinator] = useState(false);
+    const [coordinator, setCoordinator] = useState('');
+    const [errorsCoordinator, setErrorsCoordinator] = useState({
+        coordinatorName: ''
     });
     
 
@@ -73,6 +80,13 @@ const WorkRegister = () => {
     }
     const handleAddCoordinating = (addCoordinating) => {            
         setCoordinating(addCoordinating);    
+    }
+
+    const handleCoordinatorList = (e) => {       
+        setCoordinator(e.target.value);
+    }
+    const handleAddCoordinator = (addCoordinator) => {            
+        setCoordinator(addCoordinator);    
     }
     
   
@@ -208,6 +222,34 @@ const WorkRegister = () => {
         });
     };
 
+    const addCoordinator = () => {
+        let newCoordinator  = {
+            coordinatorName: coordinator,
+            coordinatorCompany: companyName
+        }
+
+        if (newCoordinator .coordinatorName === '') {    
+            setErrorsCoordinator (() => {
+                return {
+                    coordinatorName: "Wpisz koordynatora !!!"
+                };
+            });
+            return;
+        } else setErrorsCoordinator ('');
+
+        setCoordinator ('');
+
+        axios
+        .post("http://127.0.0.1:8080/addNewCoordinator ", newCoordinator )
+        .then(() => {
+
+         })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
+
+
     return (
         <div className="register-main">
             <header>
@@ -312,8 +354,16 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="koordynator">Koordynator</label>
                     </div>  
-                    <input type="text" placeholder="" name="koordynator" />
-                    <button>Wybierz</button>
+                    <input onChange={handleCoordinatorList} value={coordinator} type="text" placeholder="" name="koordynator" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        addCoordinator();
+                    }}>Dodaj</button>
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModalCoordinator(true);
+                    }}>Wybierz</button>
+                    {errorsCoordinator.coordinatorName && <p className="error">{errorsCoordinator.coordinatorName}</p>}
                 </div>
 
                 <div>
@@ -359,6 +409,8 @@ const WorkRegister = () => {
             {openModalPrincipal && <ModalPrincipal setModalPrincipal={setOpenModalPrincipal} handleAddPrincipal={handleAddPrincipal} companyName={companyName}/>}
 
             {openModalCoordinating && <ModalCoordinating setModalCoordinating={setOpenModalCoordinating} handleAddCoordinating={handleAddCoordinating} companyName={companyName}/>}
+
+            {openModalCoordinator && <ModalCoordinator setModalCoordinator={setOpenModalCoordinator} handleAddCoordinator={handleAddCoordinator} companyName={companyName}/>}
         </div>
 
     )
