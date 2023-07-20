@@ -30,7 +30,7 @@ const ModalCompanyName = ({setModalPrincipal, handleAddPrincipal, companyName}) 
         setInputDisabled(new Array(register.length).fill(false));
         // const filtered = register.find(({principalCompany}) => principalCompany === companyName);
         // const filtered = register.filter((el, i) => el.principalCompany === companyName);
-        // console.log("companyName", companyName);
+        // console.log("companyName", filtered);
     }, [register]);
    
    
@@ -70,19 +70,23 @@ const ModalCompanyName = ({setModalPrincipal, handleAddPrincipal, companyName}) 
 
     const checkHandler = (i) => {
         setInputDisabled(inputDisabled.map((item, index) => {
-            if( index === i) {
-                return item = !item;
-            } else 
-                return item = item;
+            // if( index === i) {
+            //     return item = !item;
+            // } else {
+            //     return item = item;
+            // }
+                
+                // index === i ? item = !item : item = item;
+              return item = index === i ? !item : item;
         }));
       }
 
-      const test = (el) => {
+      const filtered = (el) => {
         if(el.principalCompany === companyName) {
             return el;
         } 
-        if(el.principalCompany === "") {
-            
+        if(companyName === "") {
+            return el;
         } 
       }
 
@@ -94,12 +98,12 @@ const ModalCompanyName = ({setModalPrincipal, handleAddPrincipal, companyName}) 
                         <p className='ex-modal' onClick={() => {setModalPrincipal(false)}}>X</p>
                     </div>                  
                 </div>
-                <p className={error? 'error' : 'noError'}>{error? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
+                <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>
                     <tbody>
                         <tr><th></th><th className="name">Poleceniodawca</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
                         {/* {register.filter((el) => el.principalCompany === companyName).map((item, i) => {  */}
-                        {register.filter(test).map((item, i) => {
+                        {register.filter(filtered).map((item, i) => {
                                 return ( 
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
