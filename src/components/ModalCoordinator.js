@@ -83,7 +83,7 @@ const ModalCoordinator = ({setModalCoordinator, handleAddCoordinator, companyNam
     return (
             <div className="modalCoordinator">
                 <div className='topModal'>
-                    <h3>koordynujący</h3>
+                    <h3>Koordynator</h3>
                     <div>
                         <p className='ex-modal' onClick={() => {setModalCoordinator(false)}}>X</p>
                     </div>                  

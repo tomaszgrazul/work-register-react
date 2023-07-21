@@ -1,19 +1,19 @@
-import './ModalManager.css'
+import './ModalAllower.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
+const ModalAllower = ({setModalAllower, handleAddAllower, companyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
-    const [updateManagerCompany, setUpdateManagerCompany] = useState('');
+    const [updateAllowerCompany, setUpdateAllowerCompany] = useState('');
 
-    const readManagerList = () => {
+    const readAllowerList = () => {
 
         axios
-        .get("http://127.0.0.1:8080/readNewManager") 
+        .get("http://127.0.0.1:8080/readNewAllower") 
         .then((res) => { 
             setRegister(res.data);       
         })
@@ -23,7 +23,7 @@ const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
     }
 
     useEffect(() => {
-        readManagerList();   
+        readAllowerList();   
     }, []);
 
     useEffect(() => {
@@ -31,9 +31,9 @@ const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
     }, [register]);
    
    
-    const deleteManagerList = (item) => {
+    const deleteAllowerList = (item) => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewManager/${item._id}`) 
+        .delete(`http://127.0.0.1:8080/deleteNewAllower/${item._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
@@ -51,12 +51,12 @@ const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
     }
 
     const handleInputCompany = (e) => {
-        setUpdateManagerCompany(e.target.value);
+        setUpdateAllowerCompany(e.target.value);
     }
 
-    const updateManagerList = (item, dataCompany) => {
+    const updateAllowerList = (item, dataCompany) => {
         axios
-        .post(`http://127.0.0.1:8080/editNewManager/${item._id}`, {managerCompany: dataCompany}) 
+        .post(`http://127.0.0.1:8080/editNewAllower/${item._id}`, {allowerCompany: dataCompany}) 
         .then(() => {       
 
         })
@@ -72,7 +72,7 @@ const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
       }
 
       const filtered = (el) => {
-        if(el.managerCompany === companyName) {
+        if(el.allowerCompany === companyName) {
             return el;
         } 
         if(companyName === "") {
@@ -81,38 +81,38 @@ const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
       }
 
     return (
-            <div className="modalManager">
+            <div className="modalAllower">
                 <div className='topModal'>
-                    <h3>Kierujący zespołem</h3>
+                    <h3>Dopuszczający</h3>
                     <div>
-                        <p className='ex-modal' onClick={() => {setModalManager(false)}}>X</p>
+                        <p className='ex-modal' onClick={() => {setModalAllower(false)}}>X</p>
                     </div>                  
                 </div>
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>
                     <tbody>
-                        <tr><th></th><th className="name">Kierujący zespołem</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
+                        <tr><th></th><th className="name">Dopuszczający</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
                         {register.filter(filtered).map((item, i) => {
                                 return ( 
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddManager(item.managerName); 
+                                            handleAddAllower(item.allowerName); 
                                         }} 
-                                        /></td><td className="name">{item.managerName}</td>
-                                        <td className="companyName">{item.managerCompany} 
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={updateManagerCompany} className='companyInput'/>}
+                                        /></td><td className="name">{item.allowerName}</td>
+                                        <td className="companyName">{item.allowerCompany} 
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={updateAllowerCompany} className='companyInput'/>}
                                         {inputDisabled[i] && <button onClick={() => {
-                                            updateManagerList(item, updateManagerCompany); 
+                                            updateAllowerList(item, updateAllowerCompany); 
                                             setInputDisabled(false);   
-                                            readManagerList();    
-                                            setUpdateManagerCompany('');      
+                                            readAllowerList();    
+                                            setUpdateAllowerCompany('');      
                                         }}
                                         className="btn-wyślij">Wyślij
                                         </button>}</td>
                                         <td className="action">
                                         <button onClick={() => {
-                                            deleteManagerList(item);             
+                                            deleteAllowerList(item);             
                                         }}
                                         className="btn-delete">Usuń
                                         </button>
@@ -130,4 +130,4 @@ const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
         )
 }
 
-export default ModalManager;
+export default ModalAllower;

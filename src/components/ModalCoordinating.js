@@ -83,7 +83,7 @@ const ModalCoordinating = ({setModalCoordinating, handleAddCoordinating, company
     return (
             <div className="modalCoordinating">
                 <div className='topModal'>
-                    <h3>koordynujący</h3>
+                    <h3>Koordynujący</h3>
                     <div>
                         <p className='ex-modal' onClick={() => {setModalCoordinating(false)}}>X</p>
                     </div>                  

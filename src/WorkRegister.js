@@ -7,8 +7,9 @@ import ModalOfficeName from "./components/ModalOfficeName";
 import ModalPrincipal from "./components/ModalPrincipal";
 import ModalCoordinating from "./components/ModalCoordinating";
 import ModalCoordinator from "./components/ModalCoordinator";
-
+import ModalAllower from "./components/ModalAllower";
 import ModalManager from "./components/ModalManager";
+import ModalSupervisor from "./components/ModalSupervisor";
 
 const WorkRegister = () => {
 
@@ -21,7 +22,7 @@ const WorkRegister = () => {
     const [openModalNumberOfAgreement, setOpenModalNumberOfAgreement] = useState(false);
     const [number, setNumber] = useState('');
     const [errorsNumberOfAgreemnet, setErrorsNumberOfAgreemnet] = useState({
-        numberOfAgreemnet: ''
+        numberOfAgreement: ''
     });
  
     const [openModalOfficeName, setOpenModalOfficeName] = useState(false);
@@ -52,6 +53,18 @@ const WorkRegister = () => {
     const [manager, setManager] = useState('');
     const [errorsManager, setErrorsManager] = useState({
         managerName: ''
+    });
+
+    const [openModalSupervisor, setOpenModalSupervisor] = useState(false);
+    const [supervisor, setSupervisor] = useState('');
+    const [errorsSupervisor, setErrorsSupervisor] = useState({
+        supervisorName: ''
+    });
+
+    const [openModalAllower, setOpenModalAllower] = useState(false);
+    const [allower, setAllower] = useState('');
+    const [errorsAllower, setErrorsAllower] = useState({
+        allowerName: ''
     });
     
 
@@ -103,6 +116,20 @@ const WorkRegister = () => {
     const handleAddManager = (addManager) => {            
         setManager(addManager);    
     }
+
+    const handleSupervisorList = (e) => {       
+        setSupervisor(e.target.value);
+    }
+    const handleAddSupervisor = (addSupervisor) => {            
+        setSupervisor(addSupervisor);    
+    }
+
+    const handleAllowerList = (e) => {       
+        setAllower(e.target.value);
+    }
+    const handleAddAllower = (addAllower) => {            
+        setAllower(addAllower);    
+    }
     
   
     const addCompany = () => {
@@ -132,14 +159,14 @@ const WorkRegister = () => {
     };
 
     const addNmberOfAgreemnet = () => {
-        let newNumberOfAgreemnet = {
-            number: number
+        let newNumberOfAgreement = {
+            numberOfAgreement: number
         }
 
-        if (newNumberOfAgreemnet.numberOfAgreemnet === '') {    
+        if (newNumberOfAgreement.numberOfAgreement === '') {    
             setErrorsNumberOfAgreemnet(() => {
                 return {
-                    numberOfAgreemnet: "Wpisz numer porozumienia !!!"
+                    numberOfAgreement: "Wpisz numer porozumienia !!!"
                 };
             });
             return;
@@ -148,7 +175,7 @@ const WorkRegister = () => {
         setNumber('');
 
         axios
-        .post("http://127.0.0.1:8080/addNumberOfAgreemnet", newNumberOfAgreemnet)
+        .post("http://127.0.0.1:8080/addNumberOfAgreemnet", newNumberOfAgreement)
         .then(() => {
 
          })
@@ -291,6 +318,60 @@ const WorkRegister = () => {
         });
     };
 
+    const addSupervisor = () => {
+        let newSupervisor  = {
+            supervisorName: supervisor,
+            supervisorCompany: companyName
+        }
+
+        if (newSupervisor.supervisorName === '') {    
+            setErrorsSupervisor (() => {
+                return {
+                    supervisorName: "Wpisz nadzorującego !!!"
+                };
+            });
+            return;
+        } else setErrorsSupervisor ('');
+
+        setSupervisor ('');
+
+        axios
+        .post("http://127.0.0.1:8080/addNewSupervisor ", newSupervisor )
+        .then(() => {
+
+         })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
+
+    const addAllower = () => {
+        let newAllower  = {
+            allowerName: allower,
+            allowerCompany: companyName
+        }
+
+        if (newAllower.allowerName === '') {    
+            setErrorsAllower (() => {
+                return {
+                    allowerName: "Wpisz dopuszczającego !!!"
+                };
+            });
+            return;
+        } else setErrorsAllower ('');
+
+        setAllower ('');
+
+        axios
+        .post("http://127.0.0.1:8080/addNewAllower ", newAllower )
+        .then(() => {
+
+         })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
+
 
     return (
         <div className="register-main">
@@ -318,7 +399,7 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModalNumberOfAgreement(true);
                     }}>Wybierz</button>
-                    {errorsNumberOfAgreemnet.numberOfAgreemnet && <p className="error">{errorsNumberOfAgreemnet.numberOfAgreemnet}</p>}
+                    {errorsNumberOfAgreemnet.numberOfAgreement && <p className="error">{errorsNumberOfAgreemnet.numberOfAgreement}</p>}
                 </div>
                 
                 <div>
@@ -412,8 +493,16 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="dopuszczający">Dopuszczający</label>
                     </div>   
-                    <input type="text" placeholder="" name="dopuszczający" />
-                    <button>Wybierz</button>
+                    <input onChange={handleAllowerList} value={allower} type="text" placeholder="" name="dopuszczający" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        addAllower();
+                    }}>Dodaj</button>
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModalAllower(true);
+                    }}>Wybierz</button>
+                    {errorsAllower.allowerName && <p className="error">{errorsAllower.allowerName}</p>}
                 </div>
 
                 <div>
@@ -436,8 +525,16 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="nadzorEksploatacyjny">Nadzór eksploatacyjny</label>
                     </div>     
-                    <input type="text" placeholder="" name="nadzorEksploatacyjny" />
-                    <button>Wybierz</button>
+                    <input onChange={handleSupervisorList} value={supervisor} type="text" placeholder="" name="nadzorEksploatacyjny" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        addSupervisor();
+                    }}>Dodaj</button>
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModalSupervisor(true);
+                    }}>Wybierz</button>
+                    {errorsSupervisor.supervisorName && <p className="error">{errorsSupervisor.supervisorName}</p>}
                 </div>
 
                 <div>
@@ -463,6 +560,10 @@ const WorkRegister = () => {
             {openModalCoordinator && <ModalCoordinator setModalCoordinator={setOpenModalCoordinator} handleAddCoordinator={handleAddCoordinator} companyName={companyName}/>}
 
             {openModalManager && <ModalManager setModalManager={setOpenModalManager} handleAddManager={handleAddManager} companyName={companyName}/>}
+
+            {openModalSupervisor && <ModalSupervisor setModalSupervisor={setOpenModalSupervisor} handleAddSupervisor={handleAddSupervisor} companyName={companyName}/>}
+
+            {openModalAllower && <ModalAllower setModalAllower={setOpenModalAllower} handleAddAllower={handleAddAllower} companyName={companyName}/>}
         </div>
 
     )

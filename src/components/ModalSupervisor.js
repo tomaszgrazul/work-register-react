@@ -1,19 +1,19 @@
-import './ModalManager.css'
+import './ModalSupervisor.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
+const ModalSupervisor = ({setModalSupervisor, handleAddSupervisor, companyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
-    const [updateManagerCompany, setUpdateManagerCompany] = useState('');
+    const [updateSupervisorCompany, setUpdateSupervisorCompany] = useState('');
 
-    const readManagerList = () => {
+    const readSupervisorList = () => {
 
         axios
-        .get("http://127.0.0.1:8080/readNewManager") 
+        .get("http://127.0.0.1:8080/readNewSupervisor") 
         .then((res) => { 
             setRegister(res.data);       
         })
@@ -23,7 +23,7 @@ const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
     }
 
     useEffect(() => {
-        readManagerList();   
+        readSupervisorList();   
     }, []);
 
     useEffect(() => {
@@ -31,9 +31,9 @@ const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
     }, [register]);
    
    
-    const deleteManagerList = (item) => {
+    const deleteSupervisorList = (item) => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewManager/${item._id}`) 
+        .delete(`http://127.0.0.1:8080/deleteNewSupervisor/${item._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
@@ -51,12 +51,12 @@ const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
     }
 
     const handleInputCompany = (e) => {
-        setUpdateManagerCompany(e.target.value);
+        setUpdateSupervisorCompany(e.target.value);
     }
 
-    const updateManagerList = (item, dataCompany) => {
+    const updateSupervisorList = (item, dataCompany) => {
         axios
-        .post(`http://127.0.0.1:8080/editNewManager/${item._id}`, {managerCompany: dataCompany}) 
+        .post(`http://127.0.0.1:8080/editNewSupervisor/${item._id}`, {supervisorCompany: dataCompany}) 
         .then(() => {       
 
         })
@@ -72,7 +72,7 @@ const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
       }
 
       const filtered = (el) => {
-        if(el.managerCompany === companyName) {
+        if(el.supervisorCompany === companyName) {
             return el;
         } 
         if(companyName === "") {
@@ -81,38 +81,38 @@ const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
       }
 
     return (
-            <div className="modalManager">
+            <div className="modalSupervisor">
                 <div className='topModal'>
-                    <h3>koordynujący</h3>
+                    <h3>Nadzór eksploatacyjny</h3>
                     <div>
-                        <p className='ex-modal' onClick={() => {setModalManager(false)}}>X</p>
+                        <p className='ex-modal' onClick={() => {setModalSupervisor(false)}}>X</p>
                     </div>                  
                 </div>
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>
                     <tbody>
-                        <tr><th></th><th className="name">Koordynator</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
+                        <tr><th></th><th className="name">Nadzorujący</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
                         {register.filter(filtered).map((item, i) => {
                                 return ( 
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddManager(item.managerName); 
+                                            handleAddSupervisor(item.supervisorName); 
                                         }} 
-                                        /></td><td className="name">{item.managerName}</td>
-                                        <td className="companyName">{item.managerCompany} 
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={updateManagerCompany} className='companyInput'/>}
+                                        /></td><td className="name">{item.supervisorName}</td>
+                                        <td className="companyName">{item.supervisorCompany} 
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={updateSupervisorCompany} className='companyInput'/>}
                                         {inputDisabled[i] && <button onClick={() => {
-                                            updateManagerList(item, updateManagerCompany); 
+                                            updateSupervisorList(item, updateSupervisorCompany); 
                                             setInputDisabled(false);   
-                                            readManagerList();    
-                                            setUpdateManagerCompany('');      
+                                            readSupervisorList();    
+                                            setUpdateSupervisorCompany('');      
                                         }}
                                         className="btn-wyślij">Wyślij
                                         </button>}</td>
                                         <td className="action">
                                         <button onClick={() => {
-                                            deleteManagerList(item);             
+                                            deleteSupervisorList(item);             
                                         }}
                                         className="btn-delete">Usuń
                                         </button>
@@ -130,4 +130,4 @@ const ModalManager = ({setModalManager, handleAddManager, companyName}) => {
         )
 }
 
-export default ModalManager;
+export default ModalSupervisor;

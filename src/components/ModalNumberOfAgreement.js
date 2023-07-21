@@ -60,9 +60,9 @@ const ModalNumberOfAgreement = ({setModalNumberOfAgreement, handleAddNumberOfAgr
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddNumberOfAgreement(item.number); 
+                                            handleAddNumberOfAgreement(item.numberOfAgreement); 
                                         }} 
-                                        /></td><td className="name">{item.number}</td><td className="action">
+                                        /></td><td className="name">{item.numberOfAgreement}</td><td className="action">
                                         <button onClick={() => {
                                             deleteNumberOfAgreement(item);             
                                         }}
