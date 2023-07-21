@@ -13,10 +13,20 @@ import ModalSupervisor from "./components/ModalSupervisor";
 
 const WorkRegister = () => {
 
+    const [whoWork, setWhoWork] = useState('');
+    const [errorsWhoWork, setErrorsWhoWork] = useState({
+        whoWork: ''
+    });
+
     const [openModalCompanyName, setOpenModalCompanyName] = useState(false);
     const [companyName, setCompanyName] = useState('');
     const [errorsCompanyName, setErrorsCompanyName] = useState({
         companyName: ''
+    });
+
+    const [numberOutCompany, setNumberOutCompany] = useState('');
+    const [errorsNumberOutCompany, setErrorsNumberOutCompany] = useState({
+        numberOutCompany: ''
     });
 
     const [openModalNumberOfAgreement, setOpenModalNumberOfAgreement] = useState(false);
@@ -68,11 +78,19 @@ const WorkRegister = () => {
     });
     
 
+    const handleWhoWork = (e) => {
+        setWhoWork(e.target.value);
+    }
+
     const handleCompanyList = (e) => {       
         setCompanyName(e.target.value);
     }
     const handleAddCompanyName = (addCompanyName) => {            
         setCompanyName(addCompanyName);    
+    }
+
+    const handleNumberOutCompany = (e) => {
+        setNumberOutCompany(e.target.value);
     }
 
     const handleNumberOfAgreemnetList = (e) => {       
@@ -372,6 +390,50 @@ const WorkRegister = () => {
         });
     };
 
+    const handleSubmitForm = () => {
+
+        let workOrder = {
+            whoWork: whoWork,
+            companyName: companyName,
+            numberOutCompany: numberOutCompany,
+            numberOfAgreement: number,
+            officeName: officeName,
+            principalName: principal,
+            coordinatingName: coordinating,
+            coordinatorName: coordinator,
+            managerName: manager,
+            supervisorName: supervisor,
+            allowerName: allower
+        }
+        
+        if (workOrder.whoWork === '') {    
+            setErrorsWhoWork (() => {
+                return {
+                    whoWork: "Wpisz kto realizuje prace !!!"
+                };
+            });
+            return;
+        } else setErrorsWhoWork ('');
+
+        if (workOrder.numberOutCompany === '') {  
+            setErrorsNumberOutCompany (() => {
+                return {
+                    numberOutCompany: "Wpisz numer polecenia !!!"
+                };
+            });
+            return;
+        } else setErrorsNumberOutCompany ('');
+
+        axios
+        .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
+        .then(() => {
+
+         })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+
 
     return (
         <div className="register-main">
@@ -383,7 +445,8 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="praceRealizuje">Prace realizuje</label>
                     </div> 
-                    <input type="text" placeholder="" name="praceRealizuje" />
+                    <input onChange={handleWhoWork} value={whoWork} type="text" placeholder="" name="praceRealizuje" />
+                    {errorsWhoWork.whoWork && <p className="error">{errorsWhoWork.whoWork}</p>}
                 </div>
                 
                 <div>
@@ -404,9 +467,10 @@ const WorkRegister = () => {
                 
                 <div>
                     <div className="label">
-                        <label htmlFor="nrFirmyZewnetrznej">Nr firmy zew.</label>
+                        <label htmlFor="nrPolFirmyZewnetrznej">Nr polecenia firmy zew.</label>
                     </div> 
-                    <input type="text" placeholder="" name="nrFirmyZewnetrznej" />
+                    <input onChange={handleNumberOutCompany} value={numberOutCompany} type="text" placeholder="" name="nrPolFirmyZewnetrznej" />
+                    {errorsNumberOutCompany.numberOutCompany && <p className="error">{errorsNumberOutCompany.numberOutCompany}</p>}
                 </div>
 
                 <div>
@@ -546,6 +610,7 @@ const WorkRegister = () => {
                     <label htmlFor="zakonczeniePracy">Zakończenie pracy (data, godzina)</label>
                     <input type="datetime-local" placeholder="" name="zakonczeniePracy" />
                 </div>
+                <button onClick={handleSubmitForm} type="submit">Zapisz</button>
             </form>
             {openModalCompanyName && <ModalCompanyName setModalCompanyName={setOpenModalCompanyName} handleAddCompanyName={handleAddCompanyName}/>}
 
