@@ -14,69 +14,61 @@ import ModalSupervisor from "./components/ModalSupervisor";
 const WorkRegister = () => {
 
     const [whoWork, setWhoWork] = useState('');
-    const [errorsWhoWork, setErrorsWhoWork] = useState({
-        whoWork: ''
+    const [errors, setErrors] = useState({
+        whoWork: '',
+        companyName: '',
+        numberOutCompany: '',
+        numberOfAgreement: '',
+        officeName: '',
+        principalName: '',
+        coordinatingName: '',
+        coordinatorName: '',
+        managerName: '',
+        supervisorName: '',
+        allowerName: ''
     });
 
     const [openModalCompanyName, setOpenModalCompanyName] = useState(false);
-    const [companyName, setCompanyName] = useState('');
-    const [errorsCompanyName, setErrorsCompanyName] = useState({
-        companyName: ''
+    const [openModal, setOpenModal] = useState({
+        whoWork: false,
+        companyName: false,
+        numberOutCompany: false,
+        numberOfAgreement: false,
+        officeName: false,
+        principalName: false,
+        coordinatingName: false,
+        coordinatorName: false,
+        managerName: false,
+        supervisorName: false,
+        allowerName: false
     });
+    const [companyName, setCompanyName] = useState('');
 
     const [numberOutCompany, setNumberOutCompany] = useState('');
-    const [errorsNumberOutCompany, setErrorsNumberOutCompany] = useState({
-        numberOutCompany: ''
-    });
-
+ 
     const [openModalNumberOfAgreement, setOpenModalNumberOfAgreement] = useState(false);
     const [number, setNumber] = useState('');
-    const [errorsNumberOfAgreemnet, setErrorsNumberOfAgreemnet] = useState({
-        numberOfAgreement: ''
-    });
- 
+   
     const [openModalOfficeName, setOpenModalOfficeName] = useState(false);
     const [officeName, setOfficeName] = useState('');
-    const [errorsOfficeName, setErrorsOfficeName] = useState({
-        officeName: ''
-    });
-
+ 
     const [openModalPrincipal, setOpenModalPrincipal] = useState(false);
     const [principal, setPrincipal] = useState('');
-    const [errorsPrincipal, setErrorsPrincipal] = useState({
-        principalName: ''
-    });
-
+ 
     const [openModalCoordinating, setOpenModalCoordinating] = useState(false);
     const [coordinating, setCoordinating] = useState('');
-    const [errorsCoordinating, setErrorsCoordinating] = useState({
-        coordinatingName: ''
-    });
-
+ 
     const [openModalCoordinator, setOpenModalCoordinator] = useState(false);
     const [coordinator, setCoordinator] = useState('');
-    const [errorsCoordinator, setErrorsCoordinator] = useState({
-        coordinatorName: ''
-    });
-
-    const [openModalManager, setOpenModalManager] = useState(false);
+ 
     const [manager, setManager] = useState('');
-    const [errorsManager, setErrorsManager] = useState({
-        managerName: ''
-    });
-
+  
     const [openModalSupervisor, setOpenModalSupervisor] = useState(false);
     const [supervisor, setSupervisor] = useState('');
-    const [errorsSupervisor, setErrorsSupervisor] = useState({
-        supervisorName: ''
-    });
-
+  
     const [openModalAllower, setOpenModalAllower] = useState(false);
     const [allower, setAllower] = useState('');
-    const [errorsAllower, setErrorsAllower] = useState({
-        allowerName: ''
-    });
-    
+      
 
     const handleWhoWork = (e) => {
         setWhoWork(e.target.value);
@@ -156,13 +148,13 @@ const WorkRegister = () => {
         }
 
         if (newCompany.companyName === '') {    
-            setErrorsCompanyName(() => {
+            setErrors(() => {
                 return {
                     companyName: "Wpisz nazwę firmy !!!"
                 };
             });
             return;
-        } else setErrorsCompanyName('');
+        } else setErrors('');
 
         setCompanyName('');
 
@@ -182,13 +174,13 @@ const WorkRegister = () => {
         }
 
         if (newNumberOfAgreement.numberOfAgreement === '') {    
-            setErrorsNumberOfAgreemnet(() => {
+            setErrors(() => {
                 return {
                     numberOfAgreement: "Wpisz numer porozumienia !!!"
                 };
             });
             return;
-        } else setErrorsNumberOfAgreemnet('');
+        } else setErrors('');
 
         setNumber('');
 
@@ -208,13 +200,13 @@ const WorkRegister = () => {
         }
 
         if (newOffice.officeName === '') {    
-            setErrorsOfficeName(() => {
+            setErrors(() => {
                 return {
                     officeName: "Wpisz nazwę biura !!!"
                 };
             });
             return;
-        } else setErrorsOfficeName('');
+        } else setErrors('');
 
         setOfficeName('');
 
@@ -235,13 +227,13 @@ const WorkRegister = () => {
         }
 
         if (newPrincipal.principalName === '') {    
-            setErrorsPrincipal(() => {
+            setErrors(() => {
                 return {
                     principalName: "Wpisz poleceniodawcę !!!"
                 };
             });
             return;
-        } else setErrorsPrincipal('');
+        } else setErrors('');
 
         setPrincipal('');
 
@@ -262,13 +254,13 @@ const WorkRegister = () => {
         }
 
         if (newCoordinating .coordinatingName === '') {    
-            setErrorsCoordinating (() => {
+            setErrors(() => {
                 return {
                     coordinatingName: "Wpisz koordynującego !!!"
                 };
             });
             return;
-        } else setErrorsCoordinating ('');
+        } else setErrors('');
 
         setCoordinating ('');
 
@@ -289,13 +281,13 @@ const WorkRegister = () => {
         }
 
         if (newCoordinator .coordinatorName === '') {    
-            setErrorsCoordinator (() => {
+            setErrors(() => {
                 return {
                     coordinatorName: "Wpisz koordynatora !!!"
                 };
             });
             return;
-        } else setErrorsCoordinator ('');
+        } else setErrors('');
 
         setCoordinator ('');
 
@@ -316,13 +308,13 @@ const WorkRegister = () => {
         }
 
         if (newManager.managerName === '') {    
-            setErrorsManager (() => {
+            setErrors(() => {
                 return {
                     managerName: "Wpisz kierującego zespołem !!!"
                 };
             });
             return;
-        } else setErrorsManager ('');
+        } else setErrors('');
 
         setManager ('');
 
@@ -343,13 +335,13 @@ const WorkRegister = () => {
         }
 
         if (newSupervisor.supervisorName === '') {    
-            setErrorsSupervisor (() => {
+            setErrors(() => {
                 return {
                     supervisorName: "Wpisz nadzorującego !!!"
                 };
             });
             return;
-        } else setErrorsSupervisor ('');
+        } else setErrors('');
 
         setSupervisor ('');
 
@@ -370,13 +362,13 @@ const WorkRegister = () => {
         }
 
         if (newAllower.allowerName === '') {    
-            setErrorsAllower (() => {
+            setErrors(() => {
                 return {
                     allowerName: "Wpisz dopuszczającego !!!"
                 };
             });
             return;
-        } else setErrorsAllower ('');
+        } else setErrors('');
 
         setAllower ('');
 
@@ -407,22 +399,22 @@ const WorkRegister = () => {
         }
         
         if (workOrder.whoWork === '') {    
-            setErrorsWhoWork (() => {
+            setErrors(() => {
                 return {
                     whoWork: "Wpisz kto realizuje prace !!!"
                 };
             });
             return;
-        } else setErrorsWhoWork ('');
+        } else setErrors('');
 
         if (workOrder.numberOutCompany === '') {  
-            setErrorsNumberOutCompany (() => {
+            setErrors (() => {
                 return {
                     numberOutCompany: "Wpisz numer polecenia !!!"
                 };
             });
             return;
-        } else setErrorsNumberOutCompany ('');
+        } else setErrors('');
 
         axios
         .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
@@ -446,7 +438,7 @@ const WorkRegister = () => {
                         <label htmlFor="praceRealizuje">Prace realizuje</label>
                     </div> 
                     <input onChange={handleWhoWork} value={whoWork} type="text" placeholder="" name="praceRealizuje" />
-                    {errorsWhoWork.whoWork && <p className="error">{errorsWhoWork.whoWork}</p>}
+                    {errors.whoWork && <p className="error">{errors.whoWork}</p>}
                 </div>
                 
                 <div>
@@ -462,7 +454,7 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModalNumberOfAgreement(true);
                     }}>Wybierz</button>
-                    {errorsNumberOfAgreemnet.numberOfAgreement && <p className="error">{errorsNumberOfAgreemnet.numberOfAgreement}</p>}
+                    {errors.numberOfAgreement && <p className="error">{errors.numberOfAgreement}</p>}
                 </div>
                 
                 <div>
@@ -470,7 +462,7 @@ const WorkRegister = () => {
                         <label htmlFor="nrPolFirmyZewnetrznej">Nr polecenia firmy zew.</label>
                     </div> 
                     <input onChange={handleNumberOutCompany} value={numberOutCompany} type="text" placeholder="" name="nrPolFirmyZewnetrznej" />
-                    {errorsNumberOutCompany.numberOutCompany && <p className="error">{errorsNumberOutCompany.numberOutCompany}</p>}
+                    {errors.numberOutCompany && <p className="error">{errors.numberOutCompany}</p>}
                 </div>
 
                 <div>
@@ -486,7 +478,7 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModalCompanyName(true);
                     }}>Wybierz</button>
-                    {errorsCompanyName.companyName && <p className="error">{errorsCompanyName.companyName}</p>}
+                    {errors.companyName && <p className="error">{errors.companyName}</p>}
                 </div>
 
                 <div>
@@ -502,7 +494,7 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModalOfficeName(true);
                     }}>Wybierz</button>
-                    {errorsOfficeName.officeName && <p className="error">{errorsOfficeName.officeName}</p>}
+                    {errors.officeName && <p className="error">{errors.officeName}</p>}
                 </div>
 
                 <div>
@@ -518,7 +510,7 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModalPrincipal(true);
                     }}>Wybierz</button>
-                    {errorsPrincipal.principalName && <p className="error">{errorsPrincipal.principalName}</p>}
+                    {errors.principalName && <p className="error">{errors.principalName}</p>}
                 </div>
 
                 <div>
@@ -534,7 +526,7 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModalCoordinating(true);
                     }}>Wybierz</button>
-                    {errorsCoordinating.coordinatingName && <p className="error">{errorsCoordinating.coordinatingName}</p>}
+                    {errors.coordinatingName && <p className="error">{errors.coordinatingName}</p>}
                 </div>
 
                 <div>
@@ -550,7 +542,7 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModalCoordinator(true);
                     }}>Wybierz</button>
-                    {errorsCoordinator.coordinatorName && <p className="error">{errorsCoordinator.coordinatorName}</p>}
+                    {errors.coordinatorName && <p className="error">{errors.coordinatorName}</p>}
                 </div>
 
                 <div>
@@ -566,7 +558,7 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModalAllower(true);
                     }}>Wybierz</button>
-                    {errorsAllower.allowerName && <p className="error">{errorsAllower.allowerName}</p>}
+                    {errors.allowerName && <p className="error">{errors.allowerName}</p>}
                 </div>
 
                 <div>
@@ -580,9 +572,10 @@ const WorkRegister = () => {
                     }}>Dodaj</button>
                     <button onClick={(e) => {
                         e.preventDefault();
-                        setOpenModalManager(true);
+                        // setOpenModalManager(true);
+                        setOpenModal(() => {return {managerName: true}})
                     }}>Wybierz</button>
-                    {errorsManager.managerName && <p className="error">{errorsManager.managerName}</p>}
+                    {errors.managerName && <p className="error">{errors.managerName}</p>}
                 </div>
 
                 <div>
@@ -598,7 +591,7 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModalSupervisor(true);
                     }}>Wybierz</button>
-                    {errorsSupervisor.supervisorName && <p className="error">{errorsSupervisor.supervisorName}</p>}
+                    {errors.supervisorName && <p className="error">{errors.supervisorName}</p>}
                 </div>
 
                 <div>
@@ -624,7 +617,7 @@ const WorkRegister = () => {
 
             {openModalCoordinator && <ModalCoordinator setModalCoordinator={setOpenModalCoordinator} handleAddCoordinator={handleAddCoordinator} companyName={companyName}/>}
 
-            {openModalManager && <ModalManager setModalManager={setOpenModalManager} handleAddManager={handleAddManager} companyName={companyName}/>}
+            {openModal.managerName && <ModalManager setOpenModal={setOpenModal} handleAddManager={handleAddManager} companyName={companyName}/>}
 
             {openModalSupervisor && <ModalSupervisor setModalSupervisor={setOpenModalSupervisor} handleAddSupervisor={handleAddSupervisor} companyName={companyName}/>}
 
