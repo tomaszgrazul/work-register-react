@@ -2,7 +2,7 @@ import './ModalPrincipal.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalPrincipal = ({setModalPrincipal, handleAddPrincipal, companyName}) => {
+const ModalPrincipal = ({setOpenModal, handleAddPrincipal, companyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
@@ -28,9 +28,6 @@ const ModalPrincipal = ({setModalPrincipal, handleAddPrincipal, companyName}) =>
 
     useEffect(() => {
         setInputDisabled(new Array(register.length).fill(false));
-        // const filtered = register.find(({principalCompany}) => principalCompany === companyName);
-        // const filtered = register.filter((el, i) => el.principalCompany === companyName);
-        // console.log("companyName", filtered);
     }, [register]);
    
    
@@ -95,7 +92,7 @@ const ModalPrincipal = ({setModalPrincipal, handleAddPrincipal, companyName}) =>
                 <div className='topModal'>
                     <h3>Poleceniodawca</h3>
                     <div>
-                        <p className='ex-modal' onClick={() => {setModalPrincipal(false)}}>X</p>
+                        <p className='ex-modal' onClick={() => {setOpenModal(() => {return {principalName: false}})}}>X</p>
                     </div>                  
                 </div>
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>

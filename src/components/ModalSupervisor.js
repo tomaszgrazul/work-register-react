@@ -2,7 +2,7 @@ import './ModalSupervisor.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalSupervisor = ({setModalSupervisor, handleAddSupervisor, companyName}) => {
+const ModalSupervisor = ({setOpenModal, handleAddSupervisor, companyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
@@ -85,7 +85,7 @@ const ModalSupervisor = ({setModalSupervisor, handleAddSupervisor, companyName})
                 <div className='topModal'>
                     <h3>Nadzór eksploatacyjny</h3>
                     <div>
-                        <p className='ex-modal' onClick={() => {setModalSupervisor(false)}}>X</p>
+                        <p className='ex-modal' onClick={() => {setOpenModal(() => {return {supervisorName: false}})}}>X</p>
                     </div>                  
                 </div>
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>

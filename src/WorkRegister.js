@@ -63,10 +63,8 @@ const WorkRegister = () => {
  
     const [manager, setManager] = useState('');
   
-    const [openModalSupervisor, setOpenModalSupervisor] = useState(false);
     const [supervisor, setSupervisor] = useState('');
   
-    const [openModalAllower, setOpenModalAllower] = useState(false);
     const [allower, setAllower] = useState('');
       
 
@@ -452,7 +450,7 @@ const WorkRegister = () => {
                     }}>Dodaj</button>
                     <button onClick={(e) => {
                         e.preventDefault();
-                        setOpenModalNumberOfAgreement(true);
+                        setOpenModal(() => {return {numberOfAgreement: true}});
                     }}>Wybierz</button>
                     {errors.numberOfAgreement && <p className="error">{errors.numberOfAgreement}</p>}
                 </div>
@@ -476,7 +474,7 @@ const WorkRegister = () => {
                     }}>Dodaj</button>
                     <button onClick={(e) => {
                         e.preventDefault();
-                        setOpenModalCompanyName(true);
+                        setOpenModal(() => {return {companyName: true}});
                     }}>Wybierz</button>
                     {errors.companyName && <p className="error">{errors.companyName}</p>}
                 </div>
@@ -492,7 +490,7 @@ const WorkRegister = () => {
                     }}>Dodaj</button>
                     <button onClick={(e) => {
                         e.preventDefault();
-                        setOpenModalOfficeName(true);
+                        setOpenModal(() => {return {officeName: true}});
                     }}>Wybierz</button>
                     {errors.officeName && <p className="error">{errors.officeName}</p>}
                 </div>
@@ -508,7 +506,7 @@ const WorkRegister = () => {
                     }}>Dodaj</button>
                     <button onClick={(e) => {
                         e.preventDefault();
-                        setOpenModalPrincipal(true);
+                        setOpenModal(() => {return {principalName: true}});
                     }}>Wybierz</button>
                     {errors.principalName && <p className="error">{errors.principalName}</p>}
                 </div>
@@ -524,7 +522,7 @@ const WorkRegister = () => {
                     }}>Dodaj</button>
                     <button onClick={(e) => {
                         e.preventDefault();
-                        setOpenModalCoordinating(true);
+                        setOpenModal(() => {return {coordinatingName: true}});
                     }}>Wybierz</button>
                     {errors.coordinatingName && <p className="error">{errors.coordinatingName}</p>}
                 </div>
@@ -540,7 +538,7 @@ const WorkRegister = () => {
                     }}>Dodaj</button>
                     <button onClick={(e) => {
                         e.preventDefault();
-                        setOpenModalCoordinator(true);
+                        setOpenModal(() => {return {coordinatorName: true}});
                     }}>Wybierz</button>
                     {errors.coordinatorName && <p className="error">{errors.coordinatorName}</p>}
                 </div>
@@ -556,7 +554,7 @@ const WorkRegister = () => {
                     }}>Dodaj</button>
                     <button onClick={(e) => {
                         e.preventDefault();
-                        setOpenModalAllower(true);
+                        setOpenModal(() => {return {allowerName: true}});
                     }}>Wybierz</button>
                     {errors.allowerName && <p className="error">{errors.allowerName}</p>}
                 </div>
@@ -572,8 +570,7 @@ const WorkRegister = () => {
                     }}>Dodaj</button>
                     <button onClick={(e) => {
                         e.preventDefault();
-                        // setOpenModalManager(true);
-                        setOpenModal(() => {return {managerName: true}})
+                        setOpenModal(() => {return {managerName: true}});
                     }}>Wybierz</button>
                     {errors.managerName && <p className="error">{errors.managerName}</p>}
                 </div>
@@ -589,7 +586,7 @@ const WorkRegister = () => {
                     }}>Dodaj</button>
                     <button onClick={(e) => {
                         e.preventDefault();
-                        setOpenModalSupervisor(true);
+                        setOpenModal(() => {return {supervisorName: true}});
                     }}>Wybierz</button>
                     {errors.supervisorName && <p className="error">{errors.supervisorName}</p>}
                 </div>
@@ -605,23 +602,23 @@ const WorkRegister = () => {
                 </div>
                 <button onClick={handleSubmitForm} type="submit">Zapisz</button>
             </form>
-            {openModalCompanyName && <ModalCompanyName setModalCompanyName={setOpenModalCompanyName} handleAddCompanyName={handleAddCompanyName}/>}
+            {openModal.companyName && <ModalCompanyName setOpenModal={setOpenModal} handleAddCompanyName={handleAddCompanyName}/>}
 
-            {openModalNumberOfAgreement && <ModalNumberOfAgreement setModalNumberOfAgreement={setOpenModalNumberOfAgreement} handleAddNumberOfAgreement={handleAddNumberOfAgreement}/>}
+            {openModal.numberOfAgreement && <ModalNumberOfAgreement setOpenModal={setOpenModal} handleAddNumberOfAgreement={handleAddNumberOfAgreement}/>}
 
-            {openModalOfficeName && <ModalOfficeName setModalOfficeName={setOpenModalOfficeName} handleAddOfficeName={handleAddOfficeName}/>}
+            {openModal.officeName && <ModalOfficeName setOpenModal={setOpenModal} handleAddOfficeName={handleAddOfficeName}/>}
 
-            {openModalPrincipal && <ModalPrincipal setModalPrincipal={setOpenModalPrincipal} handleAddPrincipal={handleAddPrincipal} companyName={companyName}/>}
+            {openModal.principalName && <ModalPrincipal setOpenModal={setOpenModal} handleAddPrincipal={handleAddPrincipal} companyName={companyName}/>}
 
-            {openModalCoordinating && <ModalCoordinating setModalCoordinating={setOpenModalCoordinating} handleAddCoordinating={handleAddCoordinating} companyName={companyName}/>}
+            {openModal.coordinatingName && <ModalCoordinating setOpenModal={setOpenModal} handleAddCoordinating={handleAddCoordinating} companyName={companyName}/>}
 
-            {openModalCoordinator && <ModalCoordinator setModalCoordinator={setOpenModalCoordinator} handleAddCoordinator={handleAddCoordinator} companyName={companyName}/>}
+            {openModal.coordinatorName && <ModalCoordinator setOpenModal={setOpenModal} handleAddCoordinator={handleAddCoordinator} companyName={companyName}/>}
 
             {openModal.managerName && <ModalManager setOpenModal={setOpenModal} handleAddManager={handleAddManager} companyName={companyName}/>}
 
-            {openModalSupervisor && <ModalSupervisor setModalSupervisor={setOpenModalSupervisor} handleAddSupervisor={handleAddSupervisor} companyName={companyName}/>}
+            {openModal.supervisorName && <ModalSupervisor setOpenModal={setOpenModal} handleAddSupervisor={handleAddSupervisor} companyName={companyName}/>}
 
-            {openModalAllower && <ModalAllower setModalAllower={setOpenModalAllower} handleAddAllower={handleAddAllower} companyName={companyName}/>}
+            {openModal.allowerName && <ModalAllower setOpenModal={setOpenModal} handleAddAllower={handleAddAllower} companyName={companyName}/>}
         </div>
 
     )

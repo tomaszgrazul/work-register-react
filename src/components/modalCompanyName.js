@@ -2,7 +2,7 @@ import './ModalCompanyName.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalCompanyName = ({setModalCompanyName, handleAddCompanyName}) => {
+const ModalCompanyName = ({setOpenModal, handleAddCompanyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
@@ -48,7 +48,7 @@ const ModalCompanyName = ({setModalCompanyName, handleAddCompanyName}) => {
                 <div className='topModal'>
                     <h3>Lista firm</h3>
                     <div>
-                        <p className='ex-modal' onClick={() => {setModalCompanyName(false)}}>X</p>
+                        <p className='ex-modal' onClick={() => {setOpenModal(() => {return {companyName: false}})}}>X</p>
                     </div>                  
                 </div>
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
