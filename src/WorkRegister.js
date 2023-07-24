@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import './WorkRegister.css';
 import axios from "axios";
 import ModalCompanyName from "./components/ModalCompanyName";
@@ -13,7 +13,8 @@ import ModalSupervisor from "./components/ModalSupervisor";
 
 const WorkRegister = () => {
 
-    const [whoWork, setWhoWork] = useState('');
+    const [addWorkOrderResponse,setAddWorkOrderResponse] = useState(false);
+
     const [errors, setErrors] = useState({
         whoWork: '',
         companyName: '',
@@ -28,7 +29,6 @@ const WorkRegister = () => {
         allowerName: ''
     });
 
-    const [openModalCompanyName, setOpenModalCompanyName] = useState(false);
     const [openModal, setOpenModal] = useState({
         whoWork: false,
         companyName: false,
@@ -42,133 +42,202 @@ const WorkRegister = () => {
         supervisorName: false,
         allowerName: false
     });
-    const [companyName, setCompanyName] = useState('');
 
-    const [numberOutCompany, setNumberOutCompany] = useState('');
- 
-    const [openModalNumberOfAgreement, setOpenModalNumberOfAgreement] = useState(false);
-    const [number, setNumber] = useState('');
-   
-    const [openModalOfficeName, setOpenModalOfficeName] = useState(false);
-    const [officeName, setOfficeName] = useState('');
- 
-    const [openModalPrincipal, setOpenModalPrincipal] = useState(false);
-    const [principal, setPrincipal] = useState('');
- 
-    const [openModalCoordinating, setOpenModalCoordinating] = useState(false);
-    const [coordinating, setCoordinating] = useState('');
- 
-    const [openModalCoordinator, setOpenModalCoordinator] = useState(false);
-    const [coordinator, setCoordinator] = useState('');
- 
-    const [manager, setManager] = useState('');
-  
-    const [supervisor, setSupervisor] = useState('');
-  
-    const [allower, setAllower] = useState('');
-      
+    const [readValue, setReadValue] = useState({
+        whoWork: '',
+        companyName: '',
+        numberOutCompany: '',
+        numberOfAgreement: '',
+        officeName: '',
+        principalName: '',
+        coordinatingName: '',
+        coordinatorName: '',
+        managerName: '',
+        supervisorName: '',
+        allowerName: ''
+    });
+
 
     const handleWhoWork = (e) => {
-        setWhoWork(e.target.value);
-    }
-
-    const handleCompanyList = (e) => {       
-        setCompanyName(e.target.value);
-    }
-    const handleAddCompanyName = (addCompanyName) => {            
-        setCompanyName(addCompanyName);    
-    }
-
-    const handleNumberOutCompany = (e) => {
-        setNumberOutCompany(e.target.value);
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                whoWork: e.target.value
+            }
+        });
     }
 
     const handleNumberOfAgreemnetList = (e) => {       
-        setNumber(e.target.value);
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                numberOfAgreement: e.target.value
+            }
+        });
     }
     const handleAddNumberOfAgreement = (addNumber) => {        
-        setNumber(addNumber);    
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                numberOfAgreement: addNumber
+            }
+        });   
+    }
+
+    const handleCompanyList = (e) => {       
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                companyName: e.target.value
+            }
+        });
+    }
+    const handleAddCompanyName = (addCompanyName) => {            
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                companyName: addCompanyName
+            }
+        });    
+    }
+
+    const handleNumberOutCompany = (e) => {
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                numberOutCompany: e.target.value
+            }
+        }); 
     }
 
     const handleOfficeList = (e) => {       
-        setOfficeName(e.target.value);
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                officeName: e.target.value
+            }
+        }); 
     }
     const handleAddOfficeName = (addOfficeName) => {            
-        setOfficeName(addOfficeName);    
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                officeName: addOfficeName
+            }
+        });   
     }
 
     const handlePrincipalList = (e) => {       
-        setPrincipal(e.target.value);
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                principalName: e.target.value
+            }
+        });
     }
     const handleAddPrincipal = (addPrincipal) => {            
-        setPrincipal(addPrincipal);    
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                principalName: addPrincipal
+            }
+        });      
     }
 
     const handleCoordinatingList = (e) => {       
-        setCoordinating(e.target.value);
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                coordinatingName: e.target.value
+            }
+        });
     }
     const handleAddCoordinating = (addCoordinating) => {            
-        setCoordinating(addCoordinating);    
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                coordinatingName: addCoordinating
+            }
+        });    
     }
 
     const handleCoordinatorList = (e) => {       
-        setCoordinator(e.target.value);
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                coordinatorName: e.target.value
+            }
+        }); 
     }
     const handleAddCoordinator = (addCoordinator) => {            
-        setCoordinator(addCoordinator);    
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                coordinatorName: addCoordinator
+            }
+        });    
     }
 
     const handleManagerList = (e) => {       
-        setManager(e.target.value);
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                managerName: e.target.value
+            }
+        }); 
     }
     const handleAddManager = (addManager) => {            
-        setManager(addManager);    
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                managerName: addManager
+            }
+        });   
     }
 
     const handleSupervisorList = (e) => {       
-        setSupervisor(e.target.value);
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                supervisorName: e.target.value
+            }
+        }); 
     }
     const handleAddSupervisor = (addSupervisor) => {            
-        setSupervisor(addSupervisor);    
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                supervisorName: addSupervisor
+            }
+        });    
     }
 
     const handleAllowerList = (e) => {       
-        setAllower(e.target.value);
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                allowerName: e.target.value
+            }
+        });
     }
-    const handleAddAllower = (addAllower) => {            
-        setAllower(addAllower);    
+    const handleAddAllower = (addAllower) => {             
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                allowerName: addAllower
+            }
+        });   
     }
     
   
-    const addCompany = () => {
-        let newCompany = {
-            companyName: companyName
-        }
+    // useEffect(() => {
 
-        if (newCompany.companyName === '') {    
-            setErrors(() => {
-                return {
-                    companyName: "Wpisz nazwę firmy !!!"
-                };
-            });
-            return;
-        } else setErrors('');
-
-        setCompanyName('');
-
-        axios
-        .post("http://127.0.0.1:8080/addNewCompany", newCompany)
-        .then(() => {
-            
-         })
-        .catch((error) => {
-            console.error(error);
-        });
-    };
+    //     console.log('aaaa', readValue) 
+    // }, [readValue]);
 
     const addNmberOfAgreemnet = () => {
         let newNumberOfAgreement = {
-            numberOfAgreement: number
+            numberOfAgreement: readValue.numberOfAgreement
         }
 
         if (newNumberOfAgreement.numberOfAgreement === '') {    
@@ -180,7 +249,12 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setNumber('');
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                numberOfAgreement: ''
+            };
+        });
 
         axios
         .post("http://127.0.0.1:8080/addNumberOfAgreemnet", newNumberOfAgreement)
@@ -192,9 +266,40 @@ const WorkRegister = () => {
         });
     };
 
+    const addCompany = () => {
+        let newCompany = {
+            companyName: readValue.companyName  
+        }
+
+        if (newCompany.companyName === '') {    
+            setErrors(() => {
+                return {
+                    companyName: "Wpisz nazwę firmy !!!"
+                };
+            });
+            return;
+        } else setErrors('');
+
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                companyName: ''
+            };
+        });
+
+        axios
+        .post("http://127.0.0.1:8080/addNewCompany", newCompany)
+        .then(() => {
+            
+         })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
+
     const addOffice = () => {
         let newOffice = {
-            officeName: officeName
+            officeName: readValue.officeName
         }
 
         if (newOffice.officeName === '') {    
@@ -206,7 +311,12 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setOfficeName('');
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                officeName: ''
+            };
+        });
 
         axios
         .post("http://127.0.0.1:8080/addNewOfficeName", newOffice)
@@ -220,8 +330,8 @@ const WorkRegister = () => {
 
     const addPrincipal = () => {
         let newPrincipal = {
-            principalName: principal,
-            principalCompany: companyName
+            principalName: readValue.principalName,
+            principalCompany: readValue.companyName
         }
 
         if (newPrincipal.principalName === '') {    
@@ -233,7 +343,12 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setPrincipal('');
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                principalName: ''
+            };
+        });
 
         axios
         .post("http://127.0.0.1:8080/addNewPrincipal", newPrincipal)
@@ -247,8 +362,8 @@ const WorkRegister = () => {
 
     const addCoordinating = () => {
         let newCoordinating  = {
-            coordinatingName: coordinating,
-            coordinatingCompany: companyName
+            coordinatingName: readValue.coordinatingName,
+            coordinatingCompany: readValue.companyName
         }
 
         if (newCoordinating .coordinatingName === '') {    
@@ -260,7 +375,12 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setCoordinating ('');
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                coordinatingName: ''
+            };
+        });
 
         axios
         .post("http://127.0.0.1:8080/addNewCoordinating ", newCoordinating )
@@ -274,8 +394,8 @@ const WorkRegister = () => {
 
     const addCoordinator = () => {
         let newCoordinator  = {
-            coordinatorName: coordinator,
-            coordinatorCompany: companyName
+            coordinatorName: readValue.coordinatorName,
+            coordinatorCompany: readValue.companyName
         }
 
         if (newCoordinator .coordinatorName === '') {    
@@ -287,7 +407,12 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setCoordinator ('');
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                coordinatorName: ''
+            };
+        });
 
         axios
         .post("http://127.0.0.1:8080/addNewCoordinator ", newCoordinator )
@@ -301,8 +426,8 @@ const WorkRegister = () => {
 
     const addManager = () => {
         let newManager  = {
-            managerName: manager,
-            managerCompany: companyName
+            managerName: readValue.managerName,
+            managerCompany: readValue.companyName
         }
 
         if (newManager.managerName === '') {    
@@ -314,7 +439,12 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setManager ('');
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                managerName: ''
+            };
+        });
 
         axios
         .post("http://127.0.0.1:8080/addNewManager ", newManager )
@@ -328,8 +458,8 @@ const WorkRegister = () => {
 
     const addSupervisor = () => {
         let newSupervisor  = {
-            supervisorName: supervisor,
-            supervisorCompany: companyName
+            supervisorName: readValue.supervisorName,
+            supervisorCompany: readValue.companyName
         }
 
         if (newSupervisor.supervisorName === '') {    
@@ -341,7 +471,12 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setSupervisor ('');
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                supervisorName: ''
+            };
+        });
 
         axios
         .post("http://127.0.0.1:8080/addNewSupervisor ", newSupervisor )
@@ -355,8 +490,8 @@ const WorkRegister = () => {
 
     const addAllower = () => {
         let newAllower  = {
-            allowerName: allower,
-            allowerCompany: companyName
+            allowerName: readValue.allowerName,
+            allowerCompany: readValue.companyName
         }
 
         if (newAllower.allowerName === '') {    
@@ -368,7 +503,12 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setAllower ('');
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                allowerName: ''
+            };
+        });
 
         axios
         .post("http://127.0.0.1:8080/addNewAllower ", newAllower )
@@ -380,20 +520,21 @@ const WorkRegister = () => {
         });
     };
 
-    const handleSubmitForm = () => {
+    const handleSubmitForm = (e) => {
 
+        e.preventDefault();
         let workOrder = {
-            whoWork: whoWork,
-            companyName: companyName,
-            numberOutCompany: numberOutCompany,
-            numberOfAgreement: number,
-            officeName: officeName,
-            principalName: principal,
-            coordinatingName: coordinating,
-            coordinatorName: coordinator,
-            managerName: manager,
-            supervisorName: supervisor,
-            allowerName: allower
+            whoWork: readValue.whoWork,
+            companyName: readValue.companyName,
+            numberOutCompany: readValue.numberOutCompany,
+            numberOfAgreement: readValue.numberOfAgreement,
+            officeName: readValue.officeName,
+            principalName: readValue.principalName,
+            coordinatingName: readValue.coordinatingName,
+            coordinatorName: readValue.coordinatorName,
+            managerName: readValue.managerName,
+            supervisorName: readValue.supervisorName,
+            allowerName: readValue.allowerName
         }
         
         if (workOrder.whoWork === '') {    
@@ -416,8 +557,8 @@ const WorkRegister = () => {
 
         axios
         .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
-        .then(() => {
-
+        .then((res) => {
+            setAddWorkOrderResponse(res.data.save);
          })
         .catch((error) => {
             console.error(error);
@@ -435,7 +576,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="praceRealizuje">Prace realizuje</label>
                     </div> 
-                    <input onChange={handleWhoWork} value={whoWork} type="text" placeholder="" name="praceRealizuje" />
+                    <input onChange={handleWhoWork} value={readValue.whoWork} type="text" placeholder="" name="praceRealizuje" />
                     {errors.whoWork && <p className="error">{errors.whoWork}</p>}
                 </div>
                 
@@ -443,7 +584,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="nrPorozumienia">Nr porozumienia</label>
                     </div> 
-                    <input onChange={handleNumberOfAgreemnetList} value={number} type="text" placeholder="" name="nrPorozumienia" />
+                    <input onChange={handleNumberOfAgreemnetList} value={readValue.numberOfAgreement} type="text" placeholder="" name="nrPorozumienia" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addNmberOfAgreemnet();
@@ -459,7 +600,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="nrPolFirmyZewnetrznej">Nr polecenia firmy zew.</label>
                     </div> 
-                    <input onChange={handleNumberOutCompany} value={numberOutCompany} type="text" placeholder="" name="nrPolFirmyZewnetrznej" />
+                    <input onChange={handleNumberOutCompany} value={readValue.numberOutCompany} type="text" placeholder="" name="nrPolFirmyZewnetrznej" />
                     {errors.numberOutCompany && <p className="error">{errors.numberOutCompany}</p>}
                 </div>
 
@@ -467,7 +608,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="companyName">Nazwa firmy</label>
                     </div> 
-                    <input onChange={handleCompanyList} value={companyName} type="text" placeholder="" name="companyName" />
+                    <input onChange={handleCompanyList} value={readValue.companyName} type="text" placeholder="" name="companyName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCompany();
@@ -483,7 +624,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="nazwaBiura">Nazwa biura</label>
                     </div>  
-                    <input onChange={handleOfficeList} value={officeName} type="text" placeholder="" name="nazwaBiura" />
+                    <input onChange={handleOfficeList} value={readValue.officeName} type="text" placeholder="" name="nazwaBiura" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addOffice();
@@ -499,7 +640,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="poleceniodawca">Poleceniodawca</label>
                     </div>   
-                    <input onChange={handlePrincipalList} value={principal} type="text" placeholder="" name="poleceniodawca" />
+                    <input onChange={handlePrincipalList} value={readValue.principalName} type="text" placeholder="" name="poleceniodawca" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addPrincipal();
@@ -515,7 +656,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="koordynujący">Koordynujący</label>
                     </div>    
-                    <input onChange={handleCoordinatingList} value={coordinating} type="text" placeholder="" name="koordynujący" />
+                    <input onChange={handleCoordinatingList} value={readValue.coordinatingName} type="text" placeholder="" name="koordynujący" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCoordinating();
@@ -531,7 +672,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="koordynator">Koordynator</label>
                     </div>  
-                    <input onChange={handleCoordinatorList} value={coordinator} type="text" placeholder="" name="koordynator" />
+                    <input onChange={handleCoordinatorList} value={readValue.coordinatorName} type="text" placeholder="" name="koordynator" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCoordinator();
@@ -547,7 +688,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="dopuszczający">Dopuszczający</label>
                     </div>   
-                    <input onChange={handleAllowerList} value={allower} type="text" placeholder="" name="dopuszczający" />
+                    <input onChange={handleAllowerList} value={readValue.allowerName} type="text" placeholder="" name="dopuszczający" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addAllower();
@@ -563,7 +704,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="kierującyZespołem">Kierujący zespołem</label>
                     </div> 
-                    <input onChange={handleManagerList} value={manager} type="text" placeholder="" name="kierującyZespołem" />
+                    <input onChange={handleManagerList} value={readValue.managerName} type="text" placeholder="" name="kierującyZespołem" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addManager();
@@ -579,7 +720,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="nadzorEksploatacyjny">Nadzór eksploatacyjny</label>
                     </div>     
-                    <input onChange={handleSupervisorList} value={supervisor} type="text" placeholder="" name="nadzorEksploatacyjny" />
+                    <input onChange={handleSupervisorList} value={readValue.supervisorName} type="text" placeholder="" name="nadzorEksploatacyjny" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addSupervisor();
@@ -600,7 +741,10 @@ const WorkRegister = () => {
                     <label htmlFor="zakonczeniePracy">Zakończenie pracy (data, godzina)</label>
                     <input type="datetime-local" placeholder="" name="zakonczeniePracy" />
                 </div>
-                <button onClick={handleSubmitForm} type="submit">Zapisz</button>
+                <div>
+                    <button onClick={handleSubmitForm} type="submit">Zapisz</button>
+                    {addWorkOrderResponse && <p>Zapisane</p>}
+                </div>
             </form>
             {openModal.companyName && <ModalCompanyName setOpenModal={setOpenModal} handleAddCompanyName={handleAddCompanyName}/>}
 
@@ -608,17 +752,17 @@ const WorkRegister = () => {
 
             {openModal.officeName && <ModalOfficeName setOpenModal={setOpenModal} handleAddOfficeName={handleAddOfficeName}/>}
 
-            {openModal.principalName && <ModalPrincipal setOpenModal={setOpenModal} handleAddPrincipal={handleAddPrincipal} companyName={companyName}/>}
+            {openModal.principalName && <ModalPrincipal setOpenModal={setOpenModal} handleAddPrincipal={handleAddPrincipal} companyName={readValue.companyName}/>}
 
-            {openModal.coordinatingName && <ModalCoordinating setOpenModal={setOpenModal} handleAddCoordinating={handleAddCoordinating} companyName={companyName}/>}
+            {openModal.coordinatingName && <ModalCoordinating setOpenModal={setOpenModal} handleAddCoordinating={handleAddCoordinating} companyName={readValue.companyName}/>}
 
-            {openModal.coordinatorName && <ModalCoordinator setOpenModal={setOpenModal} handleAddCoordinator={handleAddCoordinator} companyName={companyName}/>}
+            {openModal.coordinatorName && <ModalCoordinator setOpenModal={setOpenModal} handleAddCoordinator={handleAddCoordinator} companyName={readValue.companyName}/>}
 
-            {openModal.managerName && <ModalManager setOpenModal={setOpenModal} handleAddManager={handleAddManager} companyName={companyName}/>}
+            {openModal.managerName && <ModalManager setOpenModal={setOpenModal} handleAddManager={handleAddManager} companyName={readValue.companyName}/>}
 
-            {openModal.supervisorName && <ModalSupervisor setOpenModal={setOpenModal} handleAddSupervisor={handleAddSupervisor} companyName={companyName}/>}
+            {openModal.supervisorName && <ModalSupervisor setOpenModal={setOpenModal} handleAddSupervisor={handleAddSupervisor} companyName={readValue.companyName}/>}
 
-            {openModal.allowerName && <ModalAllower setOpenModal={setOpenModal} handleAddAllower={handleAddAllower} companyName={companyName}/>}
+            {openModal.allowerName && <ModalAllower setOpenModal={setOpenModal} handleAddAllower={handleAddAllower} companyName={readValue.companyName}/>}
         </div>
 
     )
