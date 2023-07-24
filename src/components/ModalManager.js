@@ -2,7 +2,7 @@ import './ModalManager.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalManager = ({setOpenModal, handleAddManager, companyName}) => {
+const ModalManager = ({setOpenModal, handleAddModal, companyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
@@ -97,7 +97,7 @@ const ModalManager = ({setOpenModal, handleAddManager, companyName}) => {
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddManager(item.managerName); 
+                                            handleAddModal(item.managerName, 'managerName'); 
                                         }} 
                                         /></td><td className="name">{item.managerName}</td>
                                         <td className="companyName">{item.managerCompany} 

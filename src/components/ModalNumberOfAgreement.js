@@ -2,7 +2,7 @@ import './ModalNumberOfAgreement.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalNumberOfAgreement = ({setOpenModal, handleAddNumberOfAgreement}) => {
+const ModalNumberOfAgreement = ({setOpenModal, handleAddModal}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
@@ -60,7 +60,7 @@ const ModalNumberOfAgreement = ({setOpenModal, handleAddNumberOfAgreement}) => {
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddNumberOfAgreement(item.numberOfAgreement); 
+                                            handleAddModal(item.numberOfAgreement, 'numberOfAgreement'); 
                                         }} 
                                         /></td><td className="name">{item.numberOfAgreement}</td><td className="action">
                                         <button onClick={() => {

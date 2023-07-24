@@ -2,7 +2,7 @@ import './ModalPrincipal.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalPrincipal = ({setOpenModal, handleAddPrincipal, companyName}) => {
+const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
@@ -105,7 +105,7 @@ const ModalPrincipal = ({setOpenModal, handleAddPrincipal, companyName}) => {
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddPrincipal(item.principalName); 
+                                            handleAddModal(item.principalName, 'principalName'); 
                                         }} 
                                         /></td><td className="name">{item.principalName}</td>
                                         <td className="companyName">{item.principalCompany} 

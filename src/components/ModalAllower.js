@@ -2,7 +2,7 @@ import './ModalAllower.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalAllower = ({setOpenModal, handleAddAllower, companyName}) => {
+const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
@@ -97,7 +97,7 @@ const ModalAllower = ({setOpenModal, handleAddAllower, companyName}) => {
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddAllower(item.allowerName); 
+                                            handleAddModal(item.allowerName, 'allowerName'); 
                                         }} 
                                         /></td><td className="name">{item.allowerName}</td>
                                         <td className="companyName">{item.allowerCompany} 

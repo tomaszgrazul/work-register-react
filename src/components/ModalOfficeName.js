@@ -2,7 +2,7 @@ import './ModalOfficeName.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalOfficeName = ({setOpenModal, handleAddOfficeName}) => {
+const ModalOfficeName = ({setOpenModal, handleAddModal}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
@@ -60,7 +60,7 @@ const ModalOfficeName = ({setOpenModal, handleAddOfficeName}) => {
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddOfficeName(item.officeName); 
+                                            handleAddModal(item.officeName, 'officeName'); 
                                         }} 
                                         /></td><td className="name">{item.officeName}</td><td className="action">
                                         <button onClick={() => {

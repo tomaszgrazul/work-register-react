@@ -2,7 +2,7 @@ import './ModalSupervisor.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalSupervisor = ({setOpenModal, handleAddSupervisor, companyName}) => {
+const ModalSupervisor = ({setOpenModal, handleAddModal, companyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
@@ -97,7 +97,7 @@ const ModalSupervisor = ({setOpenModal, handleAddSupervisor, companyName}) => {
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddSupervisor(item.supervisorName); 
+                                            handleAddModal(item.supervisorName, 'supervisorName'); 
                                         }} 
                                         /></td><td className="name">{item.supervisorName}</td>
                                         <td className="companyName">{item.supervisorCompany} 

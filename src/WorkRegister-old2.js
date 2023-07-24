@@ -57,7 +57,9 @@ const WorkRegister = () => {
         allowerName: ''
     });
 
-     const handleValueChange = (e) => {
+
+
+    const handleValueChange = (e) => {
         const target = e.target;
         const name = e.target.name;
 
@@ -67,18 +69,92 @@ const WorkRegister = () => {
         });
     };
 
-    const handleAddModal = (addValue, name) => {
-        setReadValue({
-            ...readValue,
-            [name]: addValue
-        })
+    const handleAddNumberOfAgreement = (addNumber) => {        
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                numberOfAgreement: addNumber
+            }
+        });   
     }
 
- 
+    const handleAddCompanyName = (addCompanyName) => {            
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                companyName: addCompanyName
+            }
+        });    
+    }
+
+    const handleAddOfficeName = (addOfficeName) => {            
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                officeName: addOfficeName
+            }
+        });   
+    }
+
+    const handleAddPrincipal = (addPrincipal) => {            
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                principalName: addPrincipal
+            }
+        });      
+    }
+
+    const handleAddCoordinating = (addCoordinating) => {            
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                coordinatingName: addCoordinating
+            }
+        });    
+    }
+
+    const handleAddCoordinator = (addCoordinator) => {            
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                coordinatorName: addCoordinator
+            }
+        });    
+    }
+
+    const handleAddManager = (addManager) => {            
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                managerName: addManager
+            }
+        });   
+    }
+
+    const handleAddSupervisor = (addSupervisor) => {            
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                supervisorName: addSupervisor
+            }
+        });    
+    }
+
+    const handleAddAllower = (addAllower) => {             
+        setReadValue((prevReadValue) => {
+            return {
+                ...prevReadValue, 
+                allowerName: addAllower
+            }
+        });   
+    }
+    
+  
     // useEffect(() => {
 
-    //     console.log('aaaa', readAddModal) 
-    // }, [readAddModal]);
+    //     console.log('aaaa', readValue) 
+    // }, [readValue]);
 
     const addNmberOfAgreemnet = () => {
         let newNumberOfAgreement = {
@@ -94,9 +170,11 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setReadValue( {    
-            ...readValue, 
-            numberOfAgreement: ''
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                numberOfAgreement: ''
+            };
         });
 
         axios
@@ -123,9 +201,11 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setReadValue( {    
-            ...readValue, 
-            companyName: ''
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                companyName: ''
+            };
         });
 
         axios
@@ -152,9 +232,11 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setReadValue( {    
-            ...readValue, 
-            officeName: ''
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                officeName: ''
+            };
         });
 
         axios
@@ -182,9 +264,11 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setReadValue( {    
-            ...readValue, 
-            principalName: ''
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                principalName: ''
+            };
         });
 
         axios
@@ -212,9 +296,11 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setReadValue( {    
-            ...readValue, 
-            coordinatingName: ''
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                coordinatingName: ''
+            };
         });
 
         axios
@@ -242,9 +328,11 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setReadValue( {    
-            ...readValue, 
-            coordinatorName: ''
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                coordinatorName: ''
+            };
         });
 
         axios
@@ -272,9 +360,11 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setReadValue( {    
-            ...readValue, 
-            managerName: ''
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                managerName: ''
+            };
         });
 
         axios
@@ -302,9 +392,11 @@ const WorkRegister = () => {
             return;
         } else setErrors('');
 
-        setReadValue( {    
-            ...readValue, 
-            supervisorName: ''
+        setReadValue(prevReadValue => {
+            return { 
+                ...prevReadValue, 
+                supervisorName: ''
+            };
         });
 
         axios
@@ -331,6 +423,13 @@ const WorkRegister = () => {
             });
             return;
         } else setErrors('');
+
+        // setReadValue(prevReadValue => {
+        //     return { 
+        //         ...prevReadValue, 
+        //         allowerName: ''
+        //     };
+        // });
 
         setReadValue( {    
             ...readValue, 
@@ -573,23 +672,23 @@ const WorkRegister = () => {
                     {addWorkOrderResponse && <p>Zapisane</p>}
                 </div>
             </form>
-            {openModal.companyName && <ModalCompanyName setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
+            {openModal.companyName && <ModalCompanyName setOpenModal={setOpenModal} handleAddCompanyName={handleAddCompanyName}/>}
 
-            {openModal.numberOfAgreement && <ModalNumberOfAgreement setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
+            {openModal.numberOfAgreement && <ModalNumberOfAgreement setOpenModal={setOpenModal} handleAddNumberOfAgreement={handleAddNumberOfAgreement}/>}
 
-            {openModal.officeName && <ModalOfficeName setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
+            {openModal.officeName && <ModalOfficeName setOpenModal={setOpenModal} handleAddOfficeName={handleAddOfficeName}/>}
 
-            {openModal.principalName && <ModalPrincipal setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
+            {openModal.principalName && <ModalPrincipal setOpenModal={setOpenModal} handleAddPrincipal={handleAddPrincipal} companyName={readValue.companyName}/>}
 
-            {openModal.coordinatingName && <ModalCoordinating setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
+            {openModal.coordinatingName && <ModalCoordinating setOpenModal={setOpenModal} handleAddCoordinating={handleAddCoordinating} companyName={readValue.companyName}/>}
 
-            {openModal.coordinatorName && <ModalCoordinator setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
+            {openModal.coordinatorName && <ModalCoordinator setOpenModal={setOpenModal} handleAddCoordinator={handleAddCoordinator} companyName={readValue.companyName}/>}
 
-            {openModal.managerName && <ModalManager setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
+            {openModal.managerName && <ModalManager setOpenModal={setOpenModal} handleAddManager={handleAddManager} companyName={readValue.companyName}/>}
 
-            {openModal.supervisorName && <ModalSupervisor setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
+            {openModal.supervisorName && <ModalSupervisor setOpenModal={setOpenModal} handleAddSupervisor={handleAddSupervisor} companyName={readValue.companyName}/>}
 
-            {openModal.allowerName && <ModalAllower setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
+            {openModal.allowerName && <ModalAllower setOpenModal={setOpenModal} handleAddAllower={handleAddAllower} companyName={readValue.companyName}/>}
         </div>
 
     )

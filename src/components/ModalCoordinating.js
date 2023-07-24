@@ -2,7 +2,7 @@ import './ModalCoordinating.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalCoordinating = ({setOpenModal, handleAddCoordinating, companyName}) => {
+const ModalCoordinating = ({setOpenModal, handleAddModal, companyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
@@ -97,7 +97,7 @@ const ModalCoordinating = ({setOpenModal, handleAddCoordinating, companyName}) =
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddCoordinating(item.coordinatingName); 
+                                            handleAddModal(item.coordinatingName, 'coordinatingName'); 
                                         }} 
                                         /></td><td className="name">{item.coordinatingName}</td>
                                         <td className="companyName">{item.coordinatingCompany} 
