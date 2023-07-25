@@ -93,7 +93,7 @@ const WorkRegister = () => {
         if (newNumberOfAgreement.numberOfAgreement === '') {    
             setErrors( {
                 ...errors,
-                numberOfAgreement: "Brak danych !!!"
+                numberOfAgreement: "Wpisz numer porozumienia !!!"
             });
             return;
         } else {
@@ -126,7 +126,7 @@ const WorkRegister = () => {
         if (newCompany.companyName === '') {    
             setErrors( {
                 ...errors,
-                companyName: "Brak danych !!!"
+                companyName: "Wpisz nazwę firmy !!!"
             });
             return;
         } else {
@@ -159,7 +159,7 @@ const WorkRegister = () => {
         if (newOffice.officeName === '') {    
             setErrors( {
                 ...errors,
-                officeName: "Brak danych !!!"
+                officeName: "Wpisz nazwę biura !!!"
             });
             return;
         } else {
@@ -193,7 +193,7 @@ const WorkRegister = () => {
         if (newPrincipal.principalName === '') {    
             setErrors( {
                 ...errors,
-                principalName: "Brak danych !!!"
+                principalName: "Wpisz poleceniodawcę !!!"
             });
             return;
         } else {
@@ -227,7 +227,7 @@ const WorkRegister = () => {
         if (newCoordinating.coordinatingName === '') {    
             setErrors( {
                 ...errors,
-                coordinatingName: "Brak danych !!!"
+                coordinatingName: "Wpisz koordynującego !!!"
             });
             return;
         } else {
@@ -261,7 +261,7 @@ const WorkRegister = () => {
         if (newCoordinator .coordinatorName === '') {    
             setErrors( {
                 ...errors,
-                coordinatorName: "Brak danych !!!"
+                coordinatorName: "Wpisz koordynatora !!!"
             });
             return;
         } else {
@@ -295,7 +295,7 @@ const WorkRegister = () => {
         if (newAllower.allowerName === '') {    
             setErrors( {
                 ...errors,
-                allowerName: "Brak danych !!!"
+                allowerName: "Wpisz dopuszczającego !!!"
             });
             return;
         } else {
@@ -329,7 +329,7 @@ const WorkRegister = () => {
         if (newManager.managerName === '') {    
             setErrors( {
                 ...errors,
-                managerName: "Brak danych !!!"
+                managerName: "Wpisz kierującego zespołem !!!"
             });
             return;
         } else {
@@ -363,7 +363,7 @@ const WorkRegister = () => {
         if (newSupervisor.supervisorName === '') {    
             setErrors( {
                 ...errors,
-                supervisorName: "Brak danych !!!"
+                supervisorName: "Wpisz nadzorującego !!!"
             });
             return;
         } else {
@@ -410,7 +410,7 @@ const WorkRegister = () => {
         if (workOrder.whoWork === '') { 
             setErrors( {    
                 ...errors, 
-                whoWork: "Brak danych !!!"
+                whoWork: "Wpisz kto realizuje prace !!!"
             });
             return;
         } else {    
@@ -423,7 +423,7 @@ const WorkRegister = () => {
         if (workOrder.numberOfAgreement === '') {  
             setErrors( {    
                 ...errors, 
-                numberOfAgreement: "Brak danych !!!"
+                numberOfAgreement: "Wpisz numer polecenia !!!"
             });
             return;
         } else {
@@ -436,7 +436,7 @@ const WorkRegister = () => {
         if (workOrder.numberOutCompany === '') {  
             setErrors( {    
                 ...errors, 
-                numberOutCompany: "Brak danych !!!"
+                numberOutCompany: "Wpisz numer polecenia firmy zewnętrznej !!!"
             });
             return;
         } else {
@@ -445,6 +445,20 @@ const WorkRegister = () => {
                         numberOutCompany: ""
                     });
                 } 
+
+        
+        if (workOrder.companyName === '') {  
+            setErrors( {    
+                ...errors, 
+                companyName: "Wpisz nazwę firmy !!!"
+            });
+            return;
+        } else {
+                    setErrors( {    
+                        ...errors, 
+                        companyName: ""
+                    });
+                }
 
         axios
         .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
@@ -467,14 +481,15 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="praceRealizuje">Prace realizuje</label>
                     </div> 
-                    <input onChange={handleValueChange} value={readValue.whoWork} type="text" placeholder={errors.whoWork ? errors.whoWork : ''} name="whoWork" />
+                    <input onChange={handleValueChange} value={readValue.whoWork} type="text" placeholder="" name="whoWork" />
+                    {errors.whoWork && <p id="error">{errors.whoWork}</p>}
                 </div>
                 
                 <div>
                     <div className="label">
                         <label htmlFor="nrPorozumienia">Nr porozumienia</label>
                     </div> 
-                    <input onChange={handleValueChange} value={readValue.numberOfAgreement} type="text" placeholder={errors.numberOfAgreement ? errors.numberOfAgreement : ''} name="numberOfAgreement" />
+                    <input onChange={handleValueChange} value={readValue.numberOfAgreement} type="text" placeholder="" name="numberOfAgreement" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addNmberOfAgreemnet();
@@ -483,20 +498,22 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModal(() => {return {numberOfAgreement: true}});
                     }}>Wybierz</button>
+                    {errors.numberOfAgreement && <p id="error">{errors.numberOfAgreement}</p>}
                 </div>
                 
                 <div>
                     <div className="label">
                         <label htmlFor="nrPolFirmyZewnetrznej">Nr polecenia firmy zew.</label>
                     </div> 
-                    <input onChange={handleValueChange} value={readValue.numberOutCompany} type="text" placeholder={errors.numberOutCompany ? errors.numberOutCompany : ''} name="numberOutCompany" />
+                    <input onChange={handleValueChange} value={readValue.numberOutCompany} type="text" placeholder="" name="numberOutCompany" />
+                    {errors.numberOutCompany && <p id="error">{errors.numberOutCompany}</p>}
                 </div>
 
                 <div>
                     <div className="label">
                         <label htmlFor="companyName">Nazwa firmy</label>
                     </div> 
-                    <input onChange={handleValueChange} value={readValue.companyName} type="text" placeholder={errors.companyName ? errors.companyName : ''} name="companyName" />
+                    <input onChange={handleValueChange} value={readValue.companyName} type="text" placeholder="" name="companyName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCompany();
@@ -505,13 +522,14 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModal(() => {return {companyName: true}});
                     }}>Wybierz</button>
+                    {errors.companyName && <p id="error">{errors.companyName}</p>}
                 </div>
 
                 <div>
                     <div className="label">
                         <label htmlFor="nazwaBiura">Nazwa biura</label>
                     </div>  
-                    <input onChange={handleValueChange} value={readValue.officeName} type="text" placeholder={errors.officeName ? errors.officeName : ''} name="officeName" />
+                    <input onChange={handleValueChange} value={readValue.officeName} type="text" placeholder="" name="officeName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addOffice();
@@ -520,13 +538,14 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModal(() => {return {officeName: true}});
                     }}>Wybierz</button>
+                    {errors.officeName && <p id="error">{errors.officeName}</p>}
                 </div>
 
                 <div>
                     <div className="label">
                         <label htmlFor="poleceniodawca">Poleceniodawca</label>
                     </div>   
-                    <input onChange={handleValueChange} value={readValue.principalName} type="text" placeholder={errors.principalName ? errors.principalName : ''} name="principalName" />
+                    <input onChange={handleValueChange} value={readValue.principalName} type="text" placeholder="" name="principalName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addPrincipal();
@@ -535,13 +554,14 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModal(() => {return {principalName: true}});
                     }}>Wybierz</button>
+                    {errors.principalName && <p id="error">{errors.principalName}</p>}
                 </div>
 
                 <div>
                     <div className="label">
                         <label htmlFor="koordynujący">Koordynujący</label>
                     </div>    
-                    <input onChange={handleValueChange} value={readValue.coordinatingName} type="text" placeholder={errors.coordinatingName ? errors.coordinatingName : ''} name="coordinatingName" />
+                    <input onChange={handleValueChange} value={readValue.coordinatingName} type="text" placeholder="" name="coordinatingName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCoordinating();
@@ -550,13 +570,14 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModal(() => {return {coordinatingName: true}});
                     }}>Wybierz</button>
+                    {errors.coordinatingName && <p id="error">{errors.coordinatingName}</p>}
                 </div>
 
                 <div>
                     <div className="label">
                         <label htmlFor="koordynator">Koordynator</label>
                     </div>  
-                    <input onChange={handleValueChange} value={readValue.coordinatorName} type="text" placeholder={errors.coordinatorName ? errors.coordinatorName : ''} name="coordinatorName" />
+                    <input onChange={handleValueChange} value={readValue.coordinatorName} type="text" placeholder="" name="coordinatorName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCoordinator();
@@ -565,13 +586,14 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModal(() => {return {coordinatorName: true}});
                     }}>Wybierz</button>
+                    {errors.coordinatorName && <p id="error">{errors.coordinatorName}</p>}
                 </div>
 
                 <div>
                     <div className="label">
                         <label htmlFor="dopuszczający">Dopuszczający</label>
                     </div>   
-                    <input onChange={handleValueChange} value={readValue.allowerName} type="text" placeholder={errors.allowerName ? errors.allowerName : ''} name="allowerName" />
+                    <input onChange={handleValueChange} value={readValue.allowerName} type="text" placeholder="" name="allowerName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addAllower();
@@ -580,13 +602,14 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModal(() => {return {allowerName: true}});
                     }}>Wybierz</button>
+                    {errors.allowerName && <p id="error">{errors.allowerName}</p>}
                 </div>
 
                 <div>
                     <div className="label">
                         <label htmlFor="kierującyZespołem">Kierujący zespołem</label>
                     </div> 
-                    <input onChange={handleValueChange} value={readValue.managerName} type="text" placeholder={errors.managerName ? errors.managerName : ''} name="managerName" />
+                    <input onChange={handleValueChange} value={readValue.managerName} type="text" placeholder="" name="managerName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addManager();
@@ -595,13 +618,14 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModal(() => {return {managerName: true}});
                     }}>Wybierz</button>
+                    {errors.managerName && <p id="error">{errors.managerName}</p>}
                 </div>
 
                 <div>
                     <div className="label">
                         <label htmlFor="nadzorEksploatacyjny">Nadzór eksploatacyjny</label>
                     </div>     
-                    <input onChange={handleValueChange} value={readValue.supervisorName} type="text" placeholder={errors.supervisorName ? errors.supervisorName : ''} name="supervisorName" />
+                    <input onChange={handleValueChange} value={readValue.supervisorName} type="text" placeholder="" name="supervisorName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addSupervisor();
@@ -610,6 +634,7 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModal(() => {return {supervisorName: true}});
                     }}>Wybierz</button>
+                    {errors.supervisorName && <p id="error">{errors.supervisorName}</p>}
                 </div>
 
                 <div>

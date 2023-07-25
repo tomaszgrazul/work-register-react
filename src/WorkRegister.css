@@ -37,11 +37,10 @@ button:hover {
 }
 
 .label {
-    width: 170px;
+    width: 200px;
     display: inline-block;
 }
 
-.error {
+::placeholder {
     color: red;
-    margin: 0 0 10px 0;
 }
