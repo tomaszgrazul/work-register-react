@@ -439,7 +439,8 @@ const WorkRegister = () => {
     }
 
     useEffect(() => {
-            if(Object.values(readValue).find(item => item === '') === '') {
+        const found = Object.values(readValue).find(item => item === '');
+            if( found === '') {
             setSavePermission(false);
         }  else {
             setSavePermission(true);
