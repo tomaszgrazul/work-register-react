@@ -42,5 +42,11 @@ button:hover {
 }
 
 ::placeholder {
+    color: red; 
+}
+
+#error {
     color: red;
+    display: inline-block;
+    margin: 0 0 0 10px;
 }

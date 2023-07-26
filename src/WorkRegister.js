@@ -14,6 +14,7 @@ import ModalSupervisor from "./components/ModalSupervisor";
 const WorkRegister = () => {
 
     const [addWorkOrderResponse,setAddWorkOrderResponse] = useState(false);
+    const [savePermission,setSavePermission] = useState(false);
 
     const [errors, setErrors] = useState({
         whoWork: '',
@@ -69,6 +70,11 @@ const WorkRegister = () => {
             ...readValue,
             [name]: target.value,
         });
+
+        setErrors( {    
+            ...errors, 
+            [name]: ""
+        });
     };
 
     const handleAddModal = (addValue, name) => {
@@ -81,9 +87,9 @@ const WorkRegister = () => {
  
     // useEffect(() => {
 
-    //     // console.log('aaaa', errors);
-    //     console.log('bbb', readValue);
-    // }, [readValue]);
+    //     console.log('aaaa', errors);
+    //     // console.log('bbb', readValue);
+    // }, [errors]);
 
     const addNmberOfAgreemnet = () => {
         let newNumberOfAgreement = {
@@ -388,6 +394,7 @@ const WorkRegister = () => {
         });
     };
 
+
     const handleSubmitForm = (e) => {
 
         e.preventDefault();
@@ -407,55 +414,37 @@ const WorkRegister = () => {
             stopDate: readValue.stopDate
         }
         
-        if (workOrder.whoWork === '') { 
-            setErrors( {    
-                ...errors, 
-                whoWork: "Brak danych !!!"
-            });
-            return;
-        } else {    
-                    setErrors( {    
-                        ...errors, 
-                        whoWork: ""
-                    });
-                }  
-
-        if (workOrder.numberOfAgreement === '') {  
-            setErrors( {    
-                ...errors, 
-                numberOfAgreement: "Brak danych !!!"
-            });
-            return;
-        } else {
-                    setErrors( {    
-                        ...errors, 
-                        numberOfAgreement: ""
-                    });
-                }
-
-        if (workOrder.numberOutCompany === '') {  
-            setErrors( {    
-                ...errors, 
-                numberOutCompany: "Brak danych !!!"
-            });
-            return;
-        } else {
-                    setErrors( {    
-                        ...errors, 
-                        numberOutCompany: ""
-                    });
-                } 
-
-        axios
-        .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
-        .then((res) => {
-            setAddWorkOrderResponse(res.data.save);
-         })
-        .catch((error) => {
-            console.error(error);
+        Object.entries(workOrder).map(item => {
+            if (item[1] === '') {       
+                return (
+                    setErrors( prevErrors => { 
+                        return {   
+                        ...prevErrors, 
+                        [item[0]]: "Brak danych !!!"
+                    }})
+                )    
+            }
         });
+
+        if(savePermission) {
+            axios
+            .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
+            .then((res) => {
+                setAddWorkOrderResponse(res.data.save);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        }     
     }
 
+    useEffect(() => {
+            if(Object.values(readValue).find(item => item === '') === '') {
+            setSavePermission(false);
+        }  else {
+            setSavePermission(true);
+        }
+    },[readValue]);
 
     return (
         <div className="register-main">
@@ -614,12 +603,14 @@ const WorkRegister = () => {
 
                 <div>
                     <label htmlFor="rozpoczeciePracy">Rozpoczęcie pracy (data, godzina)</label>
-                    <input onChange={handleValueChange} value={readValue.startDate} type="datetime-local" placeholder="" name="startDate" />
+                    <input onChange={handleValueChange} value={readValue.startDate} type="datetime-local" name="startDate" />
+                    {errors.startDate && <p id="error">{errors.startDate}</p>}
                 </div>
 
                 <div>
                     <label htmlFor="zakonczeniePracy">Zakończenie pracy (data, godzina)</label>
-                    <input onChange={handleValueChange} value={readValue.stopDate} type="datetime-local" placeholder="" name="stopDate" />
+                    <input onChange={handleValueChange} value={readValue.stopDate} type="datetime-local" name="stopDate" />
+                    {errors.stopDate && <p id="error">{errors.stopDate}</p>}
                 </div>
                 <div>
                     <button onClick={handleSubmitForm} type="submit">Zapisz</button>
