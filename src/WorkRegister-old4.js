@@ -14,6 +14,7 @@ import ModalSupervisor from "./components/ModalSupervisor";
 const WorkRegister = () => {
 
     const [addWorkOrderResponse,setAddWorkOrderResponse] = useState(false);
+    const [savePermission,setSavePermission] = useState(false);
 
     const [errors, setErrors] = useState({
         whoWork: '',
@@ -425,8 +426,9 @@ const WorkRegister = () => {
             }
         });
 
+
         const found = Object.values(readValue).find(item => item === '');
-        if( found === '') {
+            if( found === '') {
             return ;
         }  else {
             axios
@@ -437,14 +439,31 @@ const WorkRegister = () => {
             .catch((error) => {
                 console.error(error);
             });
-        }   
+        }
+
+
+        // if(savePermission) {
+        //     axios
+        //     .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
+        //     .then((res) => {
+        //         setAddWorkOrderResponse(res.data.save);
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+        //     });
+        // }     
     }
 
-    useEffect(() => {
-        setAddWorkOrderResponse(false);
-    },[readValue]);
+    // useEffect(() => {
+    //     const found = Object.values(readValue).find(item => item === '');
+    //         if( found === '') {
+    //         setSavePermission(false);
+    //     }  else {
+    //         setSavePermission(true);
+    //     }
+    // },[readValue]);
 
-      return (
+    return (
         <div className="register-main">
             <header>
                 <h1>Prace szczególnie niebezpieczne</h1>
@@ -612,7 +631,7 @@ const WorkRegister = () => {
                 </div>
                 <div>
                     <button onClick={handleSubmitForm} type="submit">Zapisz</button>
-                    {addWorkOrderResponse && <p id="save" >Zapisane</p>}
+                    {addWorkOrderResponse && <p>Zapisane</p>}
                 </div>
             </form>
             {openModal.companyName && <ModalCompanyName setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
