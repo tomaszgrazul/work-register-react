@@ -10,6 +10,7 @@ import ModalCoordinator from "./components/ModalCoordinator";
 import ModalAllower from "./components/ModalAllower";
 import ModalManager from "./components/ModalManager";
 import ModalSupervisor from "./components/ModalSupervisor";
+import { Link, Navigate } from "react-router-dom";
 
 const WorkRegister = () => {
 
@@ -446,6 +447,7 @@ const WorkRegister = () => {
 
       return (
         <div className="register-main">
+            {/* {<Navigate to="/" />} */}
             <header>
                 <h1>Prace szczególnie niebezpieczne</h1>
             </header>
