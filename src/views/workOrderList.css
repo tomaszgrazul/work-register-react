@@ -1,0 +1,13 @@
+.btnUpdate {
+    width: 55px;
+}
+
+.btnSendWorkOrderList {
+    display: inline-block;
+}
+
+.inputWorkOrderList {
+    margin: 0;
+    height: 18px;
+    font-size: 15px;
+}
