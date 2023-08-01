@@ -8,7 +8,7 @@ const ModalSupervisor = ({setOpenModal, handleAddModal, companyName}) => {
     const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
-    const [updateSupervisorCompany, setUpdateSupervisorCompany] = useState('');
+    const [readValue, setReadValue] = useState('');
 
     const readSupervisorList = () => {
 
@@ -51,12 +51,12 @@ const ModalSupervisor = ({setOpenModal, handleAddModal, companyName}) => {
     }
 
     const handleInputCompany = (e) => {
-        setUpdateSupervisorCompany(e.target.value);
+        setReadValue(e.target.value);
     }
 
-    const updateSupervisorList = (item, dataCompany) => {
+    const updateSupervisorList = (item) => {
         axios
-        .post(`http://127.0.0.1:8080/editNewSupervisor/${item._id}`, {supervisorCompany: dataCompany}) 
+        .post(`http://127.0.0.1:8080/editNewSupervisor/${item._id}`, {supervisorCompany: readValue}) 
         .then(() => {       
 
         })
@@ -100,26 +100,26 @@ const ModalSupervisor = ({setOpenModal, handleAddModal, companyName}) => {
                                             handleAddModal(item.supervisorName, 'supervisorName'); 
                                         }} 
                                         /></td><td className="name">{item.supervisorName}</td>
-                                        <td className="companyName">{item.supervisorCompany} 
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={updateSupervisorCompany} className='companyInput'/>}
+                                        <td className="companyName">{!inputDisabled[i] && item.supervisorCompany} 
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput'/>}
                                         {inputDisabled[i] && <button onClick={() => {
-                                            updateSupervisorList(item, updateSupervisorCompany); 
+                                            updateSupervisorList(item); 
                                             setInputDisabled(false);   
-                                            readSupervisorList();    
-                                            setUpdateSupervisorCompany('');      
+                                            readSupervisorList();        
                                         }}
-                                        className="btn-wyślij">Wyślij
+                                        className="btnSend">Wyślij
                                         </button>}</td>
                                         <td className="action">
                                         <button onClick={() => {
                                             deleteSupervisorList(item);             
                                         }}
-                                        className="btn-delete">Usuń
+                                        className="btnDelete">Usuń
                                         </button>
                                         <button onClick={() => {           
-                                            checkHandler(i);       
+                                            checkHandler(i); 
+                                            setReadValue(register[i].supervisorCompany);       
                                         }}
-                                        className="btn-update">Edytuj
+                                        className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
                                         </button></td></tr>
                                 )     
                             })

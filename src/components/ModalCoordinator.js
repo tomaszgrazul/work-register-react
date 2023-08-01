@@ -8,7 +8,7 @@ const ModalCoordinator = ({setOpenModal, handleAddModal, companyName}) => {
     const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
-    const [updateCoordinatorCompany, setUpdateCoordinatorCompany] = useState('');
+    const [readValue, setReadValue] = useState('');
 
     const readCoordinatorList = () => {
 
@@ -51,12 +51,12 @@ const ModalCoordinator = ({setOpenModal, handleAddModal, companyName}) => {
     }
 
     const handleInputCompany = (e) => {
-        setUpdateCoordinatorCompany(e.target.value);
+        setReadValue(e.target.value);
     }
 
-    const updateCoordinatorList = (item, dataCompany) => {
+    const updateCoordinatorList = (item) => {
         axios
-        .post(`http://127.0.0.1:8080/editNewCoordinator/${item._id}`, {coordinatorCompany: dataCompany}) 
+        .post(`http://127.0.0.1:8080/editNewCoordinator/${item._id}`, {coordinatorCompany: readValue}) 
         .then(() => {       
 
         })
@@ -100,26 +100,26 @@ const ModalCoordinator = ({setOpenModal, handleAddModal, companyName}) => {
                                             handleAddModal(item.coordinatorName, 'coordinatorName'); 
                                         }} 
                                         /></td><td className="name">{item.coordinatorName}</td>
-                                        <td className="companyName">{item.coordinatorCompany} 
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={updateCoordinatorCompany} className='companyInput'/>}
+                                        <td className="companyName">{!inputDisabled[i] && item.coordinatorCompany}
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput'/>}
                                         {inputDisabled[i] && <button onClick={() => {
-                                            updateCoordinatorList(item, updateCoordinatorCompany); 
+                                            updateCoordinatorList(item); 
                                             setInputDisabled(false);   
-                                            readCoordinatorList();    
-                                            setUpdateCoordinatorCompany('');      
+                                            readCoordinatorList();         
                                         }}
-                                        className="btn-wyślij">Wyślij
+                                        className="btnSend">Wyślij
                                         </button>}</td>
                                         <td className="action">
                                         <button onClick={() => {
                                             deleteCoordinatorList(item);             
                                         }}
-                                        className="btn-delete">Usuń
+                                        className="btnDelete">Usuń
                                         </button>
                                         <button onClick={() => {           
-                                            checkHandler(i);       
+                                            checkHandler(i);   
+                                            setReadValue(register[i].coordinatorCompany);     
                                         }}
-                                        className="btn-update">Edytuj
+                                        className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
                                         </button></td></tr>
                                 )     
                             })

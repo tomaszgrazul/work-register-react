@@ -20,6 +20,18 @@ const WorkOrderList = () => {
         startDate: '',
         stopDate: ''
     });
+    const [errors, setErrors] = useState({
+        companyName: '',
+        officeName: '',
+        principalName: '',
+        coordinatingName: '',
+        coordinatorName: '',
+        managerName: '',
+        supervisorName: '',
+        allowerName: '',
+        startDate: '',
+        stopDate: ''
+    });
 
     const checkHandler = (i) => {
         setInputDisabled(inputDisabled.map((item, index) => {
@@ -41,10 +53,10 @@ const WorkOrderList = () => {
             [name]: target.value
         });
 
-        // setErrors( {    
-        //     ...errors, 
-        //     [name]: ""
-        // });
+        setErrors( {    
+            ...errors, 
+            [name]: ""
+        });
     };
 
     const readWorkOrderList = () => {
@@ -62,6 +74,7 @@ const WorkOrderList = () => {
     useEffect(() => {
         readWorkOrderList();  
     }, []);
+
    
     const deleteWorkOrderList = (item) => {
         axios
@@ -82,15 +95,33 @@ const WorkOrderList = () => {
         }); 
     }
 
-    const updateWorkOrderList = (item) => {
-        axios
-        .post(`http://127.0.0.1:8080/editWorkOrder/${item._id}`, readValue) 
-        .then(() => {       
+        const updateWorkOrderList = (item) => {
+            Object.entries(readValue).map(item => {
+                if (item[1] === '') {       
+                    return (
+                        setErrors( prevErrors => { 
+                            return {   
+                            ...prevErrors, 
+                            [item[0]]: "Brak danych !!!"
+                        }})
+                    )    
+                }
+        });
 
-        })
-        .catch((error) => {
-            console.error(error);
-        }); 
+
+        const found = Object.values(readValue).find(item => item === '');
+            if( found === '') {
+                return ;
+            }  else {
+                    axios
+                    .post(`http://127.0.0.1:8080/editWorkOrder/${item._id}`, readValue) 
+                    .then(() => {       
+
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    }); 
+          }
     }
 
     return (
@@ -98,7 +129,7 @@ const WorkOrderList = () => {
                 <div className='header'>
                     <h3>Lista poleceń</h3>
                 </div>
-                {/* <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p> */}
+                <p className={error ? 'error' : 'noErrorWorkOrderList'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>
                     <tbody>
                         <tr>
@@ -116,32 +147,32 @@ const WorkOrderList = () => {
                         {register.map((item, i) => {
                                 return (
                                     <tr key={i}>
-                                        <td className="name">{!inputDisabled[i] && item.companyName}
-                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.companyName} name='companyName' className='inputWorkOrderList'/>}
+                                        <td className={errors.companyName ? 'error' : 'name'}>{!inputDisabled[i] && (errors.companyName ? errors.companyName : item.companyName)}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={errors.companyName ? '' : readValue.companyName} name='companyName' className='inputWorkOrderList'/>}
                                         </td>
-                                        <td className="name">{!inputDisabled[i] && item.principalName}
-                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.principalName} name='principalName' className='inputWorkOrderList'/>}
+                                        <td className={errors.principalName ? 'error' : 'name'}>{!inputDisabled[i] && (errors.principalName ? errors.principalName : item.principalName)}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={errors.principalName ? '' : readValue.principalName} name='principalName' className='inputWorkOrderList'/>}
                                         </td>
-                                        <td className="name">{!inputDisabled[i] && item.coordinatingName}
-                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.coordinatingName} name='coordinatingName' className='inputWorkOrderList'/>}
+                                        <td className={errors.coordinatingName ? 'error' : 'name'}>{!inputDisabled[i] && (errors.coordinatingName ? errors.coordinatingName : item.coordinatingName)}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={errors.coordinatingName ? '' : readValue.coordinatingName} name='coordinatingName' className='inputWorkOrderList'/>}
                                         </td>
-                                        <td className="name">{!inputDisabled[i] && item.coordinatorName}
-                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.coordinatorName} name='coordinatorName' className='inputWorkOrderList'/>}
+                                        <td className={errors.coordinatorName ? 'error' : 'name'}>{!inputDisabled[i] && (errors.coordinatorName ? errors.coordinatorName : item.coordinatorName)}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={errors.coordinatorName ? '' : readValue.coordinatorName} name='coordinatorName' className='inputWorkOrderList'/>}
                                         </td>
-                                        <td className="name">{!inputDisabled[i] && item.managerName}
-                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.managerName} name='managerName' className='inputWorkOrderList'/>}
+                                        <td className={errors.managerName ? 'error' : 'name'}>{!inputDisabled[i] && (errors.managerName ? errors.managerName : item.managerName)}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={errors.managerName ? '' : readValue.managerName} name='managerName' className='inputWorkOrderList'/>}
                                         </td>
-                                        <td className="name">{!inputDisabled[i] && item.supervisorName}
-                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.supervisorName} name='supervisorName' className='inputWorkOrderList'/>}
+                                        <td className={errors.supervisorName ? 'error' : 'name'}>{!inputDisabled[i] && (errors.supervisorName ? errors.supervisorName : item.supervisorName)}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={errors.supervisorName ? '' : readValue.supervisorName} name='supervisorName' className='inputWorkOrderList'/>}
                                         </td>
-                                        <td className="name">{!inputDisabled[i] && item.allowerName}
-                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.allowerName} name='allowerName' className='inputWorkOrderList'/>}
+                                        <td className={errors.allowerName ? 'error' : 'name'}>{!inputDisabled[i] && (errors.allowerName ? errors.allowerName : item.allowerName)}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={errors.allowerName ? '' : readValue.allowerName} name='allowerName' className='inputWorkOrderList'/>}
                                         </td>
-                                        <td className="name">{!inputDisabled[i] && item.startDate}
-                                            {inputDisabled[i] && <input onChange={handleValueChange} type="datetime-local" value={readValue.startDate} name='startDate' className='inputWorkOrderList'/>}
+                                        <td className={errors.startDate ? 'error' : 'name'}>{!inputDisabled[i] && (errors.startDate ? errors.startDate : item.startDate)}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="datetime-local" value={errors.startDate ? '' : readValue.startDate} name='startDate' className='inputWorkOrderList'/>}
                                         </td>
-                                        <td className="name">{!inputDisabled[i] && item.stopDate}
-                                            {inputDisabled[i] && <input onChange={handleValueChange} type="datetime-local" value={readValue.stopDate} name='stopDate' className='inputWorkOrderList'/>}
+                                        <td className={errors.stopDate ? 'error' : 'name'}>{!inputDisabled[i] && (errors.stopDate ? errors.stopDate : item.stopDate)}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="datetime-local" value={errors.stopDate ? '' : readValue.stopDate} name='stopDate' className='inputWorkOrderList'/>}
                                         </td>
                                         <td className="action">
                                             <button onClick={() => {

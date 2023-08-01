@@ -8,7 +8,7 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
     const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
-    const [updatePrincipalCompany, setUpdatePrincipalCompany] = useState('');
+    const [readValue, setReadValue] = useState('');
 
     const readPrincipalList = () => {
 
@@ -51,12 +51,12 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
     }
 
     const handleInputCompany = (e) => {
-        setUpdatePrincipalCompany(e.target.value);
+        setReadValue(e.target.value);
     }
 
-    const updatePrincipalList = (item, dataCompany) => {
+    const updatePrincipalList = (item) => {
         axios
-        .post(`http://127.0.0.1:8080/editNewPrincipal/${item._id}`, {principalCompany: dataCompany}) 
+        .post(`http://127.0.0.1:8080/editNewPrincipal/${item._id}`, {principalCompany: readValue}) 
         .then(() => {       
 
         })
@@ -67,13 +67,6 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
 
     const checkHandler = (i) => {
         setInputDisabled(inputDisabled.map((item, index) => {
-            // if( index === i) {
-            //     return item = !item;
-            // } else {
-            //     return item = item;
-            // }
-                
-                // index === i ? item = !item : item = item;
               return item = index === i ? !item : item;
         }));
       }
@@ -99,7 +92,6 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
                 <table>
                     <tbody>
                         <tr><th></th><th className="name">Poleceniodawca</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
-                        {/* {register.filter((el) => el.principalCompany === companyName).map((item, i) => {  */}
                         {register.filter(filtered).map((item, i) => {
                                 return ( 
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
@@ -108,26 +100,26 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
                                             handleAddModal(item.principalName, 'principalName'); 
                                         }} 
                                         /></td><td className="name">{item.principalName}</td>
-                                        <td className="companyName">{item.principalCompany} 
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={updatePrincipalCompany} className='companyInput'/>}
+                                        <td className="companyName">{!inputDisabled[i] && item.principalCompany} 
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput'/>}
                                         {inputDisabled[i] && <button onClick={() => {
-                                            updatePrincipalList(item, updatePrincipalCompany); 
+                                            updatePrincipalList(item); 
                                             setInputDisabled(false);   
-                                            readPrincipalList();    
-                                            setUpdatePrincipalCompany('');      
+                                            readPrincipalList();       
                                         }}
-                                        className="btn-wyślij">Wyślij
+                                        className="btnSend">Wyślij
                                         </button>}</td>
                                         <td className="action">
                                         <button onClick={() => {
                                             deletePrincipalList(item);             
                                         }}
-                                        className="btn-delete">Usuń
+                                        className="btnDelete">Usuń
                                         </button>
                                         <button onClick={() => {           
-                                            checkHandler(i);       
+                                            checkHandler(i);  
+                                            setReadValue(register[i].principalCompany);     
                                         }}
-                                        className="btn-update">Edytuj
+                                        className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
                                         </button></td></tr>
                                 )     
                             })

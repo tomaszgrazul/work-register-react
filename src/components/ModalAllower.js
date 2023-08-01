@@ -8,7 +8,7 @@ const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
     const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
-    const [updateAllowerCompany, setUpdateAllowerCompany] = useState('');
+    const [readValue, setReadValue] = useState('');
 
     const readAllowerList = () => {
 
@@ -29,8 +29,8 @@ const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
     useEffect(() => {
         setInputDisabled(new Array(register.length).fill(false));
     }, [register]);
-   
-   
+
+ 
     const deleteAllowerList = (item) => {
         axios
         .delete(`http://127.0.0.1:8080/deleteNewAllower/${item._id}`) 
@@ -51,12 +51,12 @@ const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
     }
 
     const handleInputCompany = (e) => {
-        setUpdateAllowerCompany(e.target.value);
+        setReadValue(e.target.value);
     }
 
-    const updateAllowerList = (item, dataCompany) => {
+    const updateAllowerList = (item) => {
         axios
-        .post(`http://127.0.0.1:8080/editNewAllower/${item._id}`, {allowerCompany: dataCompany}) 
+        .post(`http://127.0.0.1:8080/editNewAllower/${item._id}`, {allowerCompany: readValue}) 
         .then(() => {       
 
         })
@@ -100,26 +100,26 @@ const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
                                             handleAddModal(item.allowerName, 'allowerName'); 
                                         }} 
                                         /></td><td className="name">{item.allowerName}</td>
-                                        <td className="companyName">{item.allowerCompany} 
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={updateAllowerCompany} className='companyInput'/>}
+                                        <td className="companyName">{!inputDisabled[i] && item.allowerCompany} 
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput'/>}
                                         {inputDisabled[i] && <button onClick={() => {
-                                            updateAllowerList(item, updateAllowerCompany); 
+                                            updateAllowerList(item); 
                                             setInputDisabled(false);   
-                                            readAllowerList();    
-                                            setUpdateAllowerCompany('');      
+                                            readAllowerList();          
                                         }}
-                                        className="btn-wyślij">Wyślij
+                                        className="btnSend">Wyślij
                                         </button>}</td>
                                         <td className="action">
                                         <button onClick={() => {
                                             deleteAllowerList(item);             
                                         }}
-                                        className="btn-delete">Usuń
+                                        className="btnDelete">Usuń
                                         </button>
                                         <button onClick={() => {           
-                                            checkHandler(i);       
+                                            checkHandler(i);  
+                                            setReadValue(register[i].allowerCompany);      
                                         }}
-                                        className="btn-update">Edytuj
+                                        className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
                                         </button></td></tr>
                                 )     
                             })

@@ -1,19 +1,19 @@
-import './ModalManager.css'
+import './ModalPrincipal.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ModalManager = ({setOpenModal, handleAddModal, companyName}) => {
+const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
-    const [readValue, setReadValue] = useState('');
+    const [updatePrincipalCompany, setUpdatePrincipalCompany] = useState('');
 
-    const readManagerList = () => {
+    const readPrincipalList = () => {
 
         axios
-        .get("http://127.0.0.1:8080/readNewManager") 
+        .get("http://127.0.0.1:8080/readNewPrincipal") 
         .then((res) => { 
             setRegister(res.data);       
         })
@@ -23,7 +23,7 @@ const ModalManager = ({setOpenModal, handleAddModal, companyName}) => {
     }
 
     useEffect(() => {
-        readManagerList();   
+        readPrincipalList();   
     }, []);
 
     useEffect(() => {
@@ -31,9 +31,9 @@ const ModalManager = ({setOpenModal, handleAddModal, companyName}) => {
     }, [register]);
    
    
-    const deleteManagerList = (item) => {
+    const deletePrincipalList = (item) => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewManager/${item._id}`) 
+        .delete(`http://127.0.0.1:8080/deleteNewPrincipal/${item._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
@@ -51,12 +51,12 @@ const ModalManager = ({setOpenModal, handleAddModal, companyName}) => {
     }
 
     const handleInputCompany = (e) => {
-        setReadValue(e.target.value);
+        setUpdatePrincipalCompany(e.target.value);
     }
 
-    const updateManagerList = (item) => {
+    const updatePrincipalList = (item, dataCompany) => {
         axios
-        .post(`http://127.0.0.1:8080/editNewManager/${item._id}`, {managerCompany: readValue}) 
+        .post(`http://127.0.0.1:8080/editNewPrincipal/${item._id}`, {principalCompany: dataCompany}) 
         .then(() => {       
 
         })
@@ -67,12 +67,19 @@ const ModalManager = ({setOpenModal, handleAddModal, companyName}) => {
 
     const checkHandler = (i) => {
         setInputDisabled(inputDisabled.map((item, index) => {
+            // if( index === i) {
+            //     return item = !item;
+            // } else {
+            //     return item = item;
+            // }
+                
+                // index === i ? item = !item : item = item;
               return item = index === i ? !item : item;
         }));
       }
 
       const filtered = (el) => {
-        if(el.managerCompany === companyName) {
+        if(el.principalCompany === companyName) {
             return el;
         } 
         if(companyName === "") {
@@ -81,45 +88,46 @@ const ModalManager = ({setOpenModal, handleAddModal, companyName}) => {
       }
 
     return (
-            <div className="modalManager">
+            <div className="modalPrincipal">
                 <div className='topModal'>
-                    <h3>Kierujący zespołem</h3>
+                    <h3>Poleceniodawca</h3>
                     <div>
-                        <p className='ex-modal' onClick={() => {setOpenModal(() => {return {managerName: false}})}}>X</p>
+                        <p className='ex-modal' onClick={() => {setOpenModal(() => {return {principalName: false}})}}>X</p>
                     </div>                  
                 </div>
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>
                     <tbody>
-                        <tr><th></th><th className="name">Kierujący zespołem</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
+                        <tr><th></th><th className="name">Poleceniodawca</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
+                        {/* {register.filter((el) => el.principalCompany === companyName).map((item, i) => {  */}
                         {register.filter(filtered).map((item, i) => {
                                 return ( 
                                     <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
                                         onChange={(e) => {
                                             setIsChecked(e.target.value);
-                                            handleAddModal(item.managerName, 'managerName'); 
+                                            handleAddModal(item.principalName, 'principalName'); 
                                         }} 
-                                        /></td><td className="name">{item.managerName}</td>
-                                        <td className="companyName">{!inputDisabled[i] && item.managerCompany}
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput'/>}
+                                        /></td><td className="name">{item.principalName}</td>
+                                        <td className="companyName">{item.principalCompany} 
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={updatePrincipalCompany} className='companyInput'/>}
                                         {inputDisabled[i] && <button onClick={() => {
-                                            updateManagerList(item); 
+                                            updatePrincipalList(item, updatePrincipalCompany); 
                                             setInputDisabled(false);   
-                                            readManagerList();         
+                                            readPrincipalList();    
+                                            setUpdatePrincipalCompany('');      
                                         }}
-                                        className="btnSend">Wyślij
+                                        className="btn-wyślij">Wyślij
                                         </button>}</td>
                                         <td className="action">
                                         <button onClick={() => {
-                                            deleteManagerList(item);             
+                                            deletePrincipalList(item);             
                                         }}
-                                        className="btnDelete">Usuń
+                                        className="btn-delete">Usuń
                                         </button>
                                         <button onClick={() => {           
-                                            checkHandler(i);  
-                                            setReadValue(register[i].managerCompany);      
+                                            checkHandler(i);       
                                         }}
-                                        className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
+                                        className="btn-update">Edytuj
                                         </button></td></tr>
                                 )     
                             })
@@ -130,4 +138,4 @@ const ModalManager = ({setOpenModal, handleAddModal, companyName}) => {
         )
 }
 
-export default ModalManager;
+export default ModalPrincipal;
