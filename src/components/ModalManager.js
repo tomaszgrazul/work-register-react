@@ -101,10 +101,9 @@ const ModalManager = ({setOpenModal, handleAddModal, companyName}) => {
                                         }} 
                                         /></td><td className="name">{item.managerName}</td>
                                         <td className="companyName">{!inputDisabled[i] && item.managerCompany}
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput'/>}
-                                        {inputDisabled[i] && <button onClick={() => {
-                                            updateManagerList(item); 
-                                            setInputDisabled(false);   
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput' placeholder={readValue==='' ? 'Brak danych!!!' : ''}/>}
+                                        {inputDisabled[i] && <button disabled={readValue==='' ? true : false} onClick={() => {
+                                            updateManagerList(item);   
                                             readManagerList();         
                                         }}
                                         className="btnSend">Wyślij

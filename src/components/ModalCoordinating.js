@@ -101,10 +101,9 @@ const ModalCoordinating = ({setOpenModal, handleAddModal, companyName}) => {
                                         }} 
                                         /></td><td className="name">{item.coordinatingName}</td>
                                         <td className="companyName">{!inputDisabled[i] && item.coordinatingCompany}
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput'/>}
-                                        {inputDisabled[i] && <button onClick={() => {
-                                            updateCoordinatingList(item); 
-                                            setInputDisabled(false);   
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput' placeholder={readValue==='' ? 'Brak danych!!!' : ''}/>}
+                                        {inputDisabled[i] && <button disabled={readValue==='' ? true : false} onClick={() => {
+                                            updateCoordinatingList(item);  
                                             readCoordinatingList();        
                                         }}
                                         className="btnSend">Wyślij

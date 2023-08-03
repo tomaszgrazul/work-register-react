@@ -101,10 +101,9 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
                                         }} 
                                         /></td><td className="name">{item.principalName}</td>
                                         <td className="companyName">{!inputDisabled[i] && item.principalCompany} 
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput'/>}
-                                        {inputDisabled[i] && <button onClick={() => {
-                                            updatePrincipalList(item); 
-                                            setInputDisabled(false);   
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput' placeholder={readValue==='' ? 'Brak danych!!!' : ''}/>}
+                                        {inputDisabled[i] && <button disabled={readValue==='' ? true : false} onClick={() => {
+                                            updatePrincipalList(item);   
                                             readPrincipalList();       
                                         }}
                                         className="btnSend">Wyślij

@@ -51,6 +51,15 @@ button:hover {
     margin: 0 0 0 10px;
 }
 
+.errorWorkRegister {
+    color: red;
+    margin: 0 0 10px 0;
+}
+
+.noErrorWorkRegister {
+    color: white;
+}
+
 #save {
     color: green;
     display: inline-block;

@@ -101,10 +101,9 @@ const ModalCoordinator = ({setOpenModal, handleAddModal, companyName}) => {
                                         }} 
                                         /></td><td className="name">{item.coordinatorName}</td>
                                         <td className="companyName">{!inputDisabled[i] && item.coordinatorCompany}
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput'/>}
-                                        {inputDisabled[i] && <button onClick={() => {
-                                            updateCoordinatorList(item); 
-                                            setInputDisabled(false);   
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput' placeholder={readValue==='' ? 'Brak danych!!!' : ''}/>}
+                                        {inputDisabled[i] && <button disabled={readValue==='' ? true : false} onClick={() => {
+                                            updateCoordinatorList(item);   
                                             readCoordinatorList();         
                                         }}
                                         className="btnSend">Wyślij

@@ -101,10 +101,9 @@ const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
                                         }} 
                                         /></td><td className="name">{item.allowerName}</td>
                                         <td className="companyName">{!inputDisabled[i] && item.allowerCompany} 
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput'/>}
-                                        {inputDisabled[i] && <button onClick={() => {
-                                            updateAllowerList(item); 
-                                            setInputDisabled(false);   
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput'placeholder={readValue==='' ? 'Brak danych!!!' : ''}/>}
+                                        {inputDisabled[i] && <button disabled={readValue==='' ? true : false} onClick={() => {
+                                            updateAllowerList(item);   
                                             readAllowerList();          
                                         }}
                                         className="btnSend">Wyślij

@@ -15,6 +15,7 @@ import { Link, Navigate } from "react-router-dom";
 const WorkRegister = () => {
 
     const [addWorkOrderResponse,setAddWorkOrderResponse] = useState(false);
+    const [error, setError] = useState(false);
 
     const [errors, setErrors] = useState({
         whoWork: '',
@@ -117,10 +118,11 @@ const WorkRegister = () => {
         axios
         .post("http://127.0.0.1:8080/addNumberOfAgreemnet", newNumberOfAgreement)
         .then(() => {
-
+            setError(false); 
          })
         .catch((error) => {
             console.error(error);
+            setError(true);
         });
     };
 
@@ -150,10 +152,11 @@ const WorkRegister = () => {
         axios
         .post("http://127.0.0.1:8080/addNewCompany", newCompany)
         .then(() => {
-            
+            setError(false);
          })
         .catch((error) => {
             console.error(error);
+            setError(true);
         });
     };
 
@@ -183,10 +186,11 @@ const WorkRegister = () => {
         axios
         .post("http://127.0.0.1:8080/addNewOfficeName", newOffice)
         .then(() => {
-            
+            setError(false);
          })
         .catch((error) => {
             console.error(error);
+            setError(true);
         });
     };
 
@@ -217,10 +221,11 @@ const WorkRegister = () => {
         axios
         .post("http://127.0.0.1:8080/addNewPrincipal", newPrincipal)
         .then(() => {
-            
+            setError(false);
          })
         .catch((error) => {
             console.error(error);
+            setError(true);
         });
     };
 
@@ -251,10 +256,11 @@ const WorkRegister = () => {
         axios
         .post("http://127.0.0.1:8080/addNewCoordinating ", newCoordinating )
         .then(() => {
-
+            setError(false);
          })
         .catch((error) => {
             console.error(error);
+            setError(true);
         });
     };
 
@@ -285,10 +291,11 @@ const WorkRegister = () => {
         axios
         .post("http://127.0.0.1:8080/addNewCoordinator ", newCoordinator )
         .then(() => {
-
+            setError(false);
          })
         .catch((error) => {
             console.error(error);
+            setError(true);
         });
     };
 
@@ -319,10 +326,11 @@ const WorkRegister = () => {
         axios
         .post("http://127.0.0.1:8080/addNewAllower ", newAllower )
         .then(() => {
-
+            setError(false);
          })
         .catch((error) => {
             console.error(error);
+            setError(true);
         });
     };
 
@@ -353,10 +361,11 @@ const WorkRegister = () => {
         axios
         .post("http://127.0.0.1:8080/addNewManager ", newManager )
         .then(() => {
-
+            setError(false);
          })
         .catch((error) => {
             console.error(error);
+            setError(true);
         });
     };
 
@@ -385,12 +394,13 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("http://127.0.0.1:8080/addNewSupervisor ", newSupervisor )
+        .post("http://127.0.0.1:8080/addNewSupervisor", newSupervisor )
         .then(() => {
-
+            setError(false);
          })
         .catch((error) => {
             console.error(error);
+            setError(true);
         });
     };
 
@@ -450,6 +460,7 @@ const WorkRegister = () => {
             {/* {<Navigate to="/" />} */}
             <header>
                 <h1>Prace szczególnie niebezpieczne</h1>
+                <p className={error ? 'errorWorkRegister' : 'noErrorWorkRegister'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
             </header>
             <form>
                 <div>

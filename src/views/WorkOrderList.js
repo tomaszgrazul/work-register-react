@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 
 const WorkOrderList = () => {
 
-    const [register, setRegister] = useState([]);
-    const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
+    const [register, setRegister] = useState([]);
     const [inputDisabled, setInputDisabled] = useState([false]);
     const [readValue, setReadValue] = useState({
         companyName: '',
@@ -60,14 +59,15 @@ const WorkOrderList = () => {
     };
 
     const readWorkOrderList = () => {
-
         axios
         .get("http://127.0.0.1:8080/readWorkOrder") 
         .then((res) => { 
-            setRegister(res.data);       
+            setRegister(res.data); 
+            setError(false);     
         })
         .catch((error) => {
             console.error(error);
+            setError(true);
         });   
     }
 
@@ -116,10 +116,11 @@ const WorkOrderList = () => {
                     axios
                     .post(`http://127.0.0.1:8080/editWorkOrder/${item._id}`, readValue) 
                     .then(() => {       
-
+                        setError(false); 
                     })
                     .catch((error) => {
                         console.error(error);
+                        setError(true);
                     }); 
           }
     }

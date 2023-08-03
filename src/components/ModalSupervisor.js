@@ -55,14 +55,14 @@ const ModalSupervisor = ({setOpenModal, handleAddModal, companyName}) => {
     }
 
     const updateSupervisorList = (item) => {
-        axios
-        .post(`http://127.0.0.1:8080/editNewSupervisor/${item._id}`, {supervisorCompany: readValue}) 
-        .then(() => {       
+            axios
+            .post(`http://127.0.0.1:8080/editNewSupervisor/${item._id}`, {supervisorCompany: readValue}) 
+            .then(() => {       
 
-        })
-        .catch((error) => {
-            console.error(error);
-        }); 
+            })
+            .catch((error) => {
+                console.error(error);
+            }); 
     }
 
     const checkHandler = (i) => {
@@ -101,11 +101,10 @@ const ModalSupervisor = ({setOpenModal, handleAddModal, companyName}) => {
                                         }} 
                                         /></td><td className="name">{item.supervisorName}</td>
                                         <td className="companyName">{!inputDisabled[i] && item.supervisorCompany} 
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput'/>}
-                                        {inputDisabled[i] && <button onClick={() => {
+                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput' placeholder={readValue==='' ? 'Brak danych!!!' : ''}/>}
+                                        {inputDisabled[i] && <button disabled={readValue==='' ? true : false} onClick={() => {
                                             updateSupervisorList(item); 
-                                            setInputDisabled(false);   
-                                            readSupervisorList();        
+                                            readSupervisorList();   
                                         }}
                                         className="btnSend">Wyślij
                                         </button>}</td>
