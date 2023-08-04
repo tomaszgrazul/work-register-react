@@ -96,6 +96,7 @@ const WorkOrderList = () => {
         .catch((error) => {
             console.error(error);
         }); 
+        setOpenModalDelete(false);
     }
 
         const updateWorkOrderList = (item) => {
@@ -126,7 +127,29 @@ const WorkOrderList = () => {
                         setError(true);
                     }); 
           }
-        setOpenModalDelete(false);
+    }
+
+    const addCopyWorkOrderItem = (item) => {
+        let workOrder = {
+            companyName: item[0].companyName,
+            officeName: item[0].officeName,
+            principalName: item[0].principalName,
+            coordinatingName: item[0].coordinatingName,
+            coordinatorName: item[0].coordinatorName,
+            managerName: item[0].managerName,
+            supervisorName: item[0].supervisorName,
+            allowerName: item[0].allowerName,
+            startDate: item[0].startDate,
+            stopDate: item[0].stopDate
+        }
+        axios
+            .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
+            .then((res) => {
+                // setAddWorkOrderResponse(res.data.save);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     return (
@@ -180,6 +203,12 @@ const WorkOrderList = () => {
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="datetime-local" value={errors.stopDate ? '' : readValue.stopDate} name='stopDate' className='inputWorkOrderList'/>}
                                         </td>
                                         <td className="action">
+                                            <button onClick={() => {
+                                                    addCopyWorkOrderItem(register.slice(0,1));
+                                                    readWorkOrderList();          
+                                                }}
+                                                className="btnCopy">Kopiuj
+                                            </button>
                                             <button onClick={() => {
                                                     setItemToDelete(item); 
                                                     setOpenModalDelete(true);           
