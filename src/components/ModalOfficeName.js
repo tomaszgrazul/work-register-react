@@ -1,12 +1,15 @@
 import './ModalOfficeName.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
+import ModalDelete from "../components/ModalDelete";
 
 const ModalOfficeName = ({setOpenModal, handleAddModal}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState(null);
+    const [openModalDelete, setOpenModalDelete] = useState(false);
 
     const readOfficeNameList = () => {
 
@@ -24,13 +27,13 @@ const ModalOfficeName = ({setOpenModal, handleAddModal}) => {
         readOfficeNameList();  
     }, []);
    
-    const deleteOfficeNameList = (item) => {
+    const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewOfficeName/${item._id}`) 
+        .delete(`http://127.0.0.1:8080/deleteNewOfficeName/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
-                i !== register.findIndex((el) => el === item)
+                i !== register.findIndex((el) => el === itemToDelete)
             );
             setRegister(filtered);
             setError(false);
@@ -41,6 +44,7 @@ const ModalOfficeName = ({setOpenModal, handleAddModal}) => {
         .catch((error) => {
             console.error(error);
         }); 
+        setOpenModalDelete(false);
     }
 
     return (
@@ -64,7 +68,8 @@ const ModalOfficeName = ({setOpenModal, handleAddModal}) => {
                                         }} 
                                         /></td><td className="name">{item.officeName}</td><td className="action">
                                         <button onClick={() => {
-                                            deleteOfficeNameList(item);             
+                                            setItemToDelete(item); 
+                                            setOpenModalDelete(true);            
                                         }}
                                         className="btn-delete">Usuń
                                         </button></td></tr>
@@ -72,6 +77,7 @@ const ModalOfficeName = ({setOpenModal, handleAddModal}) => {
                             })}    
                     </tbody>
                 </table>
+                {openModalDelete && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>}
             </div>
         )
 }

@@ -1,6 +1,7 @@
 import './ModalAllower.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
+import ModalDelete from "../components/ModalDelete";
 
 const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
  
@@ -9,6 +10,8 @@ const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
     const [readValue, setReadValue] = useState('');
+    const [itemToDelete, setItemToDelete] = useState(null);
+    const [openModalDelete, setOpenModalDelete] = useState(false);
 
     const readAllowerList = () => {
 
@@ -31,13 +34,13 @@ const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
     }, [register]);
 
  
-    const deleteAllowerList = (item) => {
+    const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewAllower/${item._id}`) 
+        .delete(`http://127.0.0.1:8080/deleteNewAllower/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
-                i !== register.findIndex((el) => el === item)
+                i !== register.findIndex((el) => el === itemToDelete)
             );
             setRegister(filtered);
             setError(false);
@@ -48,10 +51,11 @@ const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
         .catch((error) => {
             console.error(error);
         }); 
+        setOpenModalDelete(false);
     }
 
     const handleInputCompany = (e) => {
-        setReadValue(e.target.value);
+        setReadValue(e.target.value); 
     }
 
     const updateAllowerList = (item) => {
@@ -110,7 +114,8 @@ const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
                                         </button>}</td>
                                         <td className="action">
                                         <button onClick={() => {
-                                            deleteAllowerList(item);             
+                                            setItemToDelete(item); 
+                                            setOpenModalDelete(true);              
                                         }}
                                         className="btnDelete">Usuń
                                         </button>
@@ -125,6 +130,7 @@ const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
                         }    
                     </tbody>
                 </table>
+                {openModalDelete && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>}
             </div>
         )
 }

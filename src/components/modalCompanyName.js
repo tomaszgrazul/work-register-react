@@ -1,12 +1,15 @@
 import './ModalCompanyName.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
+import ModalDelete from "../components/ModalDelete";
 
 const ModalCompanyName = ({setOpenModal, handleAddModal}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState(null);
+    const [openModalDelete, setOpenModalDelete] = useState(false);
 
     const readCompanyList = () => {
 
@@ -24,13 +27,13 @@ const ModalCompanyName = ({setOpenModal, handleAddModal}) => {
         readCompanyList();  
     }, []);
    
-    const deleteCompanyList = (item) => {
+    const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewCompany/${item._id}`) 
+        .delete(`http://127.0.0.1:8080/deleteNewCompany/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
-                i !== register.findIndex((el) => el === item)
+                i !== register.findIndex((el) => el === itemToDelete)
             );
             setRegister(filtered);
             setError(false);
@@ -41,6 +44,7 @@ const ModalCompanyName = ({setOpenModal, handleAddModal}) => {
         .catch((error) => {
             console.error(error);
         }); 
+        setOpenModalDelete(false);
     }
 
     return (
@@ -64,7 +68,8 @@ const ModalCompanyName = ({setOpenModal, handleAddModal}) => {
                                         }} 
                                         /></td><td className="name">{item.companyName}</td><td className="action">
                                         <button onClick={() => {
-                                            deleteCompanyList(item);             
+                                            setItemToDelete(item); 
+                                            setOpenModalDelete(true);              
                                         }}
                                         className="btn-delete">Usuń
                                         </button></td></tr>
@@ -72,6 +77,7 @@ const ModalCompanyName = ({setOpenModal, handleAddModal}) => {
                             })}    
                     </tbody>
                 </table>
+                {openModalDelete && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>}
             </div>
         )
 }

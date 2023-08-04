@@ -1,6 +1,7 @@
 import './ModalPrincipal.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
+import ModalDelete from "../components/ModalDelete";
 
 const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
  
@@ -9,6 +10,8 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
     const [readValue, setReadValue] = useState('');
+    const [itemToDelete, setItemToDelete] = useState(null);
+    const [openModalDelete, setOpenModalDelete] = useState(false);
 
     const readPrincipalList = () => {
 
@@ -31,13 +34,13 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
     }, [register]);
    
    
-    const deletePrincipalList = (item) => {
+    const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewPrincipal/${item._id}`) 
+        .delete(`http://127.0.0.1:8080/deleteNewPrincipal/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
-                i !== register.findIndex((el) => el === item)
+                i !== register.findIndex((el) => el === itemToDelete)
             );
             setRegister(filtered);
             setError(false);
@@ -48,6 +51,7 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
         .catch((error) => {
             console.error(error);
         }); 
+        setOpenModalDelete(false); 
     }
 
     const handleInputCompany = (e) => {
@@ -110,7 +114,8 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
                                         </button>}</td>
                                         <td className="action">
                                         <button onClick={() => {
-                                            deletePrincipalList(item);             
+                                            setItemToDelete(item); 
+                                            setOpenModalDelete(true);             
                                         }}
                                         className="btnDelete">Usuń
                                         </button>
@@ -125,6 +130,7 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
                         }    
                     </tbody>
                 </table>
+                {openModalDelete && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>}
             </div>
         )
 }

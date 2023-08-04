@@ -1,0 +1,17 @@
+.modalDelete {
+    height: 100px;
+    width: 300px;
+    position: fixed;
+    /* left: 100px;
+    top: 100px; */
+    top: 40%;
+    left: 50%;
+    background-color: rgb(221, 175, 175);
+    border: 2px solid;
+}
+
+.btnModal {
+    height: 25px;
+    width: 50px;
+    margin-right: 15px;
+}

@@ -1,12 +1,15 @@
 import './ModalNumberOfAgreement.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
+import ModalDelete from "../components/ModalDelete";
 
 const ModalNumberOfAgreement = ({setOpenModal, handleAddModal}) => {
  
     const [register, setRegister] = useState([]);
     const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState(null);
+    const [openModalDelete, setOpenModalDelete] = useState(false);
 
     const readNumberOfAgreement= () => {
 
@@ -24,13 +27,13 @@ const ModalNumberOfAgreement = ({setOpenModal, handleAddModal}) => {
         readNumberOfAgreement();  
     }, []);
    
-    const deleteNumberOfAgreement = (item) => {
+    const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNumberOfAgreemnet/${item._id}`) 
+        .delete(`http://127.0.0.1:8080/deleteNumberOfAgreemnet/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
-                i !== register.findIndex((el) => el === item)
+                i !== register.findIndex((el) => el === itemToDelete)
             );
             setRegister(filtered);
             setError(false);
@@ -41,6 +44,7 @@ const ModalNumberOfAgreement = ({setOpenModal, handleAddModal}) => {
         .catch((error) => {
             console.error(error);
         }); 
+        setOpenModalDelete(false); 
     }
 
     return (
@@ -64,7 +68,8 @@ const ModalNumberOfAgreement = ({setOpenModal, handleAddModal}) => {
                                         }} 
                                         /></td><td className="name">{item.numberOfAgreement}</td><td className="action">
                                         <button onClick={() => {
-                                            deleteNumberOfAgreement(item);             
+                                            setItemToDelete(item); 
+                                            setOpenModalDelete(true);             
                                         }}
                                         className="btn-delete">Usuń
                                         </button></td></tr>
@@ -72,6 +77,7 @@ const ModalNumberOfAgreement = ({setOpenModal, handleAddModal}) => {
                             })}    
                     </tbody>
                 </table>
+                {openModalDelete && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>}
             </div>
         )
 }

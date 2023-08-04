@@ -1,9 +1,12 @@
 import './workOrderList.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
+import ModalDelete from "../components/ModalDelete";
 
 const WorkOrderList = () => {
 
+    const [itemToDelete, setItemToDelete] = useState(null);
+    const [openModalDelete, setOpenModalDelete] = useState(false);
     const [error, setError] = useState(false);
     const [register, setRegister] = useState([]);
     const [inputDisabled, setInputDisabled] = useState([false]);
@@ -76,13 +79,13 @@ const WorkOrderList = () => {
     }, []);
 
    
-    const deleteWorkOrderList = (item) => {
+    const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteWorkOrder/${item._id}`) 
+        .delete(`http://127.0.0.1:8080/deleteWorkOrder/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
-                i !== register.findIndex((el) => el === item)
+                i !== register.findIndex((el) => el === itemToDelete)
             );
             setRegister(filtered);
             setError(false);
@@ -123,6 +126,7 @@ const WorkOrderList = () => {
                         setError(true);
                     }); 
           }
+        setOpenModalDelete(false);
     }
 
     return (
@@ -177,7 +181,8 @@ const WorkOrderList = () => {
                                         </td>
                                         <td className="action">
                                             <button onClick={() => {
-                                                    deleteWorkOrderList(item);             
+                                                    setItemToDelete(item); 
+                                                    setOpenModalDelete(true);           
                                                 }}
                                                 className="btnDelete">Usuń
                                             </button>
@@ -210,6 +215,7 @@ const WorkOrderList = () => {
                             })}    
                     </tbody>
                 </table>
+                {openModalDelete && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>}
             </div>
         )
 }
