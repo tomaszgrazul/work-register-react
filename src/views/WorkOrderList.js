@@ -78,6 +78,10 @@ const WorkOrderList = () => {
         readWorkOrderList();  
     }, []);
 
+    // useEffect(() => {
+    //     console.log('eeee', errors) 
+    // }, [errors]);
+
    
     const handleModalDelete = () => {
         axios
@@ -98,22 +102,21 @@ const WorkOrderList = () => {
         }); 
         setOpenModalDelete(false);
     }
+  
+    const editWorkOrderList = (item) => {
+        Object.entries(readValue).map(item => {
+                    if (item[1] === '') {       
+                        return (
+                            setErrors( prevErrors => { 
+                                return {   
+                                ...prevErrors, 
+                                [item[0]]: "Brak danych !!!"
+                            }})
+                        )    
+                    }
+            });
 
-        const updateWorkOrderList = (item) => {
-            Object.entries(readValue).map(item => {
-                if (item[1] === '') {       
-                    return (
-                        setErrors( prevErrors => { 
-                            return {   
-                            ...prevErrors, 
-                            [item[0]]: "Brak danych !!!"
-                        }})
-                    )    
-                }
-        });
-
-
-        const found = Object.values(readValue).find(item => item === '');
+            const found = Object.values(readValue).find(item => item === '');
             if( found === '') {
                 return ;
             }  else {
@@ -146,9 +149,11 @@ const WorkOrderList = () => {
             .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
             .then((res) => {
                 // setAddWorkOrderResponse(res.data.save);
+                setError(false);
             })
             .catch((error) => {
                 console.error(error);
+                setError(true);
             });
     }
 
@@ -175,8 +180,8 @@ const WorkOrderList = () => {
                         {register.map((item, i) => {
                                 return (
                                     <tr key={i}>
-                                        <td className={errors.companyName ? 'error' : 'name'}>{!inputDisabled[i] && (errors.companyName ? errors.companyName : item.companyName)}
-                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={errors.companyName ? '' : readValue.companyName} name='companyName' className='inputWorkOrderList'/>}
+                                        <td className={errors.companyName ? 'error' : 'name'}>{!inputDisabled[i] && item.companyName}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.companyName} name='companyName' className='inputWorkOrderList' placeholder={Object.values(readValue).find(item => item === '') ==='' ? 'Brak danych!!!' : ''}/>}
                                         </td>
                                         <td className={errors.principalName ? 'error' : 'name'}>{!inputDisabled[i] && (errors.principalName ? errors.principalName : item.principalName)}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={errors.principalName ? '' : readValue.principalName} name='principalName' className='inputWorkOrderList'/>}
@@ -228,11 +233,11 @@ const WorkOrderList = () => {
                                                     startDate: register[i].startDate,
                                                     stopDate: register[i].stopDate
                                                 });  
-                                                }}
+                                            }}
                                                 className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
                                             </button>
-                                            {inputDisabled[i] && <button onClick={() => {
-                                                                                updateWorkOrderList(item); 
+                                            {inputDisabled[i] && <button disabled={Object.values(readValue).find(item => item === '') ==='' ? true : false} onClick={() => {
+                                                                                editWorkOrderList(item);
                                                                                 setInputDisabled(false);   
                                                                                 readWorkOrderList();      
                                                                             }}
