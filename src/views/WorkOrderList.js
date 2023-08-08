@@ -10,6 +10,7 @@ const WorkOrderList = () => {
     const [error, setError] = useState(false);
     const [register, setRegister] = useState([]);
     const [inputDisabled, setInputDisabled] = useState([false]);
+    const [isChecked, setIsChecked] = useState('');
     const [readValue, setReadValue] = useState({
         companyName: '',
         officeName: '',
@@ -156,6 +157,8 @@ const WorkOrderList = () => {
                 <table>
                     <tbody>
                         <tr>
+                            <th className="lp">LP</th>
+                            <th className="name">Poz. rej.</th>
                             <th className="name">Nazwa firmy</th>
                             <th className="name">Poleceniodawca</th>
                             <th className="name">Kordynujący</th>
@@ -170,6 +173,8 @@ const WorkOrderList = () => {
                         {register.map((item, i) => {
                                 return (
                                     <tr key={i}>
+                                        <td>{i+1}</td>
+                                        <td></td>
                                         <td className={readValue.companyName ==='Brak danych!!!'  ? 'error' : 'name'}>{!inputDisabled[i] && item.companyName}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.companyName} name='companyName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
                                         </td>
@@ -199,7 +204,7 @@ const WorkOrderList = () => {
                                         </td>
                                         <td className="action">
                                             <button onClick={() => {
-                                                    addCopyWorkOrderItem(register.slice(0,1));
+                                                    addCopyWorkOrderItem(register.slice(i));
                                                     readWorkOrderList();          
                                                 }}
                                                 className="btnCopy">Kopiuj
