@@ -10,7 +10,6 @@ const WorkOrderList = () => {
     const [error, setError] = useState(false);
     const [register, setRegister] = useState([]);
     const [inputDisabled, setInputDisabled] = useState([false]);
-    const [isChecked, setIsChecked] = useState('');
     const [readValue, setReadValue] = useState({
         companyName: '',
         officeName: '',
@@ -21,7 +20,8 @@ const WorkOrderList = () => {
         supervisorName: '',
         allowerName: '',
         startDate: '',
-        stopDate: ''
+        stopDate: '',
+        numberRegistration: ''
     });
 
     const checkHandler = (i) => {
@@ -34,7 +34,7 @@ const WorkOrderList = () => {
         setInputDisabled(new Array(register.length).fill(false));
     }, [register]);
 
-
+  
      const handleValueChange = (e) => {
         const target = e.target;
         const name = e.target.name;
@@ -63,8 +63,8 @@ const WorkOrderList = () => {
     }, []);
 
     // useEffect(() => {
-    //     console.log('eeee', errors) 
-    // }, [errors]);
+    //     console.log('eeee', inputDisabled);
+    // }, [inputDisabled]);
 
    
     const handleModalDelete = () => {
@@ -96,22 +96,6 @@ const WorkOrderList = () => {
     }
 
     const editWorkOrderList = (item) => {
-        // Object.entries(readValue).map(item => {
-        //             if (item[1] === '') {       
-        //                 return (
-        //                     setErrors( prevErrors => { 
-        //                         return {   
-        //                         ...prevErrors, 
-        //                         [item[0]]: "Brak danych !!!"
-        //                     }})
-        //                 )    
-        //             }
-        //     });
-
-            // const found = Object.values(readValue).find(item => item === '');
-            // if( found === '') {
-            //     return ;
-            // }  else {     
         axios
         .post(`http://127.0.0.1:8080/editWorkOrder/${item._id}`, readValue) 
         .then(() => {       
@@ -148,6 +132,35 @@ const WorkOrderList = () => {
             });
     }
 
+    const loadReadValue = (i) => {
+        setReadValue({
+            companyName: register[i].companyName,
+            officeName: register[i].officeName,
+            principalName: register[i].principalName,
+            coordinatingName: register[i].coordinatingName,
+            coordinatorName: register[i].coordinatorName,
+            managerName: register[i].managerName,
+            supervisorName: register[i].supervisorName,
+            allowerName: register[i].allowerName,
+            startDate: register[i].startDate,
+            stopDate: register[i].stopDate,
+            numberRegistration: register[i].numberRegistration
+        }); 
+    }
+
+    const addNumberRegistration = (item) => {
+        axios
+        .post(`http://127.0.0.1:8080/editWorkOrder/${item._id}`, {numberRegistration: `${item.officeName}/2023`}) 
+        .then(() => {       
+            setError(false); 
+        })
+        .catch((error) => {
+            console.error(error);
+            setError(true);
+         }); 
+    }
+
+
     return (
             <div className="workOrderList">
                 <div className='header'>
@@ -158,8 +171,9 @@ const WorkOrderList = () => {
                     <tbody>
                         <tr>
                             <th className="lp">LP</th>
-                            <th className="name">Poz. rej.</th>
+                            <th className="name">Nr rej.</th>
                             <th className="name">Nazwa firmy</th>
+                            <th className="name">Nazwa biura</th>
                             <th className="name">Poleceniodawca</th>
                             <th className="name">Kordynujący</th>
                             <th className="name">Koordynator</th>
@@ -174,9 +188,12 @@ const WorkOrderList = () => {
                                 return (
                                     <tr key={i}>
                                         <td>{i+1}</td>
-                                        <td></td>
+                                        <td>{item.numberRegistration}</td>
                                         <td className={readValue.companyName ==='Brak danych!!!'  ? 'error' : 'name'}>{!inputDisabled[i] && item.companyName}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.companyName} name='companyName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
+                                        </td>
+                                        <td className={readValue.officeName ==='Brak danych!!!'  ? 'error' : 'name'}>{!inputDisabled[i] && item.officeName}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.officeName} name='companyName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
                                         </td>
                                         <td className={readValue.principalName ==='Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.principalName}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.principalName} name='principalName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
@@ -205,39 +222,35 @@ const WorkOrderList = () => {
                                         <td className="action">
                                             <button onClick={() => {
                                                     addCopyWorkOrderItem(register.slice(i));
-                                                    readWorkOrderList();          
+                                                    readWorkOrderList();        
                                                 }}
                                                 className="btnCopy">Kopiuj
                                             </button>
-                                            <button onClick={() => {
+                                            <button disabled={item.numberRegistration ? true : false} onClick={() => {  
                                                     setItemToDelete(item); 
-                                                    setOpenModalDelete(true);           
+                                                    setOpenModalDelete(true);          
                                                 }}
                                                 className="btnDelete">Usuń
                                             </button>
-                                            <button onClick={() => {           
+                                            <button disabled={item.numberRegistration ? true : false} onClick={() => {           
                                                 checkHandler(i);  
-                                                setReadValue({
-                                                    companyName: register[i].companyName,
-                                                    principalName: register[i].principalName,
-                                                    coordinatingName: register[i].coordinatingName,
-                                                    coordinatorName: register[i].coordinatorName,
-                                                    managerName: register[i].managerName,
-                                                    supervisorName: register[i].supervisorName,
-                                                    allowerName: register[i].allowerName,
-                                                    startDate: register[i].startDate,
-                                                    stopDate: register[i].stopDate
-                                                });  
+                                                loadReadValue(i); 
                                             }}
                                                 className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
                                             </button>
                                             {inputDisabled[i] && <button disabled={Object.values(readValue).find(item => item === '') ==='' ? true : false} onClick={() => {
-                                                                                editWorkOrderList(item);
-                                                                                setInputDisabled(false);   
-                                                                                readWorkOrderList();      
-                                                                            }}
-                                                                    className="btnSendWorkOrderList">Wyślij
+                                                                editWorkOrderList(item);
+                                                                setInputDisabled(false);   
+                                                                readWorkOrderList();      
+                                                                }}
+                                                                className="btnSendWorkOrderList">Wyślij
                                                                 </button>}
+                                            <button disabled={item.numberRegistration ? true : false} onClick={() => {
+                                                addNumberRegistration(item);
+                                                readWorkOrderList();
+                                                }}
+                                                className="btnRegistration">Rejestruj
+                                            </button>
                                         </td>
                                     </tr>
                                 )      

@@ -25,7 +25,8 @@ label {
 }
 
 button {
-    margin-left: 10px;
+    width: 70px;
+    margin: 0 10px 0 10px;
     background-color:rgb(236, 172, 172);
     border-color: rgb(197, 137, 137);;
 }
