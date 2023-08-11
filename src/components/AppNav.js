@@ -16,9 +16,12 @@ const AppNav = () => {
                 <li>
                     <Link to="/workOrderList" >Lista poleceń</Link>
                 </li>
-                {/* <li>
-                    <Link to="/signup">SignUp</Link>
-                </li> */}
+                <li>
+                    <Link to="/login" >Logowanie</Link>
+                </li>
+                <li>
+                    <Link to="/signup">Zapisz użytkownika</Link>
+                </li>
             </ul>
         </nav>
     );

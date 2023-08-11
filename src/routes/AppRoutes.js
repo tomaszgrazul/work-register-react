@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "../WorkRegister";
 import WorkOrderList from "../views/WorkOrderList";
+import Login from "../views/Login";
+import SignUp from "../views/SignUp";
 
 
 const AppRoutes = () => {
@@ -8,7 +10,8 @@ const AppRoutes = () => {
         <Routes>   
             <Route path="/" element={<Home />} />
             <Route path="/workOrderList" element={<WorkOrderList/>} />
-            {/* <Route path="/signup" element={<SignUp user={props.user}/>} /> */}
+            <Route path="/login" element={<Login/>} />
+            <Route path="/signup" element={<SignUp/>} />
         </Routes>
     );
 }

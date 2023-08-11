@@ -439,16 +439,15 @@ const WorkRegister = () => {
         const found = Object.values(readValue).find(item => item === '');
         if( found === '') {
             return ;
-        }  else {
-            axios
-            .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
-            .then((res) => {
-                setAddWorkOrderResponse(res.data.save);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        }   
+        }
+        axios
+        .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
+        .then((res) => {
+            setAddWorkOrderResponse(res.data.save);
+        })
+        .catch((error) => {
+            console.error(error);
+        });   
     }
 
     useEffect(() => {
