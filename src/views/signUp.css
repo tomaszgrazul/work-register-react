@@ -13,11 +13,17 @@
 }
 
 .signUp .btn {
-    display: inline-block;
+    /* display: inline-block; */
     margin: 15px 0;
 }
 
-.signUp .btn:disabled {
-    background-color: gray;
+/* .signUp .btn:disabled {
+    background-color: gray; 
     cursor: not-allowed;
+    pointer-events: none;
+} */
+
+.signUp ::placeholder {
+    color: initial;
 }
+

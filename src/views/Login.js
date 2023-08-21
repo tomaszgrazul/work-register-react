@@ -63,17 +63,17 @@ const Login = () => {
                 type="text" 
                 name="username" 
                 value={formData.username} 
-                placeholder="User name"
+                placeholder="Nazwa użytkownika"
                 onChange={handleInputChange}
                 />
                 <input 
                 type="password" 
                 name="password" 
                 value={formData.password}
-                placeholder="Password"
+                placeholder="Hasło"
                 onChange={handleInputChange}
                 />
-                <button className="btn">Login</button>
+                <button className="btn">Zaloguj</button>
             </form>
         </div>
     );

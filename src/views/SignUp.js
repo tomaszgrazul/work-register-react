@@ -1,10 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
-
 import './signUp.css'
 
-const SignUp = (props) => {
+const SignUp = () => {
 
     const [formData, setFormData] = useState({
         username: '',
@@ -20,7 +18,6 @@ const SignUp = (props) => {
         confirmPassword: ''
     });
 
-    const [signUpMessage, setSignUpMessage] = useState('');
     const [signUpDone, setSignUpDone] = useState(false);
 
     
@@ -33,13 +30,12 @@ const SignUp = (props) => {
         };
 
         
-        // Username
         if (formData.username.trim().length < 4) {
             validationErrors.username = true;
             setErrors(prevErrors =>{
                 return {
                     ...prevErrors, 
-                    username: 'Username should have at least 4 characters'
+                    username: 'Nazwa użytkownika powinna składać się z min. 4 znaków'
                 };
             });
         } else if (!/^[^\s]*$/.test(formData.username.trim())) {
@@ -47,7 +43,7 @@ const SignUp = (props) => {
             setErrors(prevErrors =>{
                 return {
                     ...prevErrors, 
-                    username: "Username shouldn'n have empty characters"
+                    username: "Nazwa użytkownika nie może zawierać spacji"
                 };
             });
         } else {
@@ -59,14 +55,14 @@ const SignUp = (props) => {
                 };
             });
         }   
-          // Email
+
 
         if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email.trim())) {
             validationErrors.email = true;
             setErrors(prevErrors =>{
                 return {
                     ...prevErrors, 
-                    email: "There is no valid email"
+                    email: "Niepoprawny email"
                 };
             });
         } else {
@@ -78,14 +74,14 @@ const SignUp = (props) => {
                 };
             });
         }
-         // Password
+
 
         if (formData.password.trim().length < 6) {
             validationErrors.password = true;
             setErrors(prevErrors =>{
                 return {
                     ...prevErrors, 
-                    password: 'Password should have at least 6 characters'
+                    password: 'Hasło musi składać sie z min. 6 znaków'
                 };
             });
         } else if (!/^[^\s]*$/.test(formData.password.trim())) {
@@ -93,16 +89,15 @@ const SignUp = (props) => {
                     setErrors(prevErrors =>{
                     return {
                         ...prevErrors, 
-                        password: "Password shouldn'n have empty characters"
+                        password: "Hasło nie może zawierać spacji"
                     };
                 });  
-        } else 
-                if(!/[!@#$%^&*()_+\-=[\]{};':",.<>/?]+/.test(formData.password.trim())) {
+        } else if(!/[!@#$%^&*()_+\-=[\]{};':",.<>/?]+/.test(formData.password.trim())) {
                 validationErrors.password = true;
                 setErrors(prevErrors =>{
                 return {
                     ...prevErrors, 
-                    password: "Password must contain one of charts: ! # @ $ %"
+                    password: "Hasło musi zawierać jeden ze znaków specjalnych"
                 }; 
             });
         } else {
@@ -115,17 +110,17 @@ const SignUp = (props) => {
             }); 
         }
 
-        // Confirm password
+
         if (formData.password.trim() !== formData.confirmPassword.trim()) {
                 validationErrors.confirmPassword = true;
                 setErrors(prevErrors =>{
                 return {
                     ...prevErrors, 
-                    confirmPassword: "Password should be the same"
+                    confirmPassword: "Hasła muszą być takie same"
                 };
             });
         } else {
-            validationErrors.password = false;
+            validationErrors.confirmPassword = false;
                 setErrors(prevErrors =>{
                 return {
                     ...prevErrors, 
@@ -142,9 +137,6 @@ const SignUp = (props) => {
             );
     };
 
-    //  useEffect(() => {
-    //     console.log('eeee', validationErrors);
-    // }, [validationErrors]);
 
     const handleInputChange = (e) => {
         const target = e.target;
@@ -158,9 +150,9 @@ const SignUp = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    console.log('aaaaaaaaaaa')
+        
         if (!validate()) {
-            //  return;
+             return;
         }
     
         axios
@@ -170,18 +162,7 @@ const SignUp = (props) => {
         password: formData.password
         })
         .then((res) => {
-            console.log(res.data);
-            // let resData = res.data;
-            // if (resData.signedup) {
-            //     setSignUpMessage("Account created")
-            //     setSignUpDone(true)
-            // } else {
-            //     if (resData.message.username) {
-            //         setSignUpMessage(resData.message.username[0])
-            //     } else if (resData.message.email) {
-            //         setSignUpMessage(resData.message.email[0])
-            //     }
-            // }
+            setSignUpDone(res.data.save);
          })
         .catch((error) => {
             console.error(error);
@@ -193,26 +174,22 @@ const SignUp = (props) => {
                 {/* {props.user && <Navigate to="/" />} */}
                 <form onSubmit={handleSubmit} >  
 
-                    {signUpMessage && <h2>{signUpMessage}</h2> }
-
-                    <input type="text" name="username" placeholder="User name"  onChange={handleInputChange}/>
-                    {errors.username && <p>{errors.username}</p>}
+                    <input type="text" name="username" placeholder="Nazwa użytkownika"  onChange={handleInputChange}/>
+                    {errors.username && <p id="error">{errors.username}</p>}
 
                     <input type="email" name="email" placeholder="Email" onChange={handleInputChange} />
-                    {errors.email && <p>{errors.email}</p>}
+                    {errors.email && <p id="error">{errors.email}</p>}
 
-                    <input type="password" name="password" placeholder="Password" onChange={handleInputChange} />
-                    {errors.password && <p>{errors.password}</p>}
+                    <input type="password" name="password" placeholder="Hasło" onChange={handleInputChange} />
+                    {errors.password && <p id="error">{errors.password}</p>}
 
-                    <input type="password" name="confirmPassword" placeholder="Confirm password" onChange={handleInputChange} />
-                    {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                    <input type="password" name="confirmPassword" placeholder="Potwierdź hasło" onChange={handleInputChange} />
+                    {errors.confirmPassword && <p id="error">{errors.confirmPassword}</p>}
 
-                    <button className="btn" disabled={signUpDone}>Sign Up</button>
+                    <button className="btn noHover" disabled={signUpDone}>Zapisz</button>
 
-                    {signUpDone && <div className="btn">
-
-                        <Link to='/login'>Go to login</Link>
-                    </div>}
+                    {/* {signUpDone && <div className="btn"><Link to='/login'>Logowanie</Link></div>} */}
+                    {signUpDone && <p id="save" >Użytkownik zapisany</p>}
                 </form>
             </div>
             )

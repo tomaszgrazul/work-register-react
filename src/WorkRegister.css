@@ -17,7 +17,7 @@ form {
 }
 
 input {
-    margin-bottom: 20px;
+    margin: 0 10px 20px 0;
 }
 
 label {
@@ -29,6 +29,10 @@ button {
     margin: 0 10px 0 10px;
     background-color:rgb(236, 172, 172);
     border-color: rgb(197, 137, 137);;
+}
+
+button:disabled {
+    pointer-events: none;
 }
 
 button:hover {
@@ -49,7 +53,7 @@ button:hover {
 #error {
     color: red;
     display: inline-block;
-    margin: 0 0 0 10px;
+    /* margin: 0 0 0 10px; */
 }
 
 .errorWorkRegister {
