@@ -5,12 +5,12 @@ import Login from "../views/Login";
 import SignUp from "../views/SignUp";
 
 
-const AppRoutes = () => {
+const AppRoutes = (props) => {
     return (
         <Routes>   
             <Route path="/" element={<Home />} />
             <Route path="/workOrderList" element={<WorkOrderList/>} />
-            <Route path="/login" element={<Login/>} />
+            <Route path="/login" element={<Login user={props.user}/>} />
             <Route path="/signup" element={<SignUp/>} />
         </Routes>
     );
