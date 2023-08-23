@@ -1,29 +1,42 @@
 import './AppNav.css'
-
 import { Link } from "react-router-dom";
 
-const AppNav = (props) => {
+const AppNav = ({handleAppNav, handleAppNavUsername}) => {
 
-
-console.log('loginOK=' , props.user)
-
+  
     return (
         <nav className="mainNav">
             <ul>
-                <li>
-                    <Link to="/">Start</Link>
-                </li>
-                {props.user &&
+                {handleAppNav &&
                     <li>
-                        <Link to="/workOrderList" >Lista poleceń</Link>
+                        <Link to="/">Start</Link>
                     </li>
                 }
-                <li>
-                    <Link to="/login" >Logowanie</Link>
-                </li>
-                <li>
-                    <Link to="/signup">Zapisz użytkownika</Link>
-                </li>
+                {handleAppNav &&
+                    <li>
+                        <Link to="/workOrderList">Lista poleceń</Link>
+                    </li>
+                }
+                {!handleAppNav &&
+                    <li>
+                        <Link to="/login">Logowanie</Link>
+                    </li>
+                }
+                {handleAppNav &&
+                    <li>
+                        <Link to="/logout">Wyloguj</Link>
+                    </li>
+                }
+                {!handleAppNav &&
+                    <li>
+                        <Link to="/signup">Zapisz użytkownika</Link>
+                    </li>
+                }
+                {handleAppNav &&
+                    <li>
+                        Użytkownik: {handleAppNavUsername}
+                    </li>
+                }
             </ul>
         </nav>
     );
