@@ -10,7 +10,7 @@ import ModalCoordinator from "./components/ModalCoordinator";
 import ModalAllower from "./components/ModalAllower";
 import ModalManager from "./components/ModalManager";
 import ModalSupervisor from "./components/ModalSupervisor";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const WorkRegister = () => {
 
@@ -456,7 +456,7 @@ const WorkRegister = () => {
 
       return (
         <div className="register-main">
-            {/* {<Navigate to="/" />} */}
+            {/* {<Navigate to="/login" />} */}
             <header>
                 <h1>Prace szczególnie niebezpieczne</h1>
                 <p className={error ? 'errorWorkRegister' : 'noErrorWorkRegister'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>

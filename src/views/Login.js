@@ -34,10 +34,11 @@ const Login = ({handleLogin, handleLoginMessage}) => {
         .then((res) => {
             // console.log(res.data.message);
             // console.log('error', res.data.error);
+            console.log('token', res.data.jwt)
             setLoginMessage(res.data.message);            
             if(!res.data.error) {
                 setLoginMessage('');
-                localStorage.setItem('user', JSON.stringify(res.data));
+                localStorage.setItem('user', JSON.stringify(res.data));   
                 handleLogin(true, res.data.user.username);
             }
         })
@@ -50,6 +51,7 @@ const Login = ({handleLogin, handleLoginMessage}) => {
     return (
         <div className="login">
             {handleLoginMessage && <Navigate to="/workOrderList"/>}
+            {/* {handleLoginMessage ? <Navigate to="/workOrderList"/> : <Navigate to="/login"/>} */}
             <form onSubmit={handleSubmit}> 
             {loginMessage && <h2>{loginMessage}</h2> }
                 <input 

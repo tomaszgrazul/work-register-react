@@ -8,7 +8,7 @@ import Logout from "../views/Logout";
 
 const AppRoutes = ({handleAppRoutes}) => {
 
-    const [handleLoginMessage, setHandleLoginMessage] = useState(true);
+    const [handleLoginMessage, setHandleLoginMessage] = useState(false);
 
     const handleLogin = (loginOk, username) => {
         // console.log('state', loginOk);
