@@ -116,7 +116,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("http://127.0.0.1:8080/addNumberOfAgreemnet", newNumberOfAgreement)
+        .post("/addNumberOfAgreemnet", newNumberOfAgreement)
         .then(() => {
             setError(false); 
          })
@@ -150,7 +150,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("http://127.0.0.1:8080/addNewCompany", newCompany)
+        .post("/addNewCompany", newCompany)
         .then(() => {
             setError(false);
          })
@@ -184,7 +184,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("http://127.0.0.1:8080/addNewOfficeName", newOffice)
+        .post("/addNewOfficeName", newOffice)
         .then(() => {
             setError(false);
          })
@@ -219,7 +219,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("http://127.0.0.1:8080/addNewPrincipal", newPrincipal)
+        .post("/addNewPrincipal", newPrincipal)
         .then(() => {
             setError(false);
          })
@@ -254,7 +254,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("http://127.0.0.1:8080/addNewCoordinating ", newCoordinating )
+        .post("/addNewCoordinating ", newCoordinating )
         .then(() => {
             setError(false);
          })
@@ -289,7 +289,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("http://127.0.0.1:8080/addNewCoordinator ", newCoordinator )
+        .post("/addNewCoordinator ", newCoordinator )
         .then(() => {
             setError(false);
          })
@@ -324,7 +324,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("http://127.0.0.1:8080/addNewAllower ", newAllower )
+        .post("/addNewAllower ", newAllower )
         .then(() => {
             setError(false);
          })
@@ -359,7 +359,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("http://127.0.0.1:8080/addNewManager ", newManager )
+        .post("/addNewManager ", newManager )
         .then(() => {
             setError(false);
          })
@@ -394,7 +394,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("http://127.0.0.1:8080/addNewSupervisor", newSupervisor )
+        .post("/addNewSupervisor", newSupervisor )
         .then(() => {
             setError(false);
          })
@@ -441,7 +441,7 @@ const WorkRegister = () => {
             return ;
         }
         axios
-        .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
+        .post("/addWorkOrder ", workOrder )
         .then((res) => {
             setAddWorkOrderResponse(res.data.save);
         })

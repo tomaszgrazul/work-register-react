@@ -1,5 +1,5 @@
 import './Login.css'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
@@ -11,6 +11,10 @@ const Login = ({handleLogin, handleLoginMessage}) => {
     });
 
     const [loginMessage, setLoginMessage] = useState('');
+
+     useEffect(() => {
+        console.log('message', loginMessage);
+    }, [loginMessage]);
 
     const handleInputChange = (e) => {
         // console.log(e.target.value)
@@ -27,19 +31,20 @@ const Login = ({handleLogin, handleLoginMessage}) => {
         e.preventDefault();
 
         axios
-        .post("http://127.0.0.1:8080/login", {
+        .post("/login", {
         username: formData.username,
         password: formData.password
         })
         .then((res) => {
             // console.log(res.data.message);
             // console.log('error', res.data.error);
-            console.log('token', res.data.jwt)
+            console.log('token', res.data.jwt);
             setLoginMessage(res.data.message);            
             if(!res.data.error) {
                 setLoginMessage('');
-                localStorage.setItem('user', JSON.stringify(res.data));   
-                handleLogin(true, res.data.user.username);
+                localStorage.setItem('user', JSON.stringify(res.data)); 
+                console.log("localstorage", JSON.parse(localStorage.getItem('user')));  
+                handleLogin(true, res.data.user);
             }
         })
         .catch((error) => {

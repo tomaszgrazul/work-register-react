@@ -5,7 +5,7 @@ const Logout = ({handleLogout}) => {
 
     handleLogout(false);
         axios
-        .post("http://127.0.0.1:8080/logout")
+        .post("/logout")
         .then(() => {
             localStorage.clear();
         })

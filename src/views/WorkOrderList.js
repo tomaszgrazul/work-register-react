@@ -47,7 +47,7 @@ const WorkOrderList = () => {
 
     const readWorkOrderList = () => {
         axios
-        .get("http://127.0.0.1:8080/readWorkOrder") 
+        .get("/readWorkOrder") 
         .then((res) => { 
             setRegister(res.data); 
             setError(false);     
@@ -69,7 +69,7 @@ const WorkOrderList = () => {
    
     const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteWorkOrder/${itemToDelete._id}`) 
+        .delete(`/deleteWorkOrder/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
@@ -97,7 +97,7 @@ const WorkOrderList = () => {
 
     const editWorkOrderList = (item) => {
         axios
-        .post(`http://127.0.0.1:8080/editWorkOrder/${item._id}`, readValue) 
+        .post(`/editWorkOrder/${item._id}`, readValue) 
         .then(() => {       
             setError(false); 
                     })
@@ -121,7 +121,7 @@ const WorkOrderList = () => {
             stopDate: item[0].stopDate
         }
         axios
-            .post("http://127.0.0.1:8080/addWorkOrder ", workOrder )
+            .post("/addWorkOrder ", workOrder )
             .then((res) => {
                 // setAddWorkOrderResponse(res.data.save);
                 setError(false);
@@ -150,7 +150,7 @@ const WorkOrderList = () => {
 
     const addNumberRegistration = (item) => {
         axios
-        .post(`http://127.0.0.1:8080/editWorkOrder/${item._id}`, {numberRegistration: `${item.officeName}/2023`}) 
+        .post(`/editWorkOrder/${item._id}`, {numberRegistration: `${item.officeName}/2023`}) 
         .then(() => {       
             setError(false); 
         })
