@@ -16,7 +16,7 @@ const ModalCoordinating = ({setOpenModal, handleAddModal, companyName}) => {
     const readCoordinatingList = () => {
 
         axios
-        .get("http://127.0.0.1:8080/readNewCoordinating") 
+        .get("workRegister/readNewCoordinating") 
         .then((res) => { 
             setRegister(res.data);       
         })
@@ -36,7 +36,7 @@ const ModalCoordinating = ({setOpenModal, handleAddModal, companyName}) => {
    
     const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewCoordinating/${itemToDelete._id}`) 
+        .delete(`workRegister/deleteNewCoordinating/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
@@ -60,7 +60,7 @@ const ModalCoordinating = ({setOpenModal, handleAddModal, companyName}) => {
 
     const updateCoordinatingList = (item) => {
         axios
-        .post(`http://127.0.0.1:8080/editNewCoordinating/${item._id}`, {coordinatingCompany: readValue}) 
+        .post(`workRegister/editNewCoordinating/${item._id}`, {coordinatingCompany: readValue}) 
         .then(() => {       
 
         })

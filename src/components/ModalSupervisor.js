@@ -16,7 +16,7 @@ const ModalSupervisor = ({setOpenModal, handleAddModal, companyName}) => {
     const readSupervisorList = () => {
 
         axios
-        .get("http://127.0.0.1:8080/readNewSupervisor") 
+        .get("workRegister/readNewSupervisor") 
         .then((res) => { 
             setRegister(res.data);       
         })
@@ -36,7 +36,7 @@ const ModalSupervisor = ({setOpenModal, handleAddModal, companyName}) => {
    
     const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewSupervisor/${itemToDelete._id}`) 
+        .delete(`workRegister/deleteNewSupervisor/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
@@ -60,7 +60,7 @@ const ModalSupervisor = ({setOpenModal, handleAddModal, companyName}) => {
 
     const updateSupervisorList = (item) => {
             axios
-            .post(`http://127.0.0.1:8080/editNewSupervisor/${item._id}`, {supervisorCompany: readValue}) 
+            .post(`workRegister/editNewSupervisor/${item._id}`, {supervisorCompany: readValue}) 
             .then(() => {       
 
             })

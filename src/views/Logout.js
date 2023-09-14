@@ -5,7 +5,7 @@ const Logout = ({handleLogout}) => {
 
     handleLogout(false);
         axios
-        .post("/logout")
+        .post("user/logout")
         .then(() => {
             localStorage.clear();
         })

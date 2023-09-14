@@ -15,3 +15,7 @@
 .login ::placeholder {
     color: initial;
 }
+
+.login h2 {
+    color: red;
+}

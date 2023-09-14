@@ -156,7 +156,7 @@ const SignUp = () => {
         }
     
         axios
-        .post("http://127.0.0.1:8080/signup", {
+        .post("user/signup", {
         username: formData.username,
         email: formData.email,
         password: formData.password

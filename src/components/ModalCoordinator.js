@@ -16,7 +16,7 @@ const ModalCoordinator = ({setOpenModal, handleAddModal, companyName}) => {
     const readCoordinatorList = () => {
 
         axios
-        .get("http://127.0.0.1:8080/readNewCoordinator") 
+        .get("workRegister/readNewCoordinator") 
         .then((res) => { 
             setRegister(res.data);       
         })
@@ -36,7 +36,7 @@ const ModalCoordinator = ({setOpenModal, handleAddModal, companyName}) => {
    
     const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewCoordinator/${itemToDelete._id}`) 
+        .delete(`workRegister/deleteNewCoordinator/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
@@ -60,7 +60,7 @@ const ModalCoordinator = ({setOpenModal, handleAddModal, companyName}) => {
 
     const updateCoordinatorList = (item) => {
         axios
-        .post(`http://127.0.0.1:8080/editNewCoordinator/${item._id}`, {coordinatorCompany: readValue}) 
+        .post(`workRegister/editNewCoordinator/${item._id}`, {coordinatorCompany: readValue}) 
         .then(() => {       
 
         })

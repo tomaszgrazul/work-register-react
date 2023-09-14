@@ -16,7 +16,7 @@ const ModalManager = ({setOpenModal, handleAddModal, companyName}) => {
     const readManagerList = () => {
 
         axios
-        .get("http://127.0.0.1:8080/readNewManager") 
+        .get("workRegister/readNewManager") 
         .then((res) => { 
             setRegister(res.data);       
         })
@@ -36,7 +36,7 @@ const ModalManager = ({setOpenModal, handleAddModal, companyName}) => {
    
     const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewManager/${itemToDelete._id}`) 
+        .delete(`workRegister/deleteNewManager/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
@@ -60,7 +60,7 @@ const ModalManager = ({setOpenModal, handleAddModal, companyName}) => {
 
     const updateManagerList = (item) => {
         axios
-        .post(`http://127.0.0.1:8080/editNewManager/${item._id}`, {managerCompany: readValue}) 
+        .post(`workRegister/editNewManager/${item._id}`, {managerCompany: readValue}) 
         .then(() => {       
 
         })

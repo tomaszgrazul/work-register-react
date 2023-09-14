@@ -16,7 +16,7 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
     const readPrincipalList = () => {
 
         axios
-        .get("http://127.0.0.1:8080/readNewPrincipal") 
+        .get("workRegister/readNewPrincipal") 
         .then((res) => { 
             setRegister(res.data);       
         })
@@ -36,7 +36,7 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
    
     const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewPrincipal/${itemToDelete._id}`) 
+        .delete(`workRegister/deleteNewPrincipal/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
@@ -60,7 +60,7 @@ const ModalPrincipal = ({setOpenModal, handleAddModal, companyName}) => {
 
     const updatePrincipalList = (item) => {
         axios
-        .post(`http://127.0.0.1:8080/editNewPrincipal/${item._id}`, {principalCompany: readValue}) 
+        .post(`workRegister/editNewPrincipal/${item._id}`, {principalCompany: readValue}) 
         .then(() => {       
 
         })

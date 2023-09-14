@@ -14,7 +14,7 @@ const ModalNumberOfAgreement = ({setOpenModal, handleAddModal}) => {
     const readNumberOfAgreement= () => {
 
         axios
-        .get("http://127.0.0.1:8080/readNumberOfAgreemnet") 
+        .get("workRegister/readNumberOfAgreemnet") 
         .then((res) => { 
             setRegister(res.data);      
         })
@@ -29,7 +29,7 @@ const ModalNumberOfAgreement = ({setOpenModal, handleAddModal}) => {
    
     const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNumberOfAgreemnet/${itemToDelete._id}`) 
+        .delete(`workRegister/deleteNumberOfAgreemnet/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>

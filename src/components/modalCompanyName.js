@@ -14,7 +14,7 @@ const ModalCompanyName = ({setOpenModal, handleAddModal}) => {
     const readCompanyList = () => {
 
         axios
-        .get("http://127.0.0.1:8080/readNewCompany") 
+        .get("workRegister/readNewCompany") 
         .then((res) => { 
             setRegister(res.data);       
         })
@@ -29,7 +29,7 @@ const ModalCompanyName = ({setOpenModal, handleAddModal}) => {
    
     const handleModalDelete = () => {
         axios
-        .delete(`http://127.0.0.1:8080/deleteNewCompany/${itemToDelete._id}`) 
+        .delete(`workRegister/deleteNewCompany/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>

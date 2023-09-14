@@ -116,7 +116,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("/addNumberOfAgreemnet", newNumberOfAgreement)
+        .post("workRegister/addNumberOfAgreemnet", newNumberOfAgreement)
         .then(() => {
             setError(false); 
          })
@@ -150,7 +150,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("/addNewCompany", newCompany)
+        .post("workRegister/addNewCompany", newCompany)
         .then(() => {
             setError(false);
          })
@@ -184,7 +184,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("/addNewOfficeName", newOffice)
+        .post("workRegister/addNewOfficeName", newOffice)
         .then(() => {
             setError(false);
          })
@@ -219,7 +219,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("/addNewPrincipal", newPrincipal)
+        .post("workRegister/addNewPrincipal", newPrincipal)
         .then(() => {
             setError(false);
          })
@@ -254,7 +254,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("/addNewCoordinating ", newCoordinating )
+        .post("workRegister/addNewCoordinating ", newCoordinating )
         .then(() => {
             setError(false);
          })
@@ -289,7 +289,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("/addNewCoordinator ", newCoordinator )
+        .post("workRegister/addNewCoordinator ", newCoordinator )
         .then(() => {
             setError(false);
          })
@@ -324,7 +324,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("/addNewAllower ", newAllower )
+        .post("workRegister/addNewAllower ", newAllower )
         .then(() => {
             setError(false);
          })
@@ -359,7 +359,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("/addNewManager ", newManager )
+        .post("workRegister/addNewManager ", newManager )
         .then(() => {
             setError(false);
          })
@@ -394,7 +394,7 @@ const WorkRegister = () => {
         });
 
         axios
-        .post("/addNewSupervisor", newSupervisor )
+        .post("workRegister/addNewSupervisor", newSupervisor )
         .then(() => {
             setError(false);
          })
@@ -441,7 +441,7 @@ const WorkRegister = () => {
             return ;
         }
         axios
-        .post("/addWorkOrder ", workOrder )
+        .post("workOrder/addWorkOrder ", workOrder )
         .then((res) => {
             setAddWorkOrderResponse(res.data.save);
         })

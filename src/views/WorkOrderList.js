@@ -47,7 +47,7 @@ const WorkOrderList = () => {
 
     const readWorkOrderList = () => {
         axios
-        .get("/readWorkOrder") 
+        .get("workOrder/readWorkOrder") 
         .then((res) => { 
             setRegister(res.data); 
             setError(false);     
@@ -69,7 +69,7 @@ const WorkOrderList = () => {
    
     const handleModalDelete = () => {
         axios
-        .delete(`/deleteWorkOrder/${itemToDelete._id}`) 
+        .delete(`workOrder/deleteWorkOrder/${itemToDelete._id}`) 
         .then((res) => {       
         if (!res.data.error) {
             const filtered = register.filter((el, i) =>
@@ -97,7 +97,7 @@ const WorkOrderList = () => {
 
     const editWorkOrderList = (item) => {
         axios
-        .post(`/editWorkOrder/${item._id}`, readValue) 
+        .post(`workOrder/editWorkOrder/${item._id}`, readValue) 
         .then(() => {       
             setError(false); 
                     })
@@ -121,7 +121,7 @@ const WorkOrderList = () => {
             stopDate: item[0].stopDate
         }
         axios
-            .post("/addWorkOrder ", workOrder )
+            .post("workOrder/addWorkOrder ", workOrder )
             .then((res) => {
                 // setAddWorkOrderResponse(res.data.save);
                 setError(false);
@@ -150,7 +150,7 @@ const WorkOrderList = () => {
 
     const addNumberRegistration = (item) => {
         axios
-        .post(`/editWorkOrder/${item._id}`, {numberRegistration: `${item.officeName}/2023`}) 
+        .post(`workOrder/editWorkOrder/${item._id}`, {numberRegistration: `${item.officeName}/2023`}) 
         .then(() => {       
             setError(false); 
         })
