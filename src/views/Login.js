@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
-const Login = ({handleLogin, handleLoginMessage}) => {
+const Login = ({handleLogin, handleLoginMessage, user}) => {
 
     const [formData, setFormData] = useState({
         username: '',
@@ -26,7 +26,7 @@ const Login = ({handleLogin, handleLoginMessage}) => {
             [name]: target.value,
         });
     };
-    // console.log(formData);
+    console.log('user2', user);
     const handleSubmit = (e) => {
         e.preventDefault();
 

@@ -1,15 +1,33 @@
 import './AppNav.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const AppNav = ({handleAppNav, handleAppNavUsername}) => {
+const AppNav = ({handleAppNav, handleLogout, user}) => {
 
+    const navigate = useNavigate();
+// console.log('user', user)
+    const logout = (e) => {
+        e.preventDefault();
+
+        axios
+        .post("user/logout")
+        .then(() => {
+            localStorage.clear();
+            navigate("/login");
+            handleLogout(false);
+        })
+        .catch((error) => {
+            localStorage.clear();
+            console.error(error);
+        });
+    }
   
     return (
         <nav className="mainNav">
             <ul>
                 {handleAppNav &&
                     <li>
-                        <Link to="/">Start</Link>
+                        <Link to="/order">Polecenie</Link>
                     </li>
                 }
                 {handleAppNav &&
@@ -24,7 +42,7 @@ const AppNav = ({handleAppNav, handleAppNavUsername}) => {
                 }
                 {handleAppNav &&
                     <li>
-                        <Link to="/logout">Wyloguj</Link>
+                        <Link onClick={logout}>Wyloguj</Link>
                     </li>
                 }
                 {!handleAppNav &&
@@ -34,7 +52,7 @@ const AppNav = ({handleAppNav, handleAppNavUsername}) => {
                 }
                 {handleAppNav &&
                     <li>
-                        Użytkownik: {handleAppNavUsername}
+                        Użytkownik: {user.user}
                     </li>
                 }
             </ul>

@@ -6,6 +6,9 @@
     display: inline-block;
 } */
 
+.workOrderList h3 {
+    color: brown;
+}
 .inputWorkOrderList {
     margin: 0;
     height: 18px;
