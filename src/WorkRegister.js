@@ -13,9 +13,8 @@ import ModalSupervisor from "./components/ModalSupervisor";
 import { Navigate } from "react-router-dom";
 
 
-const WorkRegister = ({handleWorkRegister}) => {
+const WorkRegister = () => {
 
-    handleWorkRegister(false);
 
     const [addWorkOrderResponse,setAddWorkOrderResponse] = useState(false);
     const [error, setError] = useState(false);

@@ -5,7 +5,7 @@ import ModalDelete from "../components/ModalDelete";
 
 const WorkOrderList = ({handleWorkOrderList}) => {
 
-    handleWorkOrderList(true);
+    // handleWorkOrderList(true);
 
     const [itemToDelete, setItemToDelete] = useState(null);
     const [openModalDelete, setOpenModalDelete] = useState(false);

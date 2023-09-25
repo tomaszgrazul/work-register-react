@@ -2,19 +2,19 @@ import './AppNav.css'
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const AppNav = ({handleAppNav, handleLogout, user}) => {
+    const AppNav = (props) => {
 
     const navigate = useNavigate();
-// console.log('user', user)
+
     const logout = (e) => {
         e.preventDefault();
 
         axios
         .post("user/logout")
         .then(() => {
+            props.setUser(null);
             localStorage.clear();
             navigate("/login");
-            handleLogout(false);
         })
         .catch((error) => {
             localStorage.clear();
@@ -25,34 +25,34 @@ const AppNav = ({handleAppNav, handleLogout, user}) => {
     return (
         <nav className="mainNav">
             <ul>
-                {handleAppNav &&
+                {props.user &&
                     <li>
                         <Link to="/order">Polecenie</Link>
                     </li>
                 }
-                {handleAppNav &&
+                {props.user &&
                     <li>
                         <Link to="/workOrderList">Lista poleceń</Link>
                     </li>
                 }
-                {!handleAppNav &&
+                {!props.user &&
                     <li>
                         <Link to="/login">Logowanie</Link>
                     </li>
                 }
-                {handleAppNav &&
+                {props.user &&
                     <li>
                         <Link onClick={logout}>Wyloguj</Link>
                     </li>
                 }
-                {!handleAppNav &&
+                {!props.user &&
                     <li>
                         <Link to="/signup">Zapisz użytkownika</Link>
                     </li>
                 }
-                {handleAppNav &&
+                {props.user &&
                     <li>
-                        Użytkownik: {user.user}
+                        Użytkownik: {props.user.user}
                     </li>
                 }
             </ul>
