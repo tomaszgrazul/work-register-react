@@ -1,7 +1,7 @@
 import './WorkRegisterNav.css'
 import { Link } from "react-router-dom";
 
-const WorkRegisterNav = () => {
+const WorkRegisterNav = (props) => {
 
   
     return (
@@ -9,14 +9,18 @@ const WorkRegisterNav = () => {
             <ul>
 
                     <li>
-                        <Link to="/workRegister">Informacje</Link>
+                        <Link onClick={e=>props.setWorkRegisterSwitch(true)}>Informacje</Link>
                     </li>
 
                     <li>
-                        <Link to="/workRegisterTeam">Zespół</Link>
+                        <Link onClick={e=>{
+                                props.setWorkRegisterTeamSwitch(true);
+                                props.setWorkRegisterSwitch(false);
+                            }
+                            }>Zespół</Link>
                     </li>
 
-                    <li>
+                    {/* <li>
                         <Link to="/workRegisterG1">G1</Link>
                     </li>
 
@@ -26,7 +30,7 @@ const WorkRegisterNav = () => {
 
                     <li>
                         <Link to="/workRegisterG3">G3</Link>
-                    </li>
+                    </li> */}
 
             </ul>
         </nav>

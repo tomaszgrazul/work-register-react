@@ -3,10 +3,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import ModalDelete from "../components/ModalDelete";
 
-const WorkOrderList = ({handleWorkOrderList}) => {
+const WorkOrderList = () => {
 
-    // handleWorkOrderList(true);
-
+    
     const [itemToDelete, setItemToDelete] = useState(null);
     const [openModalDelete, setOpenModalDelete] = useState(false);
     const [error, setError] = useState(false);
