@@ -10,7 +10,6 @@ import ModalCoordinator from "./components/ModalCoordinator";
 import ModalAllower from "./components/ModalAllower";
 import ModalManager from "./components/ModalManager";
 import ModalSupervisor from "./components/ModalSupervisor";
-import { Navigate } from "react-router-dom";
 
 
 const WorkRegister = () => {

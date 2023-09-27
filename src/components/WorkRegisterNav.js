@@ -9,15 +9,17 @@ const WorkRegisterNav = (props) => {
             <ul>
 
                     <li>
-                        <Link onClick={e=>props.setWorkRegisterSwitch(true)}>Informacje</Link>
+                        <Link onClick={e=>{
+                                props.setWorkRegisterSwitch(true);
+                                props.setWorkRegisterTeamSwitch(false);
+                            }}>Informacje</Link>
                     </li>
 
                     <li>
                         <Link onClick={e=>{
                                 props.setWorkRegisterTeamSwitch(true);
                                 props.setWorkRegisterSwitch(false);
-                            }
-                            }>Zespół</Link>
+                            }}>Zespół</Link>
                     </li>
 
                     {/* <li>
