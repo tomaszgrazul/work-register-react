@@ -1,24 +1,26 @@
+import { useState } from 'react';
 import './WorkRegisterNav.css'
 import { Link } from "react-router-dom";
 
 const WorkRegisterNav = (props) => {
 
+    const [switchColor, setSwitchColor] = useState('WorkRegister');
   
     return (
         <nav className="workRegisterNav">
             <ul>
 
                     <li>
-                        <Link onClick={e=>{
-                                props.setWorkRegisterSwitch(true);
-                                props.setWorkRegisterTeamSwitch(false);
+                        <Link style={{color: switchColor === 'WorkRegister' ? 'blue' : ''}} onClick={()=>{
+                                props.setDisplayComponentName('WorkRegister');
+                                setSwitchColor('WorkRegister');
                             }}>Informacje</Link>
                     </li>
 
                     <li>
-                        <Link onClick={e=>{
-                                props.setWorkRegisterTeamSwitch(true);
-                                props.setWorkRegisterSwitch(false);
+                        <Link style={{color: switchColor === 'WorkRegisterTeam' ? 'blue' : ''}} onClick={()=>{
+                                props.setDisplayComponentName('WorkRegisterTeam');
+                                setSwitchColor('WorkRegisterTeam');
                             }}>Zespół</Link>
                     </li>
 

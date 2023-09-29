@@ -1,7 +1,7 @@
-import '/a108/work-register-react/src/views/workOrderList.css'
+import '../../views/workRegister/workRegisterTeam.css'
 import { useState, useEffect } from "react";
 import axios from 'axios';
-// import ModalDelete from "/a108/work-register-react/src/components/ModalDelete";
+import ModalDelete from "../../components/ModalDelete";
 
 const WorkRegisterTeam = () => {
 
@@ -45,7 +45,7 @@ const WorkRegisterTeam = () => {
 
     useEffect(() => {
         readTeamMemberList();  
-    }, [register]);
+    }, []);
 
     const addTeamMember = () => {
         let newteamMember = {
@@ -75,6 +75,7 @@ const WorkRegisterTeam = () => {
             .then((res) => {
                 // setAddWorkOrderResponse(res.data.save);
                 setError(false);
+                readTeamMemberList();
             })
             .catch((error) => {
                 console.error(error);
@@ -108,17 +109,19 @@ const WorkRegisterTeam = () => {
     });
 
     return (
-        <div className="WorkRegisterTeam">
+        <div className="workRegisterTeam">
             <div className='header'>
                 <h3>Lista członków zespołu</h3>
             </div>
             <p className={error ? 'error' : 'noErrorWorkRegisterTeam'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
-            <input onChange={handleValueChange} value={readValue.company} type="text" placeholder={errors.company ? errors.company : 'Nazwa firmy'} name="company" />
-            <input onChange={handleValueChange} value={readValue.teamMember} type="text" placeholder={errors.teamMember ? errors.teamMember : 'Imię i Nazwisko'} name="teamMember" />
-                    <button onClick={(e) => {
-                        e.preventDefault();
-                        addTeamMember();
-                    }}>Dodaj</button>
+            <div className='block'>
+                <input onChange={handleValueChange} value={readValue.company} type="text" placeholder={errors.company ? errors.company : 'Nazwa firmy'} name="company" />
+                <input onChange={handleValueChange} value={readValue.teamMember} type="text" placeholder={errors.teamMember ? errors.teamMember : 'Imię i Nazwisko'} name="teamMember" />
+                        <button onClick={(e) => {
+                            e.preventDefault();
+                            addTeamMember();
+                        }}>Dodaj</button>
+            </div>
             <table>
                 <tbody>
                     <tr>
@@ -140,7 +143,7 @@ const WorkRegisterTeam = () => {
                                     
                                     <td className="action">
                                         <button onClick={() => {  
-                                                // setOpenModalDelete(true); 
+                                                setOpenModalDelete(true); 
                                                 handleModalDelete(item);         
                                             }}
                                             className="btnDelete">Usuń
@@ -151,7 +154,7 @@ const WorkRegisterTeam = () => {
                         })}    
                 </tbody>
             </table>
-            {/* {openModalDelete && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>} */}
+            {openModalDelete && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>}
         </div>
     )
 }

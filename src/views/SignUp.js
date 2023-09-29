@@ -161,8 +161,17 @@ const SignUp = () => {
         email: formData.email,
         password: formData.password
         })
-        .then((res) => {
-            setSignUpDone(res.data.save);
+        .then((res) => {  
+            if(res.data.error) {
+                    setErrors(prevErrors =>{
+                     return {
+                        ...prevErrors, 
+                        username: res.data.message
+                    };
+                });
+            } else {
+                setSignUpDone(res.data.save);
+            }  
          })
         .catch((error) => {
             console.error(error);

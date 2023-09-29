@@ -1,0 +1,13 @@
+.workRegisterTeam {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.block {
+    display: inline-block;
+}
+
+.noErrorWorkRegisterTeam {
+    color: white;
+}

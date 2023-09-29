@@ -6,15 +6,14 @@ import WorkRegisterTeam from "../views/workRegister/WorkRegisterTeam";
 
 const Order = () => {
 
-    const [workRegisterSwitch, setWorkRegisterSwitch] = useState(false);
-    const [workRegisterTeamSwitch, setWorkRegisterTeamSwitch] = useState(false);
+    const [displayComponentName, setDisplayComponentName] = useState('WorkRegister');
 
     return (
         <div className="order">
             <h1>Prace szczególnie niebezpieczne</h1>
-                <WorkRegisterNav setWorkRegisterSwitch={setWorkRegisterSwitch} setWorkRegisterTeamSwitch={setWorkRegisterTeamSwitch}/>
-                {workRegisterSwitch && <WorkRegister/>}
-                {workRegisterTeamSwitch && <WorkRegisterTeam/>} 
+                <WorkRegisterNav setDisplayComponentName={setDisplayComponentName}/>
+                {displayComponentName === 'WorkRegister' && <WorkRegister/>}
+                {displayComponentName === 'WorkRegisterTeam' && <WorkRegisterTeam/>} 
         </div>
     );
 }
