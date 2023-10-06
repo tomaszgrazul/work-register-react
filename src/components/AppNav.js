@@ -6,8 +6,7 @@ import axios from "axios";
 
     const navigate = useNavigate();
 
-    const logout = (e) => {
-        e.preventDefault();
+    const logout = () => {
 
         axios
         .post("user/logout")
@@ -20,6 +19,11 @@ import axios from "axios";
             localStorage.clear();
             console.error(error);
         });
+    }
+
+    if(props.expTokenTime) {
+        logout();
+        props.setExpTokenTime(false);
     }
   
     return (

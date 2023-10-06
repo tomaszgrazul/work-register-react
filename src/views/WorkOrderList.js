@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import ModalDelete from "../components/ModalDelete";
 
-const WorkOrderList = ({companyName}) => {
+const WorkOrderList = () => {
 
     
     const [itemToDelete, setItemToDelete] = useState(null);
