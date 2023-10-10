@@ -16,7 +16,8 @@ const WorkRegister = () => {
 
 
     const [addWorkOrderResponse,setAddWorkOrderResponse] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState(false);
+
     const [errors, setErrors] = useState({
         whoWork: '',
         companyName: '',
@@ -83,24 +84,21 @@ const WorkRegister = () => {
             ...readValue,
             [name]: addValue
         })
-    };
+    }
 
-    useEffect(() => {
-        Object.entries(readValue).map(item => {
-            if (item[1] === '') {       
-                return (
-                    setError('')
-                )    
-            }
-        });
-    },[readValue]);
+ 
+    // useEffect(() => {
+
+    //     console.log('aaaa', errors);
+    //     // console.log('bbb', readValue);
+    // }, [errors]);
 
     const addNmberOfAgreemnet = () => {
-        // let newNumberOfAgreement = {
-        //     numberOfAgreement: readValue.numberOfAgreement
-        // }
+        let newNumberOfAgreement = {
+            numberOfAgreement: readValue.numberOfAgreement
+        }
 
-        if (readValue.numberOfAgreement === '') {    
+        if (newNumberOfAgreement.numberOfAgreement === '') {    
             setErrors( {
                 ...errors,
                 numberOfAgreement: "Brak danych !!!"
@@ -113,10 +111,15 @@ const WorkRegister = () => {
                     });
                 }
 
+        // setReadValue( {    
+        //     ...readValue, 
+        //     numberOfAgreement: ''
+        // });
+
         axios
-        .post("workRegister/addNumberOfAgreemnet", readValue.numberOfAgreement)
-        .then((res) => {
-            setError(res.data.message);
+        .post("workRegister/addNumberOfAgreemnet", newNumberOfAgreement)
+        .then(() => {
+            setError(false); 
          })
         .catch((error) => {
             console.error(error);
@@ -141,6 +144,11 @@ const WorkRegister = () => {
                         companyName: ""
                     });
                 }
+
+        // setReadValue( {    
+        //     ...readValue, 
+        //     companyName: ''
+        // });
 
         axios
         .post("workRegister/addNewCompany", newCompany)
@@ -170,6 +178,11 @@ const WorkRegister = () => {
                         officeName: ""
                     });
                 }
+
+        // setReadValue( {    
+        //     ...readValue, 
+        //     officeName: ''
+        // });
 
         axios
         .post("workRegister/addNewOfficeName", newOffice)
@@ -201,6 +214,11 @@ const WorkRegister = () => {
                     });
                 }
 
+        // setReadValue( {    
+        //     ...readValue, 
+        //     principalName: ''
+        // });
+
         axios
         .post("workRegister/addNewPrincipal", newPrincipal)
         .then(() => {
@@ -231,7 +249,12 @@ const WorkRegister = () => {
                     });
                 }
 
-         axios
+        // setReadValue( {    
+        //     ...readValue, 
+        //     coordinatingName: ''
+        // });
+
+        axios
         .post("workRegister/addNewCoordinating ", newCoordinating )
         .then(() => {
             setError(false);
@@ -260,6 +283,11 @@ const WorkRegister = () => {
                         coordinatorName: ""
                     });
                 }
+
+        // setReadValue( {    
+        //     ...readValue, 
+        //     coordinatorName: ''
+        // });
 
         axios
         .post("workRegister/addNewCoordinator ", newCoordinator )
@@ -291,6 +319,11 @@ const WorkRegister = () => {
                     });
                 }
 
+        // setReadValue( {    
+        //     ...readValue, 
+        //     allowerName: ''
+        // });
+
         axios
         .post("workRegister/addNewAllower ", newAllower )
         .then(() => {
@@ -321,7 +354,12 @@ const WorkRegister = () => {
                     });
                 }
 
-         axios
+        // setReadValue( {    
+        //     ...readValue, 
+        //     managerName: ''
+        // });
+
+        axios
         .post("workRegister/addNewManager ", newManager )
         .then(() => {
             setError(false);
@@ -350,6 +388,11 @@ const WorkRegister = () => {
                         supervisorName: ""
                     });
                 }
+
+        // setReadValue( {    
+        //     ...readValue, 
+        //     supervisorName: ''
+        // });
 
         axios
         .post("workRegister/addNewSupervisor", newSupervisor )
@@ -417,8 +460,7 @@ const WorkRegister = () => {
             <header>
                 {/* <h1>Prace szczególnie niebezpieczne</h1>
                 <WorkRegisterNav/> */}
-                {/* <p className={error ? 'errorWorkRegister' : 'noErrorWorkRegister'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p> */}
-                <p className={error ? 'errorWorkRegister' : 'noErrorWorkRegister'}>{error ? error : '-'}</p>
+                <p className={error ? 'errorWorkRegister' : 'noErrorWorkRegister'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
             </header>
             <form onSubmit={handleSubmitForm}>
                 <div>
