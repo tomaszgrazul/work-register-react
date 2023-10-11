@@ -96,11 +96,11 @@ const WorkRegister = () => {
     },[readValue]);
 
     const addNmberOfAgreemnet = () => {
-        // let newNumberOfAgreement = {
-        //     numberOfAgreement: readValue.numberOfAgreement
-        // }
+        let newNumberOfAgreement = {
+            numberOfAgreement: readValue.numberOfAgreement
+        }
 
-        if (readValue.numberOfAgreement === '') {    
+        if (newNumberOfAgreement === '') {    
             setErrors( {
                 ...errors,
                 numberOfAgreement: "Brak danych !!!"
@@ -114,13 +114,13 @@ const WorkRegister = () => {
                 }
 
         axios
-        .post("workRegister/addNumberOfAgreemnet", readValue.numberOfAgreement)
+        .post("workRegister/addNumberOfAgreemnet", newNumberOfAgreement)
         .then((res) => {
             setError(res.data.message);
          })
         .catch((error) => {
             console.error(error);
-            setError(true);
+            setError('Wystąpił błąd. Spróbuj jeszcze raz.');
         });
     };
 
@@ -144,12 +144,12 @@ const WorkRegister = () => {
 
         axios
         .post("workRegister/addNewCompany", newCompany)
-        .then(() => {
-            setError(false);
+        .then((res) => {
+            setError(res.data.message);
          })
         .catch((error) => {
             console.error(error);
-            setError(true);
+            setError('Wystąpił błąd. Spróbuj jeszcze raz.');
         });
     };
 
@@ -173,12 +173,12 @@ const WorkRegister = () => {
 
         axios
         .post("workRegister/addNewOfficeName", newOffice)
-        .then(() => {
-            setError(false);
+        .then((res) => {
+            setError(res.data.message);
          })
         .catch((error) => {
             console.error(error);
-            setError(true);
+            setError('Wystąpił błąd. Spróbuj jeszcze raz.');
         });
     };
 
@@ -203,12 +203,12 @@ const WorkRegister = () => {
 
         axios
         .post("workRegister/addNewPrincipal", newPrincipal)
-        .then(() => {
-            setError(false);
+        .then((res) => {
+            setError(res.data.message);
          })
         .catch((error) => {
             console.error(error);
-            setError(true);
+            setError('Wystąpił błąd. Spróbuj jeszcze raz.');
         });
     };
 
@@ -233,12 +233,12 @@ const WorkRegister = () => {
 
          axios
         .post("workRegister/addNewCoordinating ", newCoordinating )
-        .then(() => {
-            setError(false);
+        .then((res) => {
+            setError(res.data.message);
          })
         .catch((error) => {
             console.error(error);
-            setError(true);
+            setError('Wystąpił błąd. Spróbuj jeszcze raz.');
         });
     };
 
@@ -263,12 +263,12 @@ const WorkRegister = () => {
 
         axios
         .post("workRegister/addNewCoordinator ", newCoordinator )
-        .then(() => {
-            setError(false);
+        .then((res) => {
+            setError(res.data.message);
          })
         .catch((error) => {
             console.error(error);
-            setError(true);
+            setError('Wystąpił błąd. Spróbuj jeszcze raz.');
         });
     };
 
@@ -293,12 +293,12 @@ const WorkRegister = () => {
 
         axios
         .post("workRegister/addNewAllower ", newAllower )
-        .then(() => {
-            setError(false);
+        .then((res) => {
+            setError(res.data.message);
          })
         .catch((error) => {
             console.error(error);
-            setError(true);
+            setError('Wystąpił błąd. Spróbuj jeszcze raz.');
         });
     };
 
@@ -323,12 +323,12 @@ const WorkRegister = () => {
 
          axios
         .post("workRegister/addNewManager ", newManager )
-        .then(() => {
-            setError(false);
+        .then((res) => {
+            setError(res.data.message);
          })
         .catch((error) => {
             console.error(error);
-            setError(true);
+            setError('Wystąpił błąd. Spróbuj jeszcze raz.');
         });
     };
 
@@ -353,12 +353,12 @@ const WorkRegister = () => {
 
         axios
         .post("workRegister/addNewSupervisor", newSupervisor )
-        .then(() => {
-            setError(false);
+        .then((res) => {
+            setError(res.data.message);
          })
         .catch((error) => {
             console.error(error);
-            setError(true);
+            setError('Wystąpił błąd. Spróbuj jeszcze raz.');
         });
     };
 
@@ -405,6 +405,7 @@ const WorkRegister = () => {
         })
         .catch((error) => {
             console.error(error);
+            setError('Wystąpił błąd. Spróbuj jeszcze raz.');
         });   
     }
 
