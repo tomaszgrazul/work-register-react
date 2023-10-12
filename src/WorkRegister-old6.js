@@ -10,7 +10,6 @@ import ModalCoordinator from "./components/ModalCoordinator";
 import ModalAllower from "./components/ModalAllower";
 import ModalManager from "./components/ModalManager";
 import ModalSupervisor from "./components/ModalSupervisor";
-import ModalTeam from "./components/ModalTeam";
 
 
 const WorkRegister = () => {
@@ -31,8 +30,7 @@ const WorkRegister = () => {
         supervisorName: '',
         allowerName: '',
         startDate: '',
-        stopDate: '',
-        teamMember: ''
+        stopDate: ''
     });
 
     const [openModal, setOpenModal] = useState({
@@ -46,8 +44,7 @@ const WorkRegister = () => {
         coordinatorName: false,
         managerName: false,
         supervisorName: false,
-        allowerName: false,
-        teamMember: false
+        allowerName: false
     });
 
     const [readValue, setReadValue] = useState({
@@ -63,8 +60,7 @@ const WorkRegister = () => {
         supervisorName: '',
         allowerName: '',
         startDate: '',
-        stopDate: '',
-        teamMember: ''
+        stopDate: ''
     });
 
      const handleValueChange = (e) => {
@@ -366,42 +362,6 @@ const WorkRegister = () => {
         });
     };
 
-    const addTeamMember = () => {
-        let newteamMember = {
-            teamMember: readValue.teamMember,
-            // company: readValue.company
-        }
-
-        Object.entries(newteamMember).map(item => {
-            if (item[1] === '') {       
-                return (
-                    setErrors( prevErrors => { 
-                        return {   
-                        ...prevErrors, 
-                        [item[0]]: "Brak danych !!!"
-                    }})
-                )    
-            }
-        });
-
-        const found = Object.values(readValue).find(item => item === '');
-        if( found === '') {
-            return ;
-        }
-
-        axios
-            .post("teamMember/addTeamMember ", newteamMember )
-            .then((res) => {
-                // setAddWorkOrderResponse(res.data.save);
-                setError(false);
-                // readTeamMemberList();
-            })
-            .catch((error) => {
-                console.error(error);
-                setError(true);
-            });
-    }
-
 
     const handleSubmitForm = (e) => {
 
@@ -610,21 +570,6 @@ const WorkRegister = () => {
                 </div>
 
                 <div>
-                    <div className="label">
-                        <label htmlFor="zespół">Zespół</label>
-                    </div>     
-                    <input onChange={handleValueChange} value={readValue.teamMember} type="text" placeholder={errors.teamMember ? errors.teamMember : ''} name="teamMember" />
-                    <button onClick={(e) => {
-                        e.preventDefault();
-                        addTeamMember();
-                    }}>Dodaj</button>
-                    <button onClick={(e) => {
-                        e.preventDefault();
-                        setOpenModal(() => {return {teamMember: true}});
-                    }}>Wybierz</button>
-                </div>
-
-                <div>
                     <label htmlFor="rozpoczeciePracy">Rozpoczęcie pracy (data, godzina)</label>
                     <input onChange={handleValueChange} value={readValue.startDate} type="datetime-local" name="startDate" />
                     {errors.startDate && <p id="error">{errors.startDate}</p>}
@@ -635,7 +580,6 @@ const WorkRegister = () => {
                     <input onChange={handleValueChange} value={readValue.stopDate} type="datetime-local" name="stopDate" />
                     {errors.stopDate && <p id="error">{errors.stopDate}</p>}
                 </div>
-
                 <div>
                     <button type="submit">Zapisz</button>
                     {addWorkOrderResponse && <p id="save" >Zapisane</p>}
@@ -658,8 +602,6 @@ const WorkRegister = () => {
             {openModal.supervisorName && <ModalSupervisor setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
 
             {openModal.allowerName && <ModalAllower setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
-
-            {openModal.teamMember && <ModalTeam setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
         </div>
 
     )

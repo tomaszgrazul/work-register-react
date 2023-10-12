@@ -31,7 +31,8 @@ import axios from "axios";
             <ul>
                 {props.user &&
                     <li>
-                        <Link to="/order">Polecenie</Link>
+                        {/* <Link to="/order">Polecenie</Link> */}
+                        <Link to="/workRegister">Polecenie</Link>
                     </li>
                 }
                 {props.user &&
