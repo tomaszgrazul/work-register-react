@@ -6,7 +6,6 @@ import ModalDelete from "../components/ModalDelete";
 const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
  
     const [register, setRegister] = useState([]);
-    const [isChecked, setIsChecked] = useState('');
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
     const [readValue, setReadValue] = useState('');
@@ -60,7 +59,7 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
 
     const updateTeamMemberList = (item) => {
             axios
-            .post(`teamMember/editTeamMember/${item._id}`, {teamMember: readValue}) 
+            .post(`teamMember/editTeamMember/${item._id}`, {teamMemberCompany: readValue}) 
             .then(() => {       
 
             })
@@ -76,7 +75,7 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
       }
 
       const filtered = (el) => {
-        if(el.teamMember === companyName) {
+        if(el.teamMemberCompany === companyName) {
             return el;
         } 
         if(companyName === "") {
@@ -98,13 +97,14 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
                         <tr><th></th><th className="name">Imię i nazwisko</th><th className="companyName">Nazwa firmy</th><th className="action">Czynność</th></tr>
                         {register.filter(filtered).map((item, i) => {
                                 return ( 
-                                    <tr key={i}><td><input type="radio" className="radio" value={`option${i}`} checked={isChecked === `option${i}`}
-                                        onChange={(e) => {
-                                            setIsChecked(e.target.value);
-                                            handleAddModal(item.teamMember, 'teamMember'); 
-                                        }} 
-                                        /></td><td className="name">{item.teamMember}</td>
-                                        <td className="companyName">{!inputDisabled[i] && item.teamMember} 
+                                    <tr key={i}>
+                                        <td><input type="checkbox" className="checkbox" 
+                                            onChange={(e) => {
+                                                handleAddModal(item.teamMember, 'teamMember'); 
+                                            }} 
+                                        /></td>
+                                        <td className="name">{item.teamMember}</td>
+                                        <td className="companyName">{!inputDisabled[i] && item.teamMemberCompany} 
                                         {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput' placeholder={readValue==='' ? 'Brak danych!!!' : ''}/>}
                                         {inputDisabled[i] && <button disabled={readValue==='' ? true : false} onClick={() => {
                                             updateTeamMemberList(item); 
@@ -121,7 +121,7 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
                                         </button>
                                         <button onClick={() => {           
                                             checkHandler(i); 
-                                            setReadValue(register[i].teamMember);       
+                                            setReadValue(register[i].teamMemberCompany);       
                                         }}
                                         className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
                                         </button></td></tr>

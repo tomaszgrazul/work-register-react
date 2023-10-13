@@ -369,36 +369,30 @@ const WorkRegister = () => {
     const addTeamMember = () => {
         let newteamMember = {
             teamMember: readValue.teamMember,
-            // company: readValue.company
+            teamMemberCompany: readValue.companyName
         }
 
-        Object.entries(newteamMember).map(item => {
-            if (item[1] === '') {       
-                return (
-                    setErrors( prevErrors => { 
-                        return {   
-                        ...prevErrors, 
-                        [item[0]]: "Brak danych !!!"
-                    }})
-                )    
-            }
-        });
-
-        const found = Object.values(readValue).find(item => item === '');
-        if( found === '') {
-            return ;
-        }
+        if (newteamMember.teamMember === '') {    
+            setErrors( {
+                ...errors,
+                teamMember: "Brak danych !!!"
+            });
+            return;
+        } else {
+                    setErrors( {
+                        ...errors,
+                        teamMember: ""
+                    });
+                }
 
         axios
             .post("teamMember/addTeamMember ", newteamMember )
             .then((res) => {
-                // setAddWorkOrderResponse(res.data.save);
-                setError(false);
-                // readTeamMemberList();
+                setError(res.data.message);
             })
             .catch((error) => {
                 console.error(error);
-                setError(true);
+                setError('Wystąpił błąd. Spróbuj jeszcze raz.');
             });
     }
 
