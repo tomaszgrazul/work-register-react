@@ -6,6 +6,8 @@ import ModalDelete from "../components/ModalDelete";
 const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
  
     const [register, setRegister] = useState([]);
+    const [registerTeam, setRegisterTeam] = useState([]);
+    const [isChecked, setIsChecked] = useState([]);
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
     const [readValue, setReadValue] = useState('');
@@ -29,7 +31,12 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
     }, []);
 
     useEffect(() => {
+        console.log('qqqq', registerTeam)
+    }, [isChecked]);
+
+    useEffect(() => {
         setInputDisabled(new Array(register.length).fill(false));
+        setIsChecked(new Array(register.length).fill(false));
     }, [register]);
    
    
@@ -98,8 +105,12 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
                         {register.filter(filtered).map((item, i) => {
                                 return ( 
                                     <tr key={i}>
-                                        <td><input type="checkbox" className="checkbox" 
+                                        <td><input type="checkbox" className="checkbox" checked={isChecked[i]}
                                             onChange={(e) => {
+                                                setIsChecked(isChecked.map((item, index) => {
+                                                    return item = index === i ? !item : item;
+                                                }));
+                                                !isChecked[i] ? setRegisterTeam([...registerTeam, item.teamMember]) : registerTeam.splice(i,1)
                                                 handleAddModal(item.teamMember, 'teamMember'); 
                                             }} 
                                         /></td>
