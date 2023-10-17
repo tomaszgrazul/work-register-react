@@ -31,7 +31,8 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
     }, []);
 
     useEffect(() => {
-        console.log('qqqq', registerTeam)
+        console.log('qqqq', registerTeam);
+        console.log('isChecked', isChecked);
     }, [isChecked]);
 
     useEffect(() => {
@@ -110,7 +111,9 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
                                                 setIsChecked(isChecked.map((item, index) => {
                                                     return item = index === i ? !item : item;
                                                 }));
-                                                !isChecked[i] ? setRegisterTeam([...registerTeam, item.teamMember]) : registerTeam.splice(i,1)
+                                                !isChecked[i] ? setRegisterTeam([...registerTeam, item.teamMember]) : registerTeam.filter((el, i) => {
+                                                    i !== registerTeam.findIndex((el) => el === i)
+                                                })
                                                 handleAddModal(item.teamMember, 'teamMember'); 
                                             }} 
                                         /></td>
