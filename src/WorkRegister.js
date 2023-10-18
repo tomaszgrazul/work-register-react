@@ -15,7 +15,6 @@ import ModalTeam from "./components/ModalTeam";
 
 const WorkRegister = () => {
 
-
     const [addWorkOrderResponse,setAddWorkOrderResponse] = useState(false);
     const [error, setError] = useState('');
     const [errors, setErrors] = useState({
@@ -385,6 +384,11 @@ const WorkRegister = () => {
                     });
                 }
 
+        // setReadValue( {    
+        //     ...readValue, 
+        //     teamMember: ''
+        // });
+
         axios
             .post("teamMember/addTeamMember ", newteamMember )
             .then((res) => {
@@ -413,7 +417,8 @@ const WorkRegister = () => {
             supervisorName: readValue.supervisorName,
             allowerName: readValue.allowerName,
             startDate: readValue.startDate,
-            stopDate: readValue.stopDate
+            stopDate: readValue.stopDate,
+            teamMember: readValue.teamMember
         }
         
         Object.entries(workOrder).map(item => {
@@ -607,7 +612,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="zespół">Zespół</label>
                     </div>     
-                    <input onChange={handleValueChange} value={readValue.teamMember} type="text" placeholder={errors.teamMember ? errors.teamMember : ''} name="teamMember" />
+                    <textarea onChange={handleValueChange} value={readValue.teamMember} type="text" placeholder={errors.teamMember ? errors.teamMember : ''} name="teamMember" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addTeamMember();

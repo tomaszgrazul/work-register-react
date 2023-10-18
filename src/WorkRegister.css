@@ -16,6 +16,10 @@ input {
     margin: 0 10px 20px 0;
 }
 
+textarea {
+    width: 170px;
+}
+
 label {
     margin-right: 10px;
 }
