@@ -10,12 +10,14 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
     const [isChecked, setIsChecked] = useState([]);
     const [error, setError] = useState(false);
     const [inputDisabled, setInputDisabled] = useState([false]);
-    const [readValue, setReadValue] = useState('');
+    const [readValue, setReadValue] = useState({
+        teamMember: '',
+        teamMemberCompany: ''
+    });
     const [itemToDelete, setItemToDelete] = useState(null);
     const [openModalDelete, setOpenModalDelete] = useState(false);
 
     const readTeamMemberList = () => {
-
         axios
         .get("teamMember/readTeamMember") 
         .then((res) => { 
@@ -26,13 +28,18 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
         });   
     }
 
+    const loadReadValue = (i) => {
+        setReadValue({
+            teamMember: register[i].teamMember,
+            teamMemberCompany: register[i].teamMemberCompany
+        }); 
+    }
+
     useEffect(() => {
         readTeamMemberList();   
     }, []);
 
     useEffect(() => {
-        // console.log('registerTeam', registerTeam);
-        // console.log('isChecked', isChecked);
         handleAddModal(registerTeam, 'teamMember'); 
     }, [isChecked]);
 
@@ -62,13 +69,19 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
         setOpenModalDelete(false);
     }
 
-    const handleInputCompany = (e) => {
-        setReadValue(e.target.value);
-    }
+    const handleValueChange = (e) => {
+        const target = e.target;
+        const name = e.target.name;
+
+        setReadValue ({
+            ...readValue,
+            [name]: target.value
+        });
+    };
 
     const updateTeamMemberList = (item) => {
             axios
-            .post(`teamMember/editTeamMember/${item._id}`, {teamMemberCompany: readValue}) 
+            .post(`teamMember/editTeamMember/${item._id}`, readValue) 
             .then(() => {       
 
             })
@@ -93,12 +106,14 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
       }
 
     return (
-            <div className="modalTeam">
-                <div className='topModal'>
-                    <h3>Zespół</h3>
+            <div className="modal">
+                <div>
+                    <div className='xModal'>
+                        <p onClick={() => {setOpenModal(() => {return {supervisorName: false}})}}>X</p>
+                    </div>  
                     <div>
-                        <p className='ex-modal' onClick={() => {setOpenModal(() => {return {supervisorName: false}})}}>X</p>
-                    </div>                  
+                        <h3>Zespół</h3>
+                    </div>   
                 </div>
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>
@@ -112,34 +127,36 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
                                                 setIsChecked(isChecked.map((item, index) => {
                                                     return item = index === i ? !item : item;
                                                 }));
-                                                !isChecked[i] ? setRegisterTeam([...registerTeam, item.teamMember]) : setRegisterTeam(registerTeam.filter((item, index) => {
-                                                    return index !== registerTeam.findIndex(el => el === register[i].teamMember)
-                                                }))
-                                                
+                                                !isChecked[i] ? setRegisterTeam([...registerTeam, item.teamMember]) : setRegisterTeam(registerTeam.filter
+                                                (item => { return item !== register[i].teamMember }))               
                                             }} 
                                         /></td>
-                                        <td className="name">{item.teamMember}</td>
-                                        <td className="companyName">{!inputDisabled[i] && item.teamMemberCompany} 
-                                        {inputDisabled[i] && <input onChange={handleInputCompany} type="text" value={readValue} className='companyInput' placeholder={readValue==='' ? 'Brak danych!!!' : ''}/>}
-                                        {inputDisabled[i] && <button disabled={readValue==='' ? true : false} onClick={() => {
-                                            updateTeamMemberList(item); 
-                                            readTeamMemberList();   
-                                        }}
-                                        className="btnSend">Wyślij
-                                        </button>}</td>
+                                        <td className="tableName">{!inputDisabled[i] && item.teamMember}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.teamMember} className='input' name='teamMember' placeholder={readValue.teamMember ==='' ? 'Brak danych!!!' : ''}/>}  
+                                        </td>
+                                        <td className="tableName">{!inputDisabled[i] && item.teamMemberCompany} 
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.teamMemberCompany} className='input' name='teamMemberCompany' placeholder={readValue.teamMemberCompany ==='' ? 'Brak danych!!!' : ''}/>}                                          
+                                        </td>
                                         <td className="action">
-                                        <button onClick={() => {
-                                            setItemToDelete(item); 
-                                            setOpenModalDelete(true);             
-                                        }}
-                                        className="btnDelete">Usuń
-                                        </button>
-                                        <button onClick={() => {           
-                                            checkHandler(i); 
-                                            setReadValue(register[i].teamMemberCompany);       
-                                        }}
-                                        className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
-                                        </button></td></tr>
+                                            <button onClick={() => {
+                                                setItemToDelete(item); 
+                                                setOpenModalDelete(true);             
+                                            }}
+                                            className="btnDelete">Usuń
+                                            </button>
+                                            <button onClick={() => {           
+                                                checkHandler(i); 
+                                                loadReadValue(i);        
+                                            }}
+                                            className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
+                                            </button>
+                                              {inputDisabled[i] && <button disabled={Object.values(readValue).find(item => item === '') ==='' ? true : false} onClick={() => {
+                                                updateTeamMemberList(item); 
+                                                readTeamMemberList();   
+                                            }}
+                                            className="btnSend">Wyślij
+                                            </button>}
+                                        </td></tr>
                                 )     
                             })
                         }    
@@ -151,172 +168,3 @@ const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
 }
 
 export default ModalTeam;
-
-
-
-
-// import '../components/ModalTeam.css'
-// import { useState, useEffect } from "react";
-// import axios from 'axios';
-// import ModalDelete from "../components/ModalDelete";
-
-// const ModalTeam = ({setOpenModal, handleAddModal, companyName}) => {
-
-
-//     const [openModalDelete, setOpenModalDelete] = useState(false);
-//     const [register, setRegister] = useState([]);
-//     const [error, setError] = useState(false);
-
-//     const handleModalDelete = (item) => {
-//         axios
-//         .delete(`teamMember/deleteTeamMember/${item._id}`) 
-//         .then((res) => {       
-//         if (!res.data.error) {
-//             const filtered = register.filter((el, i) =>
-//                 i !== register.findIndex((el) => el === item)
-//             );
-//             setRegister(filtered);
-//             setError(false);
-//             } else {
-//                 setError(true);
-//             }
-//         })
-//         .catch((error) => {
-//             console.error(error);
-//         }); 
-//         setOpenModalDelete(false);
-//     }
-
-//     const readTeamMemberList = () => {
-//         axios
-//         .get("teamMember/readTeamMember") 
-//         .then((res) => { 
-//             setRegister(res.data); 
-//             setError(false);     
-//         })
-//         .catch((error) => {
-//             console.error(error);
-//             setError(true);
-//         });   
-//     }
-
-//     useEffect(() => {
-//         readTeamMemberList();  
-//     }, []);
-
-//     // const addTeamMember = () => {
-//     //     let newteamMember = {
-//     //         teamMember: readValue.teamMember,
-//     //         company: readValue.company
-//     //     }
-
-//     //     Object.entries(newteamMember).map(item => {
-//     //         if (item[1] === '') {       
-//     //             return (
-//     //                 setErrors( prevErrors => { 
-//     //                     return {   
-//     //                     ...prevErrors, 
-//     //                     [item[0]]: "Brak danych !!!"
-//     //                 }})
-//     //             )    
-//     //         }
-//     //     });
-
-//     //     const found = Object.values(readValue).find(item => item === '');
-//     //     if( found === '') {
-//     //         return ;
-//     //     }
-
-//     //     axios
-//     //         .post("teamMember/addTeamMember ", newteamMember )
-//     //         .then((res) => {
-//     //             // setAddWorkOrderResponse(res.data.save);
-//     //             setError(false);
-//     //             readTeamMemberList();
-//     //         })
-//     //         .catch((error) => {
-//     //             console.error(error);
-//     //             setError(true);
-//     //         });
-//     // }
-
-//     const handleValueChange = (e) => {
-//         const target = e.target;
-//         const name = e.target.name;
-
-//         setReadValue ({
-//             ...readValue,
-//             [name]: target.value,
-//         });
-
-//         setErrors( {    
-//             ...errors, 
-//             [name]: ""
-//         });
-//     };
-
-//     const [errors, setErrors] = useState({
-//         teamMember: '',
-//         company: ''
-//     });
-
-//     const [readValue, setReadValue] = useState({
-//         teamMember: '',
-//         company: ''
-//     });
-
-//     return (
-//         <div className="modalTeam">
-//             <div className='topModal'>
-//                 <h3>Lista członków zespołu</h3>
-//                 <div>
-//                     <p className='ex-modal' onClick={() => {setOpenModal(() => {return {team: false}})}}>X</p>
-//                 </div>   
-//             </div> 
-//             <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
-//             {/* <div className='block'>
-//                 <input onChange={handleValueChange} value={readValue.company} type="text" placeholder={errors.company ? errors.company : 'Nazwa firmy'} name="company" />
-//                 <input onChange={handleValueChange} value={readValue.teamMember} type="text" placeholder={errors.teamMember ? errors.teamMember : 'Imię i Nazwisko'} name="teamMember" />
-//                         <button onClick={(e) => {
-//                             e.preventDefault();
-//                             addTeamMember();
-//                         }}>Dodaj</button>
-//             </div> */}
-//             <table>
-//                 <tbody>
-//                     <tr>
-//                         <th className="lp">LP</th> 
-//                         <th className="name">Imię i Nazwisko</th>
-//                         <th className="name">Nazwa firmy</th>
-//                         <th className="action">Czynność</th>
-//                     </tr>
-//                     {register.map((item, i) => {
-//                             return (
-//                                 <tr key={i}>
-//                                     <td>{i+1}</td>
-
-//                                     <td>{item.teamMember}
-//                                     </td>
-
-//                                     <td className='name'> {item.company}
-//                                     </td>
-                                    
-//                                     <td className="action">
-//                                         <button onClick={() => {  
-//                                                 setOpenModalDelete(true); 
-//                                                 handleModalDelete(item);         
-//                                             }}
-//                                             className="btnDelete">Usuń
-//                                         </button>
-//                                     </td>
-//                                 </tr>
-//                             )      
-//                         })}    
-//                 </tbody>
-//             </table>
-//             {openModalDelete && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>}
-//         </div>
-//     )
-// }
-
-// export default ModalTeam;

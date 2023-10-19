@@ -1,4 +1,4 @@
-.modalTeam {
+.modal {
     height: 500px;
     width: 800px;
     position: fixed;
@@ -8,36 +8,27 @@
     overflow-y: auto;
 }
 
-.topModal {
-    display: flex;
-    flex-direction: row;
-    justify-content:space-around;
-    margin-left: 70px;
+.xModal {
+    text-align: end;
+    margin: 10px 20px 10px 0;
 }
 
-.ex-modal {
-    margin-top: 18px;
-}
-
-.ex-modal:hover {
+.xModal:hover {
     cursor: pointer;
 }
 
-.radio {
+.checkbox {
     width: 30px;
     margin: 0;
 }
 
-.name {
-    width: 180px;
-}
-
-.companyName {
+.tableName {
     width: 400px;
 }
 
-.companyInput {
+.input {
     margin: 5px 0 0 5px;
+    width: 200px;
 }
 
 .action {
@@ -69,11 +60,6 @@ table td {
     color: rgb(221, 175, 175);
     margin: 0;
 }
-
-/* .btnUpdate {
-    margin-right: 10px;
-    width: 55px;
-} */
 
 .noErrorWorkRegisterTeam {
     color: white;

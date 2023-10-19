@@ -463,14 +463,14 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="praceRealizuje">Prace realizuje</label>
                     </div> 
-                    <input onChange={handleValueChange} value={readValue.whoWork} type="text" placeholder={errors.whoWork ? errors.whoWork : ''} name="whoWork" />
+                    <input className="input" onChange={handleValueChange} value={readValue.whoWork} type="text" placeholder={errors.whoWork ? errors.whoWork : ''} name="whoWork" />
                 </div>
                 
                 <div>
                     <div className="label">
                         <label htmlFor="nrPorozumienia">Nr porozumienia</label>
                     </div> 
-                    <input onChange={handleValueChange} value={readValue.numberOfAgreement} type="text" placeholder={errors.numberOfAgreement ? errors.numberOfAgreement : ''} name="numberOfAgreement" />
+                    <input className="input" onChange={handleValueChange} value={readValue.numberOfAgreement} type="text" placeholder={errors.numberOfAgreement ? errors.numberOfAgreement : ''} name="numberOfAgreement" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addNmberOfAgreemnet();
@@ -485,14 +485,14 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="nrPolFirmyZewnetrznej">Nr polecenia firmy zew.</label>
                     </div> 
-                    <input onChange={handleValueChange} value={readValue.numberOutCompany} type="text" placeholder={errors.numberOutCompany ? errors.numberOutCompany : ''} name="numberOutCompany" />
+                    <input className="input" onChange={handleValueChange} value={readValue.numberOutCompany} type="text" placeholder={errors.numberOutCompany ? errors.numberOutCompany : ''} name="numberOutCompany" />
                 </div>
 
                 <div>
                     <div className="label">
                         <label htmlFor="companyName">Nazwa firmy</label>
                     </div> 
-                    <input onChange={handleValueChange} value={readValue.companyName} type="text" placeholder={errors.companyName ? errors.companyName : ''} name="companyName" />
+                    <input className="input" onChange={handleValueChange} value={readValue.companyName} type="text" placeholder={errors.companyName ? errors.companyName : ''} name="companyName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCompany();
@@ -507,7 +507,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="nazwaBiura">Nazwa biura</label>
                     </div>  
-                    <input onChange={handleValueChange} value={readValue.officeName} type="text" placeholder={errors.officeName ? errors.officeName : ''} name="officeName" />
+                    <input className="input" onChange={handleValueChange} value={readValue.officeName} type="text" placeholder={errors.officeName ? errors.officeName : ''} name="officeName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addOffice();
@@ -522,7 +522,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="poleceniodawca">Poleceniodawca</label>
                     </div>   
-                    <input onChange={handleValueChange} value={readValue.principalName} type="text" placeholder={errors.principalName ? errors.principalName : ''} name="principalName" />
+                    <input className="input" onChange={handleValueChange} value={readValue.principalName} type="text" placeholder={errors.principalName ? errors.principalName : ''} name="principalName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addPrincipal();
@@ -537,7 +537,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="koordynujący">Koordynujący</label>
                     </div>    
-                    <input onChange={handleValueChange} value={readValue.coordinatingName} type="text" placeholder={errors.coordinatingName ? errors.coordinatingName : ''} name="coordinatingName" />
+                    <input className="input" onChange={handleValueChange} value={readValue.coordinatingName} type="text" placeholder={errors.coordinatingName ? errors.coordinatingName : ''} name="coordinatingName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCoordinating();
@@ -552,7 +552,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="koordynator">Koordynator</label>
                     </div>  
-                    <input onChange={handleValueChange} value={readValue.coordinatorName} type="text" placeholder={errors.coordinatorName ? errors.coordinatorName : ''} name="coordinatorName" />
+                    <input className="input" onChange={handleValueChange} value={readValue.coordinatorName} type="text" placeholder={errors.coordinatorName ? errors.coordinatorName : ''} name="coordinatorName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCoordinator();
@@ -567,7 +567,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="dopuszczający">Dopuszczający</label>
                     </div>   
-                    <input onChange={handleValueChange} value={readValue.allowerName} type="text" placeholder={errors.allowerName ? errors.allowerName : ''} name="allowerName" />
+                    <input className="input" onChange={handleValueChange} value={readValue.allowerName} type="text" placeholder={errors.allowerName ? errors.allowerName : ''} name="allowerName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addAllower();
@@ -582,7 +582,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="kierującyZespołem">Kierujący zespołem</label>
                     </div> 
-                    <input onChange={handleValueChange} value={readValue.managerName} type="text" placeholder={errors.managerName ? errors.managerName : ''} name="managerName" />
+                    <input className="input" onChange={handleValueChange} value={readValue.managerName} type="text" placeholder={errors.managerName ? errors.managerName : ''} name="managerName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addManager();
@@ -597,7 +597,7 @@ const WorkRegister = () => {
                     <div className="label">
                         <label htmlFor="nadzorEksploatacyjny">Nadzór eksploatacyjny</label>
                     </div>     
-                    <input onChange={handleValueChange} value={readValue.supervisorName} type="text" placeholder={errors.supervisorName ? errors.supervisorName : ''} name="supervisorName" />
+                    <input className="input" onChange={handleValueChange} value={readValue.supervisorName} type="text" placeholder={errors.supervisorName ? errors.supervisorName : ''} name="supervisorName" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addSupervisor();
@@ -608,8 +608,8 @@ const WorkRegister = () => {
                     }}>Wybierz</button>
                 </div>
 
-                <div>
-                    <div className="label">
+                <div className="team">
+                    <div className="labelTeam">
                         <label htmlFor="zespół">Zespół</label>
                     </div>     
                     <textarea onChange={handleValueChange} value={readValue.teamMember} type="text" placeholder={errors.teamMember ? errors.teamMember : ''} name="teamMember" />
@@ -624,14 +624,18 @@ const WorkRegister = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="rozpoczeciePracy">Rozpoczęcie pracy (data, godzina)</label>
-                    <input onChange={handleValueChange} value={readValue.startDate} type="datetime-local" name="startDate" />
+                    <div className="label">
+                        <label htmlFor="rozpoczeciePracy">Rozpoczęcie pracy</label>
+                    </div>
+                    <input className="inputDateStart" onChange={handleValueChange} value={readValue.startDate} type="datetime-local" name="startDate" />
                     {errors.startDate && <p id="error">{errors.startDate}</p>}
                 </div>
 
                 <div>
-                    <label htmlFor="zakonczeniePracy">Zakończenie pracy (data, godzina)</label>
-                    <input onChange={handleValueChange} value={readValue.stopDate} type="datetime-local" name="stopDate" />
+                    <div className="label">
+                        <label htmlFor="zakonczeniePracy">Zakończenie pracy</label>
+                    </div>
+                    <input className="inputDateEnd" onChange={handleValueChange} value={readValue.stopDate} type="datetime-local" name="stopDate" />
                     {errors.stopDate && <p id="error">{errors.stopDate}</p>}
                 </div>
 

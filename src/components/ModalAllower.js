@@ -85,12 +85,14 @@ const ModalAllower = ({setOpenModal, handleAddModal, companyName}) => {
       }
 
     return (
-            <div className="modalAllower">
-                <div className='topModal'>
-                    <h3>Dopuszczający</h3>
+            <div className="modal">
+                <div>
                     <div>
-                        <p className='ex-modal' onClick={() => {setOpenModal(() => {return {supervisorName: false}})}}>X</p>
-                    </div>                  
+                        <p className='xModal' onClick={() => {setOpenModal(() => {return {supervisorName: false}})}}>X</p>
+                    </div> 
+                    <div>
+                        <h3>Dopuszczający</h3>
+                    </div>                
                 </div>
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>

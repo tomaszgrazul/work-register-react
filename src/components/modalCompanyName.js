@@ -48,12 +48,14 @@ const ModalCompanyName = ({setOpenModal, handleAddModal}) => {
     }
 
     return (
-            <div className="modalCompanyName">
-                <div className='topModal'>
-                    <h3>Lista firm</h3>
+            <div className="modalTwo">
+                <div>
                     <div>
-                        <p className='ex-modal' onClick={() => {setOpenModal(() => {return {companyName: false}})}}>X</p>
-                    </div>                  
+                        <p className='xModal' onClick={() => {setOpenModal(() => {return {companyName: false}})}}>X</p>
+                    </div> 
+                    <div>
+                        <h3>Lista firm</h3>
+                    </div>                
                 </div>
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>

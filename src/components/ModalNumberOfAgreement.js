@@ -48,12 +48,14 @@ const ModalNumberOfAgreement = ({setOpenModal, handleAddModal}) => {
     }
 
     return (
-            <div className="modalNumberOfAgreement">
-                <div className='topModal'>
-                    <h3>Lista porozumień</h3>
+            <div className="modalTwo">
+                <div>
                     <div>
-                        <p className='ex-modal' onClick={() => {setOpenModal(() => {return {numberOfAgreement: false}})}}>X</p>
-                    </div>                  
+                        <p className='xModal' onClick={() => {setOpenModal(() => {return {numberOfAgreement: false}})}}>X</p>
+                    </div> 
+                    <div>
+                        <h3>Lista porozumień</h3>
+                    </div>                 
                 </div>
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>

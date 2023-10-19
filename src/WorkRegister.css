@@ -12,18 +12,40 @@ form {
     flex-direction: column;
 }
 
-input {
-    margin: 0 10px 20px 0;
+.team {
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    margin: 0 10px 0 0;
+}
+
+.inputDateStart {
+    width: 200px;
+    margin: 20px 0 0 5px;
+}
+
+.inputDateEnd {
+    width: 200px;
+    margin: 0 0 0 5px;
 }
 
 textarea {
-    width: 170px;
+    width: 200px;
 }
 
-label {
-    margin-right: 10px;
+.labelTeam {
+    width: 200px;
+    display: inline-block;
+    margin: 0 15px 0 0;
 }
 
+.label {
+    width: 200px;
+    display: inline-block;
+    margin: 0 10px 20px 0; 
+}
 button {
     width: 70px;
     margin: 0 10px 0 10px;
@@ -39,11 +61,6 @@ button:hover {
     cursor: pointer;
     background-color:rgb(197, 79, 79);
     border-color: rgb(240, 203, 203);;
-}
-
-.label {
-    width: 200px;
-    display: inline-block;
 }
 
 ::placeholder {
