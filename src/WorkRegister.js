@@ -66,6 +66,15 @@ const WorkRegister = () => {
         teamMember: ''
     });
 
+    const readOfTeamMemberLength = () => {
+        const teamMemberLength = readValue.teamMember.length;
+        if(Array.isArray(readValue.teamMember)) {
+            return teamMemberLength * 15;
+        } else {
+            return 15;
+        }
+    }
+
      const handleValueChange = (e) => {
         const target = e.target;
         const name = e.target.name;
@@ -82,6 +91,7 @@ const WorkRegister = () => {
     };
 
     const handleAddModal = (addValue, name) => {
+        
         setReadValue({
             ...readValue,
             [name]: addValue
@@ -452,7 +462,7 @@ const WorkRegister = () => {
         setAddWorkOrderResponse(false);
     },[readValue]);
 
-      return (
+       return (
         <div className="register-main">
             <header>
                 <h1>Prace szczególnie niebezpieczne</h1>
@@ -612,7 +622,7 @@ const WorkRegister = () => {
                     <div className="labelTeam">
                         <label htmlFor="zespół">Zespół</label>
                     </div>     
-                    <textarea onChange={handleValueChange} value={readValue.teamMember} type="text" placeholder={errors.teamMember ? errors.teamMember : ''} name="teamMember" />
+                    <textarea onChange={handleValueChange} value={readValue.teamMember} style={{height: readOfTeamMemberLength()}} type="text" placeholder={errors.teamMember ? errors.teamMember : ''} name="teamMember" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addTeamMember();
