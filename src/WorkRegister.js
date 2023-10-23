@@ -68,7 +68,7 @@ const WorkRegister = () => {
 
     const readOfTeamMemberLength = () => {
         const teamMemberLength = readValue.teamMember.length;
-        if(Array.isArray(readValue.teamMember)) {
+        if(Array.isArray(readValue.teamMember) && teamMemberLength > 0) {
             return teamMemberLength * 15;
         } else {
             return 15;
