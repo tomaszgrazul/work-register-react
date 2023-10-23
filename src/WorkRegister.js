@@ -31,7 +31,10 @@ const WorkRegister = () => {
         allowerName: '',
         startDate: '',
         stopDate: '',
-        teamMember: ''
+        teamMember: '',
+        work: '',
+        workZone: '',
+        workEnd: ''
     });
 
     const [openModal, setOpenModal] = useState({
@@ -46,7 +49,10 @@ const WorkRegister = () => {
         managerName: false,
         supervisorName: false,
         allowerName: false,
-        teamMember: false
+        teamMember: false,
+        work: false,
+        workZone: false,
+        workEnd: false
     });
 
     const [readValue, setReadValue] = useState({
@@ -63,13 +69,36 @@ const WorkRegister = () => {
         allowerName: '',
         startDate: '',
         stopDate: '',
-        teamMember: ''
+        teamMember: '',
+        work: '',
+        workZone: '',
+        workEnd: ''
     });
 
     const readOfTeamMemberLength = () => {
         const teamMemberLength = readValue.teamMember.length;
-        if(Array.isArray(readValue.teamMember)) {
+        if(Array.isArray(readValue.teamMember) && teamMemberLength > 0) {
             return teamMemberLength * 15;
+        } else {
+            return 15;
+        }
+    }
+
+    const readOfLength = (name) => {
+        let teamMemberLength = 0;
+
+        if( name === 'work') {
+            teamMemberLength = readValue.work.length;
+        }
+        if( name === 'workZone') {
+            teamMemberLength = readValue.workZone.length;
+        }
+        if( name === 'workEnd') {
+            teamMemberLength = readValue.workEnd.length;
+        }
+        
+        if(teamMemberLength > 50) {
+            return ((teamMemberLength / 50) * 15) + 30;
         } else {
             return 15;
         }
@@ -428,7 +457,10 @@ const WorkRegister = () => {
             allowerName: readValue.allowerName,
             startDate: readValue.startDate,
             stopDate: readValue.stopDate,
-            teamMember: readValue.teamMember
+            teamMember: readValue.teamMember,
+            work: readValue.work,
+            workZone: readValue.workZone,
+            workEnd: readValue.workEnd
         }
         
         Object.entries(workOrder).map(item => {
@@ -618,11 +650,11 @@ const WorkRegister = () => {
                     }}>Wybierz</button>
                 </div>
 
-                <div className="team">
+                <div className="textareaFlex">
                     <div className="labelTeam">
                         <label htmlFor="zespół">Zespół</label>
                     </div>     
-                    <textarea onChange={handleValueChange} value={readValue.teamMember} style={{height: readOfTeamMemberLength()}} type="text" placeholder={errors.teamMember ? errors.teamMember : ''} name="teamMember" />
+                    <textarea  className="textAreaTeam" onChange={handleValueChange} value={readValue.teamMember} style={{height: readOfTeamMemberLength()}} type="text" placeholder={errors.teamMember ? errors.teamMember : ''} name="teamMember" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         addTeamMember();
@@ -647,6 +679,27 @@ const WorkRegister = () => {
                     </div>
                     <input className="inputDateEnd" onChange={handleValueChange} value={readValue.stopDate} type="datetime-local" name="stopDate" />
                     {errors.stopDate && <p id="error">{errors.stopDate}</p>}
+                </div>
+
+                <div className="textareaFlex">
+                    <div className="labelTeam">
+                        <label htmlFor="zakres prac">Zakres prac</label>
+                    </div>     
+                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.work} style={{height: readOfLength("work")}} type="text" placeholder={errors.work ? errors.work : ''} name="work" />
+                </div>
+
+                <div className="textareaFlex">
+                    <div className="labelTeam">
+                        <label htmlFor="strefa pracy">Strefa pracy - sposób przygotowania</label>
+                    </div>     
+                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.workZone} style={{height: readOfLength("workZone")}} type="text" placeholder={errors.workZone ? errors.workZone : ''} name="workZone" />
+                </div>
+
+                <div className="textareaFlex">
+                    <div className="labelTeam">
+                        <label htmlFor="strefa pracy">Strefa pracy - sposób likwidacji</label>
+                    </div>     
+                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.workEnd} style={{height: readOfLength("workEnd")}} type="text" placeholder={errors.workEnd ? errors.workEnd : ''} name="workEnd" />
                 </div>
 
                 <div>

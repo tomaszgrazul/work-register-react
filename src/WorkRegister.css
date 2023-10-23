@@ -12,9 +12,10 @@ form {
     flex-direction: column;
 }
 
-.team {
+.textareaFlex {
     display: flex;
     align-items: center;
+    margin: 0 0 15px 0;
 }
 
 .input {
@@ -23,7 +24,7 @@ form {
 
 .inputDateStart {
     width: 200px;
-    margin: 20px 0 0 5px;
+    margin: 0 0 0 5px;
 }
 
 .inputDateEnd {
@@ -31,8 +32,12 @@ form {
     margin: 0 0 0 5px;
 }
 
-textarea {
-    width: 200px;
+.textAreaTeam {
+    width: 203px;
+}
+
+.textAreaWork {
+    width: 375px;
 }
 
 .labelTeam {
