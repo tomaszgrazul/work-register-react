@@ -11,6 +11,8 @@ import ModalAllower from "./components/ModalAllower";
 import ModalManager from "./components/ModalManager";
 import ModalSupervisor from "./components/ModalSupervisor";
 import ModalTeam from "./components/ModalTeam";
+import ModalGroupOne from "./components/ModalGroupOne";
+
 
 
 const WorkRegister = () => {
@@ -34,7 +36,8 @@ const WorkRegister = () => {
         teamMember: '',
         work: '',
         workZone: '',
-        workEnd: ''
+        workEnd: '',
+        groupOne: ''
     });
 
     const [openModal, setOpenModal] = useState({
@@ -52,7 +55,8 @@ const WorkRegister = () => {
         teamMember: false,
         work: false,
         workZone: false,
-        workEnd: false
+        workEnd: false,
+        groupOne: false
     });
 
     const [readValue, setReadValue] = useState({
@@ -72,7 +76,8 @@ const WorkRegister = () => {
         teamMember: '',
         work: '',
         workZone: '',
-        workEnd: ''
+        workEnd: '',
+        groupOne: ''
     });
 
     const readOfTeamMemberLength = () => {
@@ -87,17 +92,20 @@ const WorkRegister = () => {
     const readOfLength = (name) => {
         let teamMemberLength = 0;
 
-        if( name === 'work') {
+        if( name === 'work' ) {
             teamMemberLength = readValue.work.length;
         }
-        if( name === 'workZone') {
+        if( name === 'workZone' ) {
             teamMemberLength = readValue.workZone.length;
         }
-        if( name === 'workEnd') {
+        if( name === 'workEnd' ) {
             teamMemberLength = readValue.workEnd.length;
         }
+        if( name === 'groupOne' ) {
+            teamMemberLength = readValue.groupOne.length;
+        }
         
-        if(teamMemberLength > 50) {
+        if( teamMemberLength > 50 ) {
             return ((teamMemberLength / 50) * 15) + 30;
         } else {
             return 15;
@@ -460,7 +468,8 @@ const WorkRegister = () => {
             teamMember: readValue.teamMember,
             work: readValue.work,
             workZone: readValue.workZone,
-            workEnd: readValue.workEnd
+            workEnd: readValue.workEnd,
+            groupOne: readValue.groupOne
         }
         
         Object.entries(workOrder).map(item => {
@@ -702,6 +711,17 @@ const WorkRegister = () => {
                     <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.workEnd} style={{height: readOfLength("workEnd")}} type="text" placeholder={errors.workEnd ? errors.workEnd : ''} name="workEnd" />
                 </div>
 
+                <div className="textareaFlex">
+                    <div className="labelTeam">
+                        <label htmlFor="grupa 1">Grupa 1</label>
+                    </div>     
+                    <textarea className="textAreaTeam" onChange={handleValueChange} value={readValue.groupOne} style={{height: readOfLength("groupOne")}} type="text" placeholder={errors.groupOne ? errors.groupOne : ''} name="groupOne" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModal(() => {return {groupOne: true}});
+                    }}>Wybierz</button>
+                </div>
+
                 <div>
                     <button type="submit">Zapisz</button>
                     {addWorkOrderResponse && <p id="save" >Zapisane</p>}
@@ -726,6 +746,9 @@ const WorkRegister = () => {
             {openModal.allowerName && <ModalAllower setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
 
             {openModal.teamMember && <ModalTeam setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
+
+            {openModal.groupOne && <ModalGroupOne setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
+
         </div>
 
     )
