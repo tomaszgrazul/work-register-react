@@ -1,14 +1,14 @@
 import './ModalGroup.css';
 import { useState, useEffect } from "react";
 
-const ModalGroupOne = ({setOpenModal, handleAddModal}) => {
+const ModalGroupThree = ({setOpenModal, handleAddModal}) => {
 
     const [registerGroup, setRegisterGroup] = useState([]);
-    const [isChecked, setIsChecked] = useState(new Array(7).fill(false));
-    const register = ['2', '3', '4', '5', '7', '9', '10'];
+    const [isChecked, setIsChecked] = useState(new Array(8).fill(false));
+    const register = ['2', '4', '5', '6', '7', '8', '9', '10'];
  
     useEffect(() => {
-        handleAddModal(registerGroup.toString(), 'groupOne'); 
+        handleAddModal(registerGroup.toString(), 'groupThree'); 
     }, [registerGroup]);
 
     const handleCheck = (i, value) => {
@@ -23,11 +23,11 @@ const ModalGroupOne = ({setOpenModal, handleAddModal}) => {
         <div className="modalGroup">
             <div className='xModal'>
                 <div className='xModal1'>
-                    <p onClick={() => {setOpenModal(() => {return {groupOne: false}})}}>X</p>
+                    <p onClick={() => {setOpenModal(() => {return {groupThree: false}})}}>X</p>
                 </div> 
             </div> 
             <div>
-                <h3>Grupa 1</h3>
+                <h3>Grupa 3</h3>
             </div>   
             <table>
                 <tbody>
@@ -36,31 +36,31 @@ const ModalGroupOne = ({setOpenModal, handleAddModal}) => {
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[0]}
                                         onChange={() => { handleCheck(0, '2') }} />
                                     </td>
-                                    <td>2. Urządzenia, instalacje i sieci elektroenergetyczne o napięciu nie wyższym niż 1 kV
+                                    <td>2. Urządzenia do przetwarzania i uzdatniania paliw gazowych, rozkładanie paliw gazowych, urzadzenia przeróbki gazu ziemnego, oczyszczalnie gazu, rozprężarnie i rozlewnie gazu płynnego, odazotownie, mieszalnie
                                     </td>
                                 </tr>
                                 
                                 <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[1]}
-                                        onChange={() => { handleCheck(1, '3') }} />
+                                        onChange={() => { handleCheck(1, '4') }} />
                                     </td>
-                                    <td>3. Urządzenia, instalacje i sieci o napięciu powyżej 1 kV
+                                    <td>4. Sieci gazowe rozdzielcze o ciśnieniu nie wyższym niż 0,5 MPa (gazociągi i punkty redukcyjne, stacje gazowe)
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[2]}
-                                        onChange={() => { handleCheck(2, '4') }} />
+                                        onChange={() => { handleCheck(2, '5') }} />
                                     </td>
-                                    <td>4. Zespoły prądotwórcze o mocy 50 kW
+                                    <td>5. Sieci gazowe przesyłowe o ciśnieniu powyżej 0,5 MPa (gazociągi, stacje rozdzielcze, tłocznie gazu)
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[3]}
-                                        onChange={() => { handleCheck(3, '5') }} />
+                                        onChange={() => { handleCheck(3, '6') }} />
                                     </td>
-                                    <td>5. Urządzenia elektrotermiczne
+                                    <td>6. Urządzenia i instalacje gazowe o ciśnieniu nie wyższym niż 5 kPa
                                     </td>
                                 </tr>
 
@@ -68,23 +68,31 @@ const ModalGroupOne = ({setOpenModal, handleAddModal}) => {
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[4]}
                                         onChange={() => { handleCheck(4, '7') }} />
                                     </td>
-                                    <td>7. Sieci elektrycznego oświetlenia ulicznego
+                                    <td>7. Urządzenia i instalacje gazowe o ciśnieniu powyżej 5 kPa
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[5]}
-                                        onChange={() => { handleCheck(5, '9') }} />
+                                        onChange={() => { handleCheck(4, '8') }} />
                                     </td>
-                                    <td>9. Elektryczne urządzenia w wykonaniu przeciwwybuchowym
+                                    <td>8. Przemysłowe odbiorniki paliw gazowych o mocy powyżej 50 kW
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[6]}
+                                        onChange={() => { handleCheck(5, '9') }} />
+                                    </td>
+                                    <td>9. Turbiny gazowe
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" className="checkbox" checked={isChecked[7]}
                                         onChange={() => { handleCheck(6, '10') }} />
                                     </td>
-                                    <td>10. Aparatura kontrolno-pomiarowa oraz urządzenia i instalacje automatycznej regulacji, sterowania i zabezpieczeń urządzeń i instalacji wymienionych w pkt. 2-5,7,9
+                                    <td>10. Aparatura kontrolno-pomiarowa, urządzenia sterowania do sieci, urządzeń i instalacji wymienionych w pkt 2,4-9.
                                     </td>
                                 </tr>
                 </tbody>
@@ -94,4 +102,4 @@ const ModalGroupOne = ({setOpenModal, handleAddModal}) => {
 
 
 }
-    export default ModalGroupOne;
+    export default ModalGroupThree;

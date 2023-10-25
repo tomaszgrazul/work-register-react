@@ -5,12 +5,13 @@
     top: 10%;
     left: 20%;
     background-color: rgb(221, 175, 175);
+    overflow-y: auto;
 }
 
 .nameGroup {
     width: 670px;
 }
 
-td {
+.modalGroup td {
     text-align: left;
 }

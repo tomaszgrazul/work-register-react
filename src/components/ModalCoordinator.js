@@ -86,14 +86,14 @@ const ModalCoordinator = ({setOpenModal, handleAddModal, companyName}) => {
 
     return (
             <div className="modal">
-                <div>
-                    <div>
-                        <p className='xModal' onClick={() => {setOpenModal(() => {return {coordinatorName: false}})}}>X</p>
+                <div className='xModal'>
+                    <div className='xModal1'>
+                        <p onClick={() => {setOpenModal(() => {return {coordinatorName: false}})}}>X</p>
                     </div>
-                    <div>
-                        <h3>Koordynator</h3>
-                    </div>                
                 </div>
+                <div>
+                    <h3>Koordynator</h3>
+                </div>                
                 <p className={error ? 'error' : 'noError'}>{error ? 'Wystąpił błąd. Spróbuj jeszcze raz!' : '-'}</p>
                 <table>
                     <tbody>

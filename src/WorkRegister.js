@@ -12,7 +12,7 @@ import ModalManager from "./components/ModalManager";
 import ModalSupervisor from "./components/ModalSupervisor";
 import ModalTeam from "./components/ModalTeam";
 import ModalGroupOne from "./components/ModalGroupOne";
-
+import ModalGroupTwo from "./components/ModalGroupTwo";
 
 
 const WorkRegister = () => {
@@ -37,7 +37,8 @@ const WorkRegister = () => {
         work: '',
         workZone: '',
         workEnd: '',
-        groupOne: ''
+        groupOne: '',
+        groupTwo: ''
     });
 
     const [openModal, setOpenModal] = useState({
@@ -56,7 +57,8 @@ const WorkRegister = () => {
         work: false,
         workZone: false,
         workEnd: false,
-        groupOne: false
+        groupOne: false,
+        groupTwo: false
     });
 
     const [readValue, setReadValue] = useState({
@@ -77,7 +79,8 @@ const WorkRegister = () => {
         work: '',
         workZone: '',
         workEnd: '',
-        groupOne: ''
+        groupOne: '',
+        groupTwo: ''
     });
 
     const readOfTeamMemberLength = () => {
@@ -89,27 +92,33 @@ const WorkRegister = () => {
         }
     }
 
-    const readOfLength = (name) => {
-        let teamMemberLength = 0;
+    const readOfLength = (name, zone) => {
+        let stringLength = 0;
 
         if( name === 'work' ) {
-            teamMemberLength = readValue.work.length;
+            stringLength = readValue.work.length;
         }
         if( name === 'workZone' ) {
-            teamMemberLength = readValue.workZone.length;
+            stringLength = readValue.workZone.length;
         }
         if( name === 'workEnd' ) {
-            teamMemberLength = readValue.workEnd.length;
+            stringLength = readValue.workEnd.length;
         }
         if( name === 'groupOne' ) {
-            teamMemberLength = readValue.groupOne.length;
+            stringLength = readValue.groupOne.length;
+        }
+        if( name === 'groupTwo' ) {
+            stringLength = readValue.groupTwo.length;
         }
         
-        if( teamMemberLength > 50 ) {
-            return ((teamMemberLength / 50) * 15) + 30;
-        } else {
-            return 15;
-        }
+        if( zone === 1 && stringLength > 50 ) {
+            return ((stringLength / 50) * 15) + 30;
+        } else 
+            if( zone === 2 && stringLength > 25 ) {
+                return ((stringLength / 25) * 15) + 15;
+            } else {
+                return 15;
+            }
     }
 
      const handleValueChange = (e) => {
@@ -469,7 +478,8 @@ const WorkRegister = () => {
             work: readValue.work,
             workZone: readValue.workZone,
             workEnd: readValue.workEnd,
-            groupOne: readValue.groupOne
+            groupOne: readValue.groupOne,
+            groupTwo: readValue.groupTwo
         }
         
         Object.entries(workOrder).map(item => {
@@ -694,31 +704,42 @@ const WorkRegister = () => {
                     <div className="labelTeam">
                         <label htmlFor="zakres prac">Zakres prac</label>
                     </div>     
-                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.work} style={{height: readOfLength("work")}} type="text" placeholder={errors.work ? errors.work : ''} name="work" />
+                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.work} style={{height: readOfLength("work", 1)}} type="text" placeholder={errors.work ? errors.work : ''} name="work" />
                 </div>
 
                 <div className="textareaFlex">
                     <div className="labelTeam">
                         <label htmlFor="strefa pracy">Strefa pracy - sposób przygotowania</label>
                     </div>     
-                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.workZone} style={{height: readOfLength("workZone")}} type="text" placeholder={errors.workZone ? errors.workZone : ''} name="workZone" />
+                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.workZone} style={{height: readOfLength("workZone", 1)}} type="text" placeholder={errors.workZone ? errors.workZone : ''} name="workZone" />
                 </div>
 
                 <div className="textareaFlex">
                     <div className="labelTeam">
                         <label htmlFor="strefa pracy">Strefa pracy - sposób likwidacji</label>
                     </div>     
-                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.workEnd} style={{height: readOfLength("workEnd")}} type="text" placeholder={errors.workEnd ? errors.workEnd : ''} name="workEnd" />
+                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.workEnd} style={{height: readOfLength("workEnd", 1)}} type="text" placeholder={errors.workEnd ? errors.workEnd : ''} name="workEnd" />
                 </div>
 
                 <div className="textareaFlex">
                     <div className="labelTeam">
                         <label htmlFor="grupa 1">Grupa 1</label>
                     </div>     
-                    <textarea className="textAreaTeam" onChange={handleValueChange} value={readValue.groupOne} style={{height: readOfLength("groupOne")}} type="text" placeholder={errors.groupOne ? errors.groupOne : ''} name="groupOne" />
+                    <textarea className="textAreaTeam" onChange={handleValueChange} value={readValue.groupOne} style={{height: readOfLength("groupOne", 2)}} type="text" placeholder={errors.groupOne ? errors.groupOne : ''} name="groupOne" />
                     <button onClick={(e) => {
                         e.preventDefault();
                         setOpenModal(() => {return {groupOne: true}});
+                    }}>Wybierz</button>
+                </div>
+
+                <div className="textareaFlex">
+                    <div className="labelTeam">
+                        <label htmlFor="grupa 2">Grupa 2</label>
+                    </div>     
+                    <textarea className="textAreaTeam" onChange={handleValueChange} value={readValue.groupTwo} style={{height: readOfLength("groupTwo", 2)}} type="text" placeholder={errors.groupTwo ? errors.groupTwo : ''} name="groupTwo" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModal(() => {return {groupTwo: true}});
                     }}>Wybierz</button>
                 </div>
 
@@ -747,7 +768,9 @@ const WorkRegister = () => {
 
             {openModal.teamMember && <ModalTeam setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
 
-            {openModal.groupOne && <ModalGroupOne setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
+            {openModal.groupOne && <ModalGroupOne setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
+
+            {openModal.groupTwo && <ModalGroupTwo setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
 
         </div>
 
