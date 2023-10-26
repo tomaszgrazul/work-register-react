@@ -13,7 +13,7 @@ import ModalSupervisor from "./components/ModalSupervisor";
 import ModalTeam from "./components/ModalTeam";
 import ModalGroupOne from "./components/ModalGroupOne";
 import ModalGroupTwo from "./components/ModalGroupTwo";
-
+import ModalGroupThree from "./components/ModalGroupThree";
 
 const WorkRegister = () => {
 
@@ -38,7 +38,8 @@ const WorkRegister = () => {
         workZone: '',
         workEnd: '',
         groupOne: '',
-        groupTwo: ''
+        groupTwo: '',
+        groupThree: ''
     });
 
     const [openModal, setOpenModal] = useState({
@@ -58,7 +59,8 @@ const WorkRegister = () => {
         workZone: false,
         workEnd: false,
         groupOne: false,
-        groupTwo: false
+        groupTwo: false,
+        groupThree: false
     });
 
     const [readValue, setReadValue] = useState({
@@ -80,7 +82,8 @@ const WorkRegister = () => {
         workZone: '',
         workEnd: '',
         groupOne: '',
-        groupTwo: ''
+        groupTwo: '',
+        groupThree: ''
     });
 
     const readOfTeamMemberLength = () => {
@@ -109,6 +112,9 @@ const WorkRegister = () => {
         }
         if( name === 'groupTwo' ) {
             stringLength = readValue.groupTwo.length;
+        }
+        if( name === 'groupThree' ) {
+            stringLength = readValue.groupThree.length;
         }
         
         if( zone === 1 && stringLength > 50 ) {
@@ -479,7 +485,8 @@ const WorkRegister = () => {
             workZone: readValue.workZone,
             workEnd: readValue.workEnd,
             groupOne: readValue.groupOne,
-            groupTwo: readValue.groupTwo
+            groupTwo: readValue.groupTwo,
+            groupThree: readValue.groupThree
         }
         
         Object.entries(workOrder).map(item => {
@@ -743,6 +750,17 @@ const WorkRegister = () => {
                     }}>Wybierz</button>
                 </div>
 
+                <div className="textareaFlex">
+                    <div className="labelTeam">
+                        <label htmlFor="grupa 3">Grupa 3</label>
+                    </div>     
+                    <textarea className="textAreaTeam" onChange={handleValueChange} value={readValue.groupThree} style={{height: readOfLength("groupThree", 2)}} type="text" placeholder={errors.groupThree ? errors.groupThree : ''} name="groupThree" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModal(() => {return {groupThree: true}});
+                    }}>Wybierz</button>
+                </div>
+
                 <div>
                     <button type="submit">Zapisz</button>
                     {addWorkOrderResponse && <p id="save" >Zapisane</p>}
@@ -771,6 +789,8 @@ const WorkRegister = () => {
             {openModal.groupOne && <ModalGroupOne setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
 
             {openModal.groupTwo && <ModalGroupTwo setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
+
+            {openModal.groupThree && <ModalGroupThree setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
 
         </div>
 

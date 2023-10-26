@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 const ModalGroupOne = ({setOpenModal, handleAddModal}) => {
 
     const [registerGroup, setRegisterGroup] = useState([]);
-    const [isChecked, setIsChecked] = useState(new Array(7).fill(false));
-    const register = ['2', '3', '4', '5', '7', '9', '10'];
+    const [isChecked, setIsChecked] = useState(new Array(16).fill(false));
+    const register = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'];
  
     useEffect(() => {
         handleAddModal(registerGroup.toString(), 'groupOne'); 
@@ -34,57 +34,128 @@ const ModalGroupOne = ({setOpenModal, handleAddModal}) => {
                     <tr><th></th><th className="nameGroup">Urządzenia</th></tr>
                                 <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[0]}
-                                        onChange={() => { handleCheck(0, '2') }} />
+                                        onChange={() => { handleCheck(0, '1') }} />
                                     </td>
-                                    <td>2. Urządzenia, instalacje i sieci elektroenergetyczne o napięciu nie wyższym niż 1 kV
+                                    <td>1. Urządzenia prądotwórcze przyłączone do sieci przesyłowej lub dystrybucyjnej energii elektrycznej bez względu na wysokość napięcia znamionowego
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" className="checkbox" checked={isChecked[1]}
+                                        onChange={() => { handleCheck(1, '2') }} />
+                                    </td>
+                                    <td>2. Urządzenia, instalacje i sieci elektroenergetyczne o napięciu znamionowym nie wyższym niż 1 kV;
                                     </td>
                                 </tr>
                                 
                                 <tr>
-                                    <td><input type="checkbox" className="checkbox" checked={isChecked[1]}
-                                        onChange={() => { handleCheck(1, '3') }} />
-                                    </td>
-                                    <td>3. Urządzenia, instalacje i sieci o napięciu powyżej 1 kV
-                                    </td>
-                                </tr>
-
-                                <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[2]}
-                                        onChange={() => { handleCheck(2, '4') }} />
+                                        onChange={() => { handleCheck(2, '3') }} />
                                     </td>
-                                    <td>4. Zespoły prądotwórcze o mocy 50 kW
+                                    <td>3. Urządzenia, instalacje i sieci elektroenergetyczne o napięciu znamionowym wyższym niż 1 kV i napięciu znamionowym nie wyższym niż 30 kV
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[3]}
-                                        onChange={() => { handleCheck(3, '5') }} />
+                                        onChange={() => { handleCheck(3, '4') }} />
                                     </td>
-                                    <td>5. Urządzenia elektrotermiczne
+                                    <td>4. Urządzenia, instalacje i sieci elektroenergetyczne o napięciu znamionowym wyższym niż 30 kV i napięciu znamionowym nie wyższym niż 110 kV
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[4]}
-                                        onChange={() => { handleCheck(4, '7') }} />
+                                        onChange={() => { handleCheck(4, '5') }} />
                                     </td>
-                                    <td>7. Sieci elektrycznego oświetlenia ulicznego
+                                    <td>5. Urządzenia, instalacje i sieci elektroenergetyczne o napięciu znamionowym wyższym niż 110 kV
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[5]}
-                                        onChange={() => { handleCheck(5, '9') }} />
+                                        onChange={() => { handleCheck(5, '6') }} />
                                     </td>
-                                    <td>9. Elektryczne urządzenia w wykonaniu przeciwwybuchowym
+                                    <td>6. Zespoły prądotwórcze o mocy wyższej niż 50 kW
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[6]}
-                                        onChange={() => { handleCheck(6, '10') }} />
+                                        onChange={() => { handleCheck(6, '7') }} />
                                     </td>
-                                    <td>10. Aparatura kontrolno-pomiarowa oraz urządzenia i instalacje automatycznej regulacji, sterowania i zabezpieczeń urządzeń i instalacji wymienionych w pkt. 2-5,7,9
+                                    <td>7. Urządzenia elektrotermiczne
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" className="checkbox" checked={isChecked[7]}
+                                        onChange={() => { handleCheck(7, '8') }} />
+                                    </td>
+                                    <td>8. Urządzenia do elektrolizy
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" className="checkbox" checked={isChecked[8]}
+                                        onChange={() => { handleCheck(8, '9') }} />
+                                    </td>
+                                    <td>9. Sieci elektrycznego oświetlenia ulicznego
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" className="checkbox" checked={isChecked[9]}
+                                        onChange={() => { handleCheck(9, '10') }} />
+                                    </td>
+                                    <td>10. Elektryczna sieć trakcyjna
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" className="checkbox" checked={isChecked[10]}
+                                        onChange={() => { handleCheck(10, '11') }} />
+                                    </td>
+                                    <td>11. Elektryczne urządzenia w wykonaniu przeciwwybuchowym
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" className="checkbox" checked={isChecked[11]}
+                                        onChange={() => { handleCheck(11, '12') }} />
+                                    </td>
+                                    <td>12. Urządzenia umożliwiające magazynowanie energii elektrycznej i jej wprowadzanie do sieci elektroenergetycznej o mocy wyższej niż 10 kW
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" className="checkbox" checked={isChecked[12]}
+                                        onChange={() => { handleCheck(12, '13') }} />
+                                    </td>
+                                    <td>13. Aparatura kontrolno-pomiarowa oraz urządzenia i instalacje automatycznej regulacji, sterowania i zabezpieczeń urządzeń i instalacji wymienionych w pkt 1–12
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" className="checkbox" checked={isChecked[13]}
+                                        onChange={() => { handleCheck(13, '14') }} />
+                                    </td>
+                                    <td>14. Urządzenia techniki wojskowej lub uzbrojenia
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" className="checkbox" checked={isChecked[14]}
+                                        onChange={() => { handleCheck(14, '15') }} />
+                                    </td>
+                                    <td>15. Urządzenia ratowniczo-gaśnicze
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" className="checkbox" checked={isChecked[15]}
+                                        onChange={() => { handleCheck(15, '16') }} />
+                                    </td>
+                                    <td>16. Urządzenia ochrony granic
                                     </td>
                                 </tr>
                 </tbody>
