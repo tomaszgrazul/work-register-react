@@ -18,6 +18,9 @@ import ModalGroupThree from "./components/ModalGroupThree";
 const WorkRegister = () => {
 
     const [addWorkOrderResponse,setAddWorkOrderResponse] = useState(false);
+    const [isCheckedOne, setIsCheckedOne] = useState(false);
+    const [isCheckedTwo, setIsCheckedTwo] = useState(false);
+    const [isCheckedThree, setIsCheckedThree] = useState(false);
     const [error, setError] = useState('');
     const [errors, setErrors] = useState({
         whoWork: '',
@@ -490,7 +493,8 @@ const WorkRegister = () => {
         }
         
         Object.entries(workOrder).map(item => {
-            if (item[1] === '') {       
+            if ( item[1] === '' ) { 
+                if ( (item[0] === 'groupOne' && isCheckedOne) || (item[0] === 'groupTwo' && isCheckedTwo) || (item[0] === 'groupThree' && isCheckedThree)) { return; } else {     
                 return (
                     setErrors( prevErrors => { 
                         return {   
@@ -499,12 +503,19 @@ const WorkRegister = () => {
                     }})
                 )    
             }
-        });
+        }});
 
-        const found = Object.values(readValue).find(item => item === '');
-        if( found === '') {
-            return ;
-        }
+        // const found = Object.values(readValue).find(item => item === '');
+        // if( found === '' ) {
+        //     return ;
+        // }
+
+        Object.entries(readValue).map(item => {
+            // if (item[1] === '' && ( (item[0] === 'groupOne' && !isCheckedOne) || (item[0] === 'groupTwo' && !isCheckedTwo) || (item[0] === 'groupThree' && !isCheckedThree))) { 
+                if (item[1] === '') { 
+                return;
+            }           
+        }) 
         axios
         .post("workOrder/addWorkOrder ", workOrder )
         .then((res) => {
@@ -737,6 +748,11 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModal(() => {return {groupOne: true}});
                     }}>Wybierz</button>
+                    <div>
+                        <input type="checkbox" className="checkbox" checked={isCheckedOne} onChange={ () => { setIsCheckedOne(prevCheck => !prevCheck); }}/> 
+                        <label htmlFor="nie dotyczy">nie dotyczy</label>  
+                    </div>
+                    
                 </div>
 
                 <div className="textareaFlex">
@@ -748,6 +764,10 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModal(() => {return {groupTwo: true}});
                     }}>Wybierz</button>
+                    <div>
+                        <input type="checkbox" className="checkbox" checked={isCheckedTwo} onChange={ () => { setIsCheckedTwo(prevCheck => !prevCheck); }}/> 
+                        <label htmlFor="nie dotyczy">nie dotyczy</label>  
+                    </div>
                 </div>
 
                 <div className="textareaFlex">
@@ -759,6 +779,10 @@ const WorkRegister = () => {
                         e.preventDefault();
                         setOpenModal(() => {return {groupThree: true}});
                     }}>Wybierz</button>
+                    <div>
+                        <input type="checkbox" className="checkbox" checked={isCheckedThree} onChange={ () => { setIsCheckedThree(prevCheck => !prevCheck); }}/> 
+                        <label htmlFor="nie dotyczy">nie dotyczy</label>  
+                    </div>
                 </div>
 
                 <div>

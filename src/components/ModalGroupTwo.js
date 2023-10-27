@@ -5,6 +5,7 @@ const ModalGroupTwo = ({setOpenModal, handleAddModal}) => {
 
     const [registerGroup, setRegisterGroup] = useState([]);
     const [isChecked, setIsChecked] = useState(new Array(24).fill(false));
+    const [isCheckedOne, setIsCheckedOne] = useState(false);
     const register = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'];
  
     useEffect(() => {
@@ -31,7 +32,16 @@ const ModalGroupTwo = ({setOpenModal, handleAddModal}) => {
             </div>   
             <table>
                 <tbody>
-                    <tr><th></th><th className="nameGroup">Urządzenia</th></tr>
+                    <tr><th><input type="checkbox" className="checkbox" checked={isCheckedOne} onChange={ () => {
+                        if (!isCheckedOne) {
+                            setIsChecked(new Array(16).fill(true));
+                            setRegisterGroup(register);
+                        } else {
+                            setIsChecked(new Array(16).fill(false));
+                            setRegisterGroup('');
+                        }
+                        setIsCheckedOne(prevCheck => !prevCheck);
+                    }   } /></th><th className="nameGroup">Urządzenia</th></tr>
                                 <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[0]}
                                         onChange={() => { handleCheck(0, '1') }} />
