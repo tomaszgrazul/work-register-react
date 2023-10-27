@@ -11,11 +11,16 @@ import ModalAllower from "./components/ModalAllower";
 import ModalManager from "./components/ModalManager";
 import ModalSupervisor from "./components/ModalSupervisor";
 import ModalTeam from "./components/ModalTeam";
-
+import ModalGroupOne from "./components/ModalGroupOne";
+import ModalGroupTwo from "./components/ModalGroupTwo";
+import ModalGroupThree from "./components/ModalGroupThree";
 
 const WorkRegister = () => {
 
     const [addWorkOrderResponse,setAddWorkOrderResponse] = useState(false);
+    const [isCheckedOne, setIsCheckedOne] = useState(false);
+    const [isCheckedTwo, setIsCheckedTwo] = useState(false);
+    const [isCheckedThree, setIsCheckedThree] = useState(false);
     const [error, setError] = useState('');
     const [errors, setErrors] = useState({
         whoWork: '',
@@ -34,7 +39,10 @@ const WorkRegister = () => {
         teamMember: '',
         work: '',
         workZone: '',
-        workEnd: ''
+        workEnd: '',
+        groupOne: '',
+        groupTwo: '',
+        groupThree: ''
     });
 
     const [openModal, setOpenModal] = useState({
@@ -52,7 +60,10 @@ const WorkRegister = () => {
         teamMember: false,
         work: false,
         workZone: false,
-        workEnd: false
+        workEnd: false,
+        groupOne: false,
+        groupTwo: false,
+        groupThree: false
     });
 
     const [readValue, setReadValue] = useState({
@@ -72,7 +83,10 @@ const WorkRegister = () => {
         teamMember: '',
         work: '',
         workZone: '',
-        workEnd: ''
+        workEnd: '',
+        groupOne: '',
+        groupTwo: '',
+        groupThree: ''
     });
 
     const readOfTeamMemberLength = () => {
@@ -84,24 +98,36 @@ const WorkRegister = () => {
         }
     }
 
-    const readOfLength = (name) => {
-        let teamMemberLength = 0;
+    const readOfLength = (name, zone) => {
+        let stringLength = 0;
 
-        if( name === 'work') {
-            teamMemberLength = readValue.work.length;
+        if( name === 'work' ) {
+            stringLength = readValue.work.length;
         }
-        if( name === 'workZone') {
-            teamMemberLength = readValue.workZone.length;
+        if( name === 'workZone' ) {
+            stringLength = readValue.workZone.length;
         }
-        if( name === 'workEnd') {
-            teamMemberLength = readValue.workEnd.length;
+        if( name === 'workEnd' ) {
+            stringLength = readValue.workEnd.length;
+        }
+        if( name === 'groupOne' ) {
+            stringLength = readValue.groupOne.length;
+        }
+        if( name === 'groupTwo' ) {
+            stringLength = readValue.groupTwo.length;
+        }
+        if( name === 'groupThree' ) {
+            stringLength = readValue.groupThree.length;
         }
         
-        if(teamMemberLength > 50) {
-            return ((teamMemberLength / 50) * 15) + 30;
-        } else {
-            return 15;
-        }
+        if( zone === 1 && stringLength > 50 ) {
+            return ((stringLength / 50) * 15) + 30;
+        } else 
+            if( zone === 2 && stringLength > 25 ) {
+                return ((stringLength / 25) * 15) + 15;
+            } else {
+                return 15;
+            }
     }
 
      const handleValueChange = (e) => {
@@ -460,11 +486,15 @@ const WorkRegister = () => {
             teamMember: readValue.teamMember,
             work: readValue.work,
             workZone: readValue.workZone,
-            workEnd: readValue.workEnd
+            workEnd: readValue.workEnd,
+            groupOne: readValue.groupOne,
+            groupTwo: readValue.groupTwo,
+            groupThree: readValue.groupThree
         }
         
         Object.entries(workOrder).map(item => {
-            if (item[1] === '') {       
+            if ( item[1] === '' ) { 
+                if ( (item[0] === 'groupOne' && isCheckedOne) || (item[0] === 'groupTwo' && isCheckedTwo) || (item[0] === 'groupThree' && isCheckedThree)) { return; } else {     
                 return (
                     setErrors( prevErrors => { 
                         return {   
@@ -473,12 +503,19 @@ const WorkRegister = () => {
                     }})
                 )    
             }
-        });
+        }});
 
-        const found = Object.values(readValue).find(item => item === '');
-        if( found === '') {
-            return ;
-        }
+        // const found = Object.values(readValue).find(item => item === '');
+        // if( found === '' ) {
+        //     return ;
+        // }
+
+        Object.entries(readValue).map(item => {
+            // if (item[1] === '' && ( (item[0] === 'groupOne' && !isCheckedOne) || (item[0] === 'groupTwo' && !isCheckedTwo) || (item[0] === 'groupThree' && !isCheckedThree))) { 
+                if (item[1] === '') { 
+                return;
+            }           
+        }) 
         axios
         .post("workOrder/addWorkOrder ", workOrder )
         .then((res) => {
@@ -685,21 +722,67 @@ const WorkRegister = () => {
                     <div className="labelTeam">
                         <label htmlFor="zakres prac">Zakres prac</label>
                     </div>     
-                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.work} style={{height: readOfLength("work")}} type="text" placeholder={errors.work ? errors.work : ''} name="work" />
+                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.work} style={{height: readOfLength("work", 1)}} type="text" placeholder={errors.work ? errors.work : ''} name="work" />
                 </div>
 
                 <div className="textareaFlex">
                     <div className="labelTeam">
                         <label htmlFor="strefa pracy">Strefa pracy - sposób przygotowania</label>
                     </div>     
-                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.workZone} style={{height: readOfLength("workZone")}} type="text" placeholder={errors.workZone ? errors.workZone : ''} name="workZone" />
+                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.workZone} style={{height: readOfLength("workZone", 1)}} type="text" placeholder={errors.workZone ? errors.workZone : ''} name="workZone" />
                 </div>
 
                 <div className="textareaFlex">
                     <div className="labelTeam">
                         <label htmlFor="strefa pracy">Strefa pracy - sposób likwidacji</label>
                     </div>     
-                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.workEnd} style={{height: readOfLength("workEnd")}} type="text" placeholder={errors.workEnd ? errors.workEnd : ''} name="workEnd" />
+                    <textarea className="textAreaWork" onChange={handleValueChange} value={readValue.workEnd} style={{height: readOfLength("workEnd", 1)}} type="text" placeholder={errors.workEnd ? errors.workEnd : ''} name="workEnd" />
+                </div>
+
+                <div className="textareaFlex">
+                    <div className="labelTeam">
+                        <label htmlFor="grupa 1">Grupa 1</label>
+                    </div>     
+                    <textarea className="textAreaTeam" onChange={handleValueChange} value={readValue.groupOne} style={{height: readOfLength("groupOne", 2)}} type="text" placeholder={errors.groupOne ? errors.groupOne : ''} name="groupOne" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModal(() => {return {groupOne: true}});
+                    }}>Wybierz</button>
+                    <div>
+                        <input type="checkbox" className="checkbox" checked={isCheckedOne} onChange={ () => { setIsCheckedOne(prevCheck => !prevCheck); }}/> 
+                        <label htmlFor="nie dotyczy">nie dotyczy</label>  
+                    </div>
+                    
+                </div>
+
+                <div className="textareaFlex">
+                    <div className="labelTeam">
+                        <label htmlFor="grupa 2">Grupa 2</label>
+                    </div>     
+                    <textarea className="textAreaTeam" onChange={handleValueChange} value={readValue.groupTwo} style={{height: readOfLength("groupTwo", 2)}} type="text" placeholder={errors.groupTwo ? errors.groupTwo : ''} name="groupTwo" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModal(() => {return {groupTwo: true}});
+                    }}>Wybierz</button>
+                    <div>
+                        <input type="checkbox" className="checkbox" checked={isCheckedTwo} onChange={ () => { setIsCheckedTwo(prevCheck => !prevCheck); }}/> 
+                        <label htmlFor="nie dotyczy">nie dotyczy</label>  
+                    </div>
+                </div>
+
+                <div className="textareaFlex">
+                    <div className="labelTeam">
+                        <label htmlFor="grupa 3">Grupa 3</label>
+                    </div>     
+                    <textarea className="textAreaTeam" onChange={handleValueChange} value={readValue.groupThree} style={{height: readOfLength("groupThree", 2)}} type="text" placeholder={errors.groupThree ? errors.groupThree : ''} name="groupThree" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModal(() => {return {groupThree: true}});
+                    }}>Wybierz</button>
+                    <div>
+                        <input type="checkbox" className="checkbox" checked={isCheckedThree} onChange={ () => { setIsCheckedThree(prevCheck => !prevCheck); }}/> 
+                        <label htmlFor="nie dotyczy">nie dotyczy</label>  
+                    </div>
                 </div>
 
                 <div>
@@ -726,6 +809,13 @@ const WorkRegister = () => {
             {openModal.allowerName && <ModalAllower setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
 
             {openModal.teamMember && <ModalTeam setOpenModal={setOpenModal} handleAddModal={handleAddModal} companyName={readValue.companyName}/>}
+
+            {openModal.groupOne && <ModalGroupOne setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
+
+            {openModal.groupTwo && <ModalGroupTwo setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
+
+            {openModal.groupThree && <ModalGroupThree setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
+
         </div>
 
     )

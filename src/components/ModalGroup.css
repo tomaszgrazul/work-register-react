@@ -1,0 +1,17 @@
+.modalGroup {
+    height: 600px;
+    width: 800px;
+    position: fixed;
+    top: 10%;
+    left: 20%;
+    background-color: rgb(221, 175, 175);
+    overflow-y: auto;
+}
+
+.nameGroup {
+    width: 670px;
+}
+
+.modalGroup td {
+    text-align: left;
+}
