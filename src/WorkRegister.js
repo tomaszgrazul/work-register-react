@@ -513,7 +513,7 @@ const WorkRegister = () => {
         Object.entries(readValue).map(item => {
             // if (item[1] === '' && ( (item[0] === 'groupOne' && !isCheckedOne) || (item[0] === 'groupTwo' && !isCheckedTwo) || (item[0] === 'groupThree' && !isCheckedThree))) { 
                 if (item[1] === '') { 
-                return ()
+                return;
             }           
         }) 
         axios
