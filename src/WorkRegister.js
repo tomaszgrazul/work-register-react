@@ -510,12 +510,21 @@ const WorkRegister = () => {
         //     return ;
         // }
 
-        Object.entries(readValue).map(item => {
-            // if (item[1] === '' && ( (item[0] === 'groupOne' && !isCheckedOne) || (item[0] === 'groupTwo' && !isCheckedTwo) || (item[0] === 'groupThree' && !isCheckedThree))) { 
-                if (item[1] === '') { 
-                return;
-            }           
-        }) 
+        const found = Object.entries(readValue).find(item => {
+            if (item[1] === '') { 
+                 if ( (item[0] === 'groupOne' && isCheckedOne) || (item[0] === 'groupTwo' && isCheckedTwo) || (item[0] === 'groupThree' && isCheckedThree) ) { return; } else { return 'a'} 
+        }});
+        console.log('found', found )
+        if( found[1] === '' ) {
+            return ;
+        }
+
+        // Object.entries(readValue).map(item => {
+        //     // if (item[1] === '' && ( (item[0] === 'groupOne' && !isCheckedOne) || (item[0] === 'groupTwo' && !isCheckedTwo) || (item[0] === 'groupThree' && !isCheckedThree))) { 
+        //         if (item[1] === '') { 
+        //         return;
+        //     }           
+        // }) 
         axios
         .post("workOrder/addWorkOrder ", workOrder )
         .then((res) => {
