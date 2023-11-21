@@ -53,7 +53,7 @@ const ModalGroupOne = ({setOpenModal, handleAddModal}) => {
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[1]}
                                         onChange={() => { handleCheck(1, '2') }} />
                                     </td>
-                                    <td>2. Urządzenia, instalacje i sieci elektroenergetyczne o napięciu znamionowym nie wyższym niż 1 kV;
+                                    <td>2. Urządzenia, instalacje i sieci elektroenergetyczne o napięciu znamionowym nie wyższym niż 1 kV
                                     </td>
                                 </tr>
                                 

@@ -14,13 +14,14 @@ import ModalTeam from "./components/ModalTeam";
 import ModalGroupOne from "./components/ModalGroupOne";
 import ModalGroupTwo from "./components/ModalGroupTwo";
 import ModalGroupThree from "./components/ModalGroupThree";
+import ModalWorkGasD from "./components/ModalWorkGasD";
+import ModalWorkFireD from "./components/ModalWorkFireD";
+import ModalWorkOtherD from "./components/ModalWorkOtherD";
 
 const WorkRegister = () => {
 
     const [addWorkOrderResponse,setAddWorkOrderResponse] = useState(false);
-    const [isCheckedOne, setIsCheckedOne] = useState(false);
-    const [isCheckedTwo, setIsCheckedTwo] = useState(false);
-    const [isCheckedThree, setIsCheckedThree] = useState(false);
+    const [isChecked, setIsChecked] = useState(new Array(6).fill(false));
     const [error, setError] = useState('');
     const [errors, setErrors] = useState({
         whoWork: '',
@@ -42,7 +43,10 @@ const WorkRegister = () => {
         workEnd: '',
         groupOne: '',
         groupTwo: '',
-        groupThree: ''
+        groupThree: '',
+        workGasD: '',
+        workFireD: '',
+        workOtherD: ''
     });
 
     const [openModal, setOpenModal] = useState({
@@ -63,7 +67,10 @@ const WorkRegister = () => {
         workEnd: false,
         groupOne: false,
         groupTwo: false,
-        groupThree: false
+        groupThree: false,
+        workGasD: false,
+        workFireD: false,
+        workOtherD: false
     });
 
     const [readValue, setReadValue] = useState({
@@ -86,8 +93,17 @@ const WorkRegister = () => {
         workEnd: '',
         groupOne: '',
         groupTwo: '',
-        groupThree: ''
+        groupThree: '',
+        workGasD: '',
+        workFireD: '',
+        workOtherD: ''
     });
+
+    const handleCheck = (i) => {
+        setIsChecked(isChecked.map((item, index) => {
+            return item = index === i ? !item : item;
+        }));
+    }
 
     const readOfTeamMemberLength = () => {
         const teamMemberLength = readValue.teamMember.length;
@@ -118,6 +134,15 @@ const WorkRegister = () => {
         }
         if( name === 'groupThree' ) {
             stringLength = readValue.groupThree.length;
+        }
+        if( name === 'workGasD' ) {
+            stringLength = readValue.workGasD.length;
+        }
+        if( name === 'workFireD' ) {
+            stringLength = readValue.workFireD.length;
+        }
+        if( name === 'workOtherD' ) {
+            stringLength = readValue.workOtherD.length;
         }
         
         if( zone === 1 && stringLength > 50 ) {
@@ -489,12 +514,15 @@ const WorkRegister = () => {
             workEnd: readValue.workEnd,
             groupOne: readValue.groupOne,
             groupTwo: readValue.groupTwo,
-            groupThree: readValue.groupThree
+            groupThree: readValue.groupThree,
+            workGasD: readValue.workGasD,
+            workFireD: readValue.workFireD,
+            workOtherD: readValue.workOtherD
         }
         
         Object.entries(workOrder).map(item => {
             if ( item[1] === '' ) { 
-                if ( (item[0] === 'groupOne' && isCheckedOne) || (item[0] === 'groupTwo' && isCheckedTwo) || (item[0] === 'groupThree' && isCheckedThree)) { return; } else {     
+                if ( (item[0] === 'groupOne' && isChecked[0]) || (item[0] === 'groupTwo' && isChecked[1]) || (item[0] === 'groupThree' && isChecked[2]) || (item[0] === 'workGasD' && isChecked[3]) || (item[0] === 'workFireD' && isChecked[4]) || (item[0] === 'workOtherD' && isChecked[5])) { return; } else {     
                 return (
                     setErrors( prevErrors => { 
                         return {   
@@ -511,10 +539,10 @@ const WorkRegister = () => {
         // }
 
         const found = Object.entries(readValue).map(item => { 
-            if (item[1] === '' && ( (item[0] === 'groupOne' && !isCheckedOne) || (item[0] === 'groupTwo' && !isCheckedTwo) || (item[0] === 'groupThree' && !isCheckedThree))) { 
+            if (item[1] === '' && ( (item[0] === 'groupOne' && !isChecked[0]) || (item[0] === 'groupTwo' && !isChecked[1]) || (item[0] === 'groupThree' && !isChecked[2]) || (item[0] === 'workGasD' && !isChecked[3]) || (item[0] === 'workFireD' && !isChecked[4]) || (item[0] === 'workOtherD' && !isChecked[5]))) { 
                 return 1;
             } else return 0;           
-        }) 
+        });
         if( found.find(item => item === 1) ) {
             return ;
         }
@@ -752,7 +780,7 @@ const WorkRegister = () => {
                         setOpenModal(() => {return {groupOne: true}});
                     }}>Wybierz</button>
                     <div>
-                        <input type="checkbox" className="checkbox" checked={isCheckedOne} onChange={ () => { setIsCheckedOne(prevCheck => !prevCheck); }}/> 
+                        <input type="checkbox" className="checkbox" checked={isChecked[0]} onChange={ () => { handleCheck(0) }}/> 
                         <label htmlFor="nie dotyczy">nie dotyczy</label>  
                     </div>
                     
@@ -768,7 +796,7 @@ const WorkRegister = () => {
                         setOpenModal(() => {return {groupTwo: true}});
                     }}>Wybierz</button>
                     <div>
-                        <input type="checkbox" className="checkbox" checked={isCheckedTwo} onChange={ () => { setIsCheckedTwo(prevCheck => !prevCheck); }}/> 
+                        <input type="checkbox" className="checkbox" checked={isChecked[1]} onChange={ () => { handleCheck(1) }}/> 
                         <label htmlFor="nie dotyczy">nie dotyczy</label>  
                     </div>
                 </div>
@@ -783,7 +811,52 @@ const WorkRegister = () => {
                         setOpenModal(() => {return {groupThree: true}});
                     }}>Wybierz</button>
                     <div>
-                        <input type="checkbox" className="checkbox" checked={isCheckedThree} onChange={ () => { setIsCheckedThree(prevCheck => !prevCheck); }}/> 
+                        <input type="checkbox" className="checkbox" checked={isChecked[2]} onChange={ () => { handleCheck(2) }}/> 
+                        <label htmlFor="nie dotyczy">nie dotyczy</label>  
+                    </div>
+                </div>
+
+                <div className="textareaFlex">
+                    <div className="labelTeam">
+                        <label htmlFor="prace gazoniebezpieczna">Prace gazoniebezpieczne</label>
+                    </div>     
+                    <textarea className="textAreaTeam" onChange={handleValueChange} value={readValue.workGasD} style={{height: readOfLength("workGasD", 2)}} type="text" placeholder={errors.workGasD ? errors.workGasD : ''} name="workGasD" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModal(() => {return {workGasD: true}});
+                    }}>Wybierz</button>
+                    <div>
+                        <input type="checkbox" className="checkbox" checked={isChecked[3]} onChange={ () => { handleCheck(3) }}/> 
+                        <label htmlFor="nie dotyczy">nie dotyczy</label>  
+                    </div>
+                </div>
+
+                <div className="textareaFlex">
+                    <div className="labelTeam">
+                        <label htmlFor="prace niebezpieczne pod względem pożarowym">Prace niebezpieczne pod względem pożarowym</label>
+                    </div>     
+                    <textarea className="textAreaTeam" onChange={handleValueChange} value={readValue.workFireD} style={{height: readOfLength("workFireD", 2)}} type="text" placeholder={errors.workFireD ? errors.workFireD : ''} name="workFireD" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModal(() => {return {workFireD: true}});
+                    }}>Wybierz</button>
+                    <div>
+                        <input type="checkbox" className="checkbox" checked={isChecked[4]} onChange={ () => { handleCheck(4)}}/> 
+                        <label htmlFor="nie dotyczy">nie dotyczy</label>  
+                    </div>
+                </div>
+
+                <div className="textareaFlex">
+                    <div className="labelTeam">
+                        <label htmlFor="prace szczególnie niebezpieczne">Prace szczególnie niebezpieczne inne</label>
+                    </div>     
+                    <textarea className="textAreaTeam" onChange={handleValueChange} value={readValue.workOtherD} style={{height: readOfLength("workOtherD", 2)}} type="text" placeholder={errors.workOtherD ? errors.workOtherD : ''} name="workOtherD" />
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        setOpenModal(() => {return {workOtherD: true}});
+                    }}>Wybierz</button>
+                    <div>
+                        <input type="checkbox" className="checkbox" checked={isChecked[5]} onChange={ () => { handleCheck(5) }}/> 
                         <label htmlFor="nie dotyczy">nie dotyczy</label>  
                     </div>
                 </div>
@@ -818,6 +891,12 @@ const WorkRegister = () => {
             {openModal.groupTwo && <ModalGroupTwo setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
 
             {openModal.groupThree && <ModalGroupThree setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
+
+            {openModal.workGasD && <ModalWorkGasD setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
+
+            {openModal.workFireD && <ModalWorkFireD setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
+
+            {openModal.workOtherD && <ModalWorkOtherD setOpenModal={setOpenModal} handleAddModal={handleAddModal}/>}
 
         </div>
 
