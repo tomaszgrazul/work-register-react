@@ -41,7 +41,7 @@ const ModalWorkOtherD = ({setOpenModal, handleAddModal}) => {
                             setRegisterGroup('');
                         }
                         setIsCheckedOne(prevCheck => !prevCheck);
-                    }   } /></th><th className="nameGroup">Prace niebezpieczne pod względem pożarowym</th></tr>
+                    }   } /></th><th className="nameGroup">Prace szczególnie niebezpieczne</th></tr>
                                 <tr>
                                     <td><input type="checkbox" className="checkbox" checked={isChecked[0]}
                                         onChange={() => { handleCheck(0, '1') }} />

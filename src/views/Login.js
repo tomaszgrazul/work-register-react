@@ -32,7 +32,8 @@ import { Navigate } from 'react-router-dom';
         password: formData.password
         })
         .then((res) => {
-            setLoginMessage(res.data.message);            
+            setLoginMessage(res.data.message);  
+            console.log('użytkownik', res.data.user);          
             if(!res.data.error) {
                 setLoginMessage('');
                 props.setUser(res.data);
