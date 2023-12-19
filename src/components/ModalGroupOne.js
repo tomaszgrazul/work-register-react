@@ -17,7 +17,7 @@ const ModalGroupOne = ({setOpenModal, handleAddModal}) => {
             return item = index === i ? !item : item;
         }));
         !isChecked[i] ? setRegisterGroup([...registerGroup, value]) : setRegisterGroup((registerGroup.filter
-            (item => { return item !== register[i]}))) 
+            (item => { return item !== register[i]}))); 
     }
     
     return (
