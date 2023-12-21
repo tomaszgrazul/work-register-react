@@ -3,9 +3,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import ModalDelete from "../components/ModalDelete";
 
-const WorkOrderList = () => {
-
-    
+const WorkOrderList = (props) => {
+        
     const [itemToDelete, setItemToDelete] = useState(null);
     const [openModalDelete, setOpenModalDelete] = useState(false);
     const [error, setError] = useState(false);
@@ -89,11 +88,12 @@ const WorkOrderList = () => {
     }
   
     const handleError = () => {
-        if (Object.values(readValue).find(item => item === '') ==='') {
-            return true;
-        } else {
-            return false;
-        }    
+        // if (Object.values(readValue).find(item => item === '') ==='') {
+        //     return true;
+        // } else {
+        //     return false;
+        // }    
+        return Object.values(readValue).find(item => item === '') === '' ? true : false;
     }
 
     const editWorkOrderList = (item) => {
@@ -110,6 +110,7 @@ const WorkOrderList = () => {
 
     const addCopyWorkOrderItem = (item) => {
         let workOrder = {
+            numberRegistration: item[0].numberRegistration,
             companyName: item[0].companyName,
             officeName: item[0].officeName,
             principalName: item[0].principalName,
@@ -189,35 +190,37 @@ const WorkOrderList = () => {
                                 return (
                                     <tr key={i}>
                                         <td>{i+1}</td>
-                                        <td>{item.numberRegistration}</td>
-                                        <td className={readValue.companyName ==='Brak danych!!!'  ? 'error' : 'name'}>{!inputDisabled[i] && item.companyName}
+                                        <td className={readValue.numberRegistration === 'Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.numberRegistration}
+                                            {(inputDisabled[i] && props.user.user === 'admin') && <input onChange={handleValueChange} type="text" value={readValue.numberRegistration} name='numberRegistration' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
+                                        </td>
+                                        <td className={readValue.companyName === 'Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.companyName}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.companyName} name='companyName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
                                         </td>
-                                        <td className={readValue.officeName ==='Brak danych!!!'  ? 'error' : 'name'}>{!inputDisabled[i] && item.officeName}
-                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.officeName} name='companyName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
+                                        <td className={readValue.officeName === 'Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.officeName}
+                                            {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.officeName} name='officeName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
                                         </td>
-                                        <td className={readValue.principalName ==='Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.principalName}
+                                        <td className={readValue.principalName === 'Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.principalName}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.principalName} name='principalName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
                                         </td>
-                                        <td className={readValue.coordinatingName ==='Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.coordinatingName}
+                                        <td className={readValue.coordinatingName === 'Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.coordinatingName}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.coordinatingName} name='coordinatingName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
                                         </td>
-                                        <td className={readValue.coordinatorName ==='Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.coordinatorName}
+                                        <td className={readValue.coordinatorName === 'Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.coordinatorName}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.coordinatorName} name='coordinatorName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
                                         </td>
-                                        <td className={readValue.managerName ==='Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.managerName}
+                                        <td className={readValue.managerName === 'Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.managerName}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.managerName} name='managerName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
                                         </td>
-                                        <td className={readValue.supervisorName ==='Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.supervisorName}
+                                        <td className={readValue.supervisorName === 'Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.supervisorName}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.supervisorName} name='supervisorName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
                                         </td>
-                                        <td className={readValue.allowerName ==='Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.allowerName}
+                                        <td className={readValue.allowerName === 'Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.allowerName}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="text" value={readValue.allowerName} name='allowerName' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
                                         </td>
-                                        <td className={readValue.startDate ==='Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && (item.startDate)}
+                                        <td className={readValue.startDate === 'Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && (item.startDate)}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="datetime-local" value={readValue.startDate} name='startDate' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
                                         </td>
-                                        <td className={readValue.stopDate ==='Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.stopDate}
+                                        <td className={readValue.stopDate === 'Brak danych!!!' ? 'error' : 'name'}>{!inputDisabled[i] && item.stopDate}
                                             {inputDisabled[i] && <input onChange={handleValueChange} type="datetime-local" value={readValue.stopDate} name='stopDate' className='inputWorkOrderList' placeholder={handleError() ? 'Brak danych!!!' : ''}/>}
                                         </td>
                                         <td className="action">
@@ -227,19 +230,19 @@ const WorkOrderList = () => {
                                                 }}
                                                 className="btnCopy">Kopiuj
                                             </button>
-                                            <button disabled={item.numberRegistration ? true : false} onClick={() => {  
+                                            <button disabled={props.user.user === 'admin' ? false : item.numberRegistration ? true : false} onClick={() => {  
                                                     setItemToDelete(item); 
                                                     setOpenModalDelete(true);          
                                                 }}
                                                 className="btnDelete">Usuń
                                             </button>
-                                            <button disabled={item.numberRegistration ? true : false} onClick={() => {           
+                                            <button disabled={props.user.user === 'admin' ? false : item.numberRegistration ? true : false} onClick={() => {           
                                                 checkHandler(i);  
                                                 loadReadValue(i); 
                                             }}
                                                 className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
                                             </button>
-                                            {inputDisabled[i] && <button disabled={Object.values(readValue).find(item => item === '') ==='' ? true : false} onClick={() => {
+                                            {inputDisabled[i] && <button disabled={Object.values(readValue).filter((item, index) => {return index !== 10}).find(item => item === '') ==='' ? true : false} onClick={() => {
                                                                 editWorkOrderList(item);
                                                                 setInputDisabled(false);   
                                                                 readWorkOrderList();      
@@ -248,6 +251,13 @@ const WorkOrderList = () => {
                                                                 </button>}
                                             <button disabled={item.numberRegistration ? true : false} onClick={() => {
                                                 addNumberRegistration(item);
+                                                // loadReadValue(i);
+                                                // setReadValue({
+                                                //     ...readValue,
+                                                //     numberRegistration: `${item.officeName}/2023`
+                                                // });
+                                                // loadReadValue(i);
+                                                // editWorkOrderList(item);
                                                 readWorkOrderList();
                                                 }}
                                                 className="btnRegistration">Rejestruj
