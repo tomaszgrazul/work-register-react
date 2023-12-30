@@ -9,7 +9,7 @@ import SignUp from "../views/SignUp";
 
     return (
         <Routes>   
-            <Route path="/workRegister" element={<WorkRegister/>} />
+            <Route path="/workRegister" element={<WorkRegister user={props.user}/>} />
             <Route path="/workOrderList" element={<WorkOrderList user={props.user}/>} />
             <Route path="/login" element={<Login user={props.user} setUser={props.setUser}/>} />
             <Route path="/signup" element={<SignUp/>} />

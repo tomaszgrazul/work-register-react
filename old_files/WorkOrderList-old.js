@@ -99,7 +99,8 @@ const WorkOrderList = (props) => {
     }
 
     const editWorkOrderList = (item) => {
-        // console.log('aaa', readValue)
+        console.log('aaa', readValue.editBy);   
+
         axios
         .post(`workOrder/editWorkOrder/${item._id}`, readValue) 
         .then(() => {       
@@ -169,6 +170,13 @@ const WorkOrderList = (props) => {
     }
 
     const setEditBy = () => {
+        // const ccc = Object.entries(readValue).find(item => item[0] === 'editBy');
+        // console.log('ccc', ccc); 
+
+        // setReadValue(Object.entries(readValue).map(item => {
+        //     return item[0] === 'editBy' ? readValue.editBy = props.user.user : '';
+        // }));
+
         setReadValue(Object.entries(readValue).map(() => {
             return readValue.editBy = props.user.user;
         }));        
@@ -254,7 +262,9 @@ const WorkOrderList = (props) => {
                                             }}
                                                 className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
                                             </button>
-                                            {inputDisabled[i] && <button disabled={Object.values(readValue).filter((item, index) => {return index !== 10}).find(item => item === '') ==='' ? true : false} onClick={() => {                                    
+                                            {inputDisabled[i] && <button disabled={Object.values(readValue).filter((item, index) => {return index !== 10}).find(item => item === '') ==='' ? true : false} 
+                                            onClick={() => {
+                                                                 
                                                                 setEditBy();
                                                                 editWorkOrderList(item);
                                                                 setInputDisabled(false);   
@@ -264,6 +274,13 @@ const WorkOrderList = (props) => {
                                                                 </button>}
                                             <button disabled={item.numberRegistration ? true : false} onClick={() => {
                                                 addNumberRegistration(item);
+                                                // loadReadValue(i);
+                                                // setReadValue({
+                                                //     ...readValue,
+                                                //     numberRegistration: `${item.officeName}/2023`
+                                                // });
+                                                // loadReadValue(i);
+                                                // editWorkOrderList(item);
                                                 readWorkOrderList();
                                                 }}
                                                 className="btnRegistration">Rejestruj

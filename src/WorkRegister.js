@@ -18,7 +18,7 @@ import ModalWorkGasD from "./components/ModalWorkGasD";
 import ModalWorkFireD from "./components/ModalWorkFireD";
 import ModalWorkOtherD from "./components/ModalWorkOtherD";
 
-const WorkRegister = () => {
+const WorkRegister = (props) => {
 
     const [addWorkOrderResponse,setAddWorkOrderResponse] = useState(false);
     const [isChecked, setIsChecked] = useState(new Array(6).fill(false));
@@ -518,13 +518,23 @@ const WorkRegister = () => {
             groupThree: readValue.groupThree,
             workGasD: readValue.workGasD,
             workFireD: readValue.workFireD,
-            workOtherD: readValue.workOtherD
+            workOtherD: readValue.workOtherD,
+            createdBy: props.user.user,
+            editBy: props.user.user
         }
         
         // Object.entries(workOrder).map(item => {
             Object.entries(workOrder).forEach(item => {
             if ( item[1] === '' ) { 
-                if ( (item[0] === 'groupOne' && isChecked[0]) || (item[0] === 'groupTwo' && isChecked[1]) || (item[0] === 'groupThree' && isChecked[2]) || (item[0] === 'workGasD' && isChecked[3]) || (item[0] === 'workFireD' && isChecked[4]) || (item[0] === 'workOtherD' && isChecked[5])) { return; } else {     
+                if ( (item[0] === 'groupOne' && isChecked[0]) || (item[0] === 'groupTwo' && isChecked[1]) || (item[0] === 'groupThree' && isChecked[2]) || (item[0] === 'workGasD' && isChecked[3]) || (item[0] === 'workFireD' && isChecked[4]) || (item[0] === 'workOtherD' && isChecked[5])) { 
+                    return (
+                        setErrors( prevErrors => { 
+                            return {   
+                            ...prevErrors, 
+                            [item[0]]: ""
+                        }})
+                    )
+                } else {     
                 return (
                     setErrors( prevErrors => { 
                         return {   
@@ -543,13 +553,16 @@ const WorkRegister = () => {
         // const found = Object.entries(readValue).map(item => { 
             const found = [];
             Object.entries(readValue).forEach(item => { 
-            if (item[1] === '' && ( (item[0] === 'groupOne' && !isChecked[0]) || (item[0] === 'groupTwo' && !isChecked[1]) || (item[0] === 'groupThree' && !isChecked[2]) || (item[0] === 'workGasD' && !isChecked[3]) || (item[0] === 'workFireD' && !isChecked[4]) || (item[0] === 'workOtherD' && !isChecked[5]))) { 
-            //     return 1;
-            // } else return 0;   
-            found.push(1); ;
-        } else found.push(0); ;  
-                   
+            if ( item[1] === '' ) {
+                if ((item[0] === 'groupOne' && isChecked[0]) || (item[0] === 'groupTwo' && isChecked[1]) || (item[0] === 'groupThree' && isChecked[2]) || (item[0] === 'workGasD' && isChecked[3]) || (item[0] === 'workFireD' && isChecked[4]) || (item[0] === 'workOtherD' && isChecked[5])) { 
+                //     return 1;
+                // } else return 0;   
+                // found.push(0); 
+                } else found.push(1);                      
+            } 
         });
+    
+
         if( found.find(item => item === 1) ) {
             return ;
         }
