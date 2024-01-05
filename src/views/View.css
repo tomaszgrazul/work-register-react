@@ -1,0 +1,41 @@
+.headerView {
+    width:auto;
+    height: 100px;
+    border: 1px solid black;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.headerView h2 {
+    margin: 0;
+}
+
+.headerMainText {
+    width: fit-content;
+    text-transform: uppercase;
+}
+    
+.regNumber {
+    border: 1px solid black;
+}
+
+.orderNumber {
+    border: 1px solid black;
+}
+
+.orderDate {
+    border: 1px solid black;
+}
+
+.orderHour {
+    border: 1px solid black;
+}
+
+.asa {
+    width:80%;
+    display: flex;
+    justify-content:space-between;
+    flex-direction: row;
+}

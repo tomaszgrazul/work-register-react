@@ -47,6 +47,11 @@ import axios from "axios";
                 }
                 {props.user &&
                     <li>
+                        <Link to="/view">Widok</Link>
+                    </li>
+                }
+                {props.user &&
+                    <li>
                         <Link onClick={logout}>Wyloguj</Link>
                     </li>
                 }

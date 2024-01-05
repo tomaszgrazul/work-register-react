@@ -254,7 +254,8 @@ const WorkOrderList = (props) => {
                                             }}
                                                 className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
                                             </button>
-                                            {inputDisabled[i] && <button disabled={Object.values(readValue).filter((item, index) => {return index !== 10}).find(item => item === '') ==='' ? true : false} onClick={() => {                                    
+                                            {/* {inputDisabled[i] && <button disabled={Object.values(readValue).filter((item, index) => {return index !== 10}).find(item => item === '') ==='' ? true : false} onClick={() => {                                      */}
+                                            {inputDisabled[i] && <button disabled={Object.values(readValue).find(item => item === '') ==='' ? true : false} onClick={() => { 
                                                                 setEditBy();
                                                                 editWorkOrderList(item);
                                                                 setInputDisabled(false);   
