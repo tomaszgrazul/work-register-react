@@ -1,41 +1,83 @@
-.headerView {
-    width:auto;
-    height: 100px;
+.headerMain {
+    /* width:auto;
+    height: auto;
+    border: 1px solid black; */
+    display: flex;
+}
+
+.headerMain h2 {
+    margin: 0;
+}
+
+.headerMainText {
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.regNumber {
     border: 1px solid black;
+    padding: 0 10px 0 10px;
+}
+
+.orderNumber {
+    width: 130px;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.orderDate {
+    width: 130px;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.orderHour {
+    width: 130px;
+    border: 1px solid black;
+}
+
+.header21 {
+    width:100%;
+    display: flex;
+    justify-content:space-between;
+}
+
+.header1 {
+    width: 100px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.header2 {
+    width: 100%;
     display: flex;
     align-items: flex-end;
     justify-content: center;
     flex-direction: column;
 }
 
-.headerView h2 {
-    margin: 0;
-}
-
-.headerMainText {
-    width: fit-content;
-    text-transform: uppercase;
-}
-    
-.regNumber {
-    border: 1px solid black;
-}
-
-.orderNumber {
-    border: 1px solid black;
-}
-
-.orderDate {
-    border: 1px solid black;
-}
-
-.orderHour {
-    border: 1px solid black;
-}
-
-.asa {
-    width:80%;
+.header22 {
+    width:100%;
     display: flex;
     justify-content:space-between;
-    flex-direction: row;
+}
+
+.header221, .header211, .header23 {
+    width:25%;
+    display: flex;
+    justify-content:space-between;
+}
+
+.p1, .p2 {
+    margin-left: 40px;
+}
+
+.p3 {
+    margin-left: 95px;
+}
+
+img {
+    width: 100%;
+    height: auto;
 }
