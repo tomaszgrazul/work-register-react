@@ -1,12 +1,23 @@
 .headerMain {
+    /* width: auto; */
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.headerMain1 {
     /* width:auto;
     height: auto;
     border: 1px solid black; */
     display: flex;
 }
 
-.headerMain h2 {
+.headerMain1 h2 {
     margin: 0;
+}
+
+.headerMain2 {
+    border: 1px solid black;
+    display: flex;
 }
 
 .headerMainText {
@@ -67,6 +78,18 @@
     width:25%;
     display: flex;
     justify-content:space-between;
+}
+
+.header3 {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.header4 {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
 }
 
 .p1, .p2 {
