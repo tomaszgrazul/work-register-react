@@ -39,14 +39,36 @@ return (
         </div>
 
         <div className='headerMain2'>
-            <div className='header3'>
+            <div className='companyNameView'>
                 <p>Nazwa firmy</p>
-                <p>Nr porozumienia</p>
-                <p>Miejsce wykonywania pracy</p>
-                <p>Planowana data rozpoczęcia</p>
+                <div className='companyNameView1'>     
+                    <p>Siemens Energy Sp. z o.o.</p>
+                    <p>03-821 Warszawa</p>
+                    <p>ul. Żupnicza 11</p>      
+                </div>
             </div>
-            <div className='header4'>
-                <p>Wasko</p>
+
+            <div className='header3'>
+                <p>Nr porozumienia</p>
+                <div className='header31'>
+                    <p className='agreementNumber'>DEZ/2/2024</p>
+                    <p>Pracodawca ustalony w Porozumieniu</p>
+                    <p className='companyAgreement'>Siemens Energy sp. z o.o.</p>
+                </div>
+            </div>
+
+            <div className='header3'>
+                <p>Miejsce wykonywania pracy</p>
+                <p className='workPLace'>Tuco 3 - TG Zambrów</p>
+            </div>
+
+            <div className='header3'>
+                <p>Planowana data rozpoczęcia</p>
+                <div className='header31'>
+                    <p className='startData'>15-01-2024</p>
+                    <p>Planowana data zakończenia</p>
+                    <p className='stopData'>19-01-2024</p>
+                </div>
             </div>
 
         </div>
