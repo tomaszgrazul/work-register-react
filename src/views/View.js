@@ -88,7 +88,7 @@ return (
             <div className='header3'>
                 <div className='header4'>
                     <p className='p8'>Poleceniodawca</p>
-                    <p className='p9'>imie i nazwisko</p>
+                    <p className='p9'>imię i nazwisko</p>
                 </div>
                 <div className='header31'>
                     <p className='p7'>Dariusz Walter</p>
@@ -96,6 +96,56 @@ return (
                     <p className='p11'>alala</p>
                 </div>
             </div>
+
+            <div className='header3'>
+                <div className='header4'>
+                    <p className='p8'>Koordynator ds. BHP</p>
+                    <p className='p9'>imię i nazwisko lub stanowisko</p>
+                </div>
+                <div className='header31'>
+                    <p className='p7'></p>
+                    <p className='p10'></p>
+                    <p className='p11'></p>
+                </div>
+            </div>
+
+            <div className='header3'>
+                <div className='header4'>
+                    <p className='p8'>Koordynujący</p>
+                    <p className='p9'>imię i nazwisko lub stanowisko</p>
+                </div>
+                <div className='header31'>
+                    <p className='p7'></p>
+                    <p className='p10'></p>
+                    <p className='p11'></p>
+                </div>
+            </div>
+
+            <div className='header3'>
+                <div className='header4'>
+                    <p className='p8'>Dopuszczający</p>
+                    <p className='p9'>imię i nazwisko lub stanowisko</p>
+                </div>
+                <div className='header31'>
+                    <p className='p7'></p>
+                    <p className='p10'></p>
+                    <p className='p11'></p>
+                </div>
+            </div>
+
+            <div className='header3'>
+                <div className='header4'>
+                    <p className='p8'>Kierujący zespołem</p>
+                    <p className='p9'>imię i nazwisko</p>
+                </div>
+                <div className='header31'>
+                    <p className='p7'></p>
+                    <p className='p10'></p>
+                    <p className='p11'></p>
+                </div>
+            </div>
+
+            <p>* W sytuacji gdy w trakcie wykonania pracy niezbędny jest udział więcej niż jednej osoby Koordynatora ds. BHP, Koordynującego lub dopuszczającego dozwolone jest dołączenie do polecenia załącznika z zestawieniem osób funkcyjnychzgodnie z powyższym wzorem</p>
         </div>
     </div>
 )
