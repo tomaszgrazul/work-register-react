@@ -40,7 +40,7 @@ return (
 
         <div className='headerMain2'>
             <div className='companyNameView'>
-                <p>Nazwa firmy</p>
+                <p className='p4'>Nazwa firmy</p>
                 <div className='companyNameView1'>     
                     <p>Siemens Energy Sp. z o.o.</p>
                     <p>03-821 Warszawa</p>
@@ -49,28 +49,53 @@ return (
             </div>
 
             <div className='header3'>
-                <p>Nr porozumienia</p>
+                <p className='p4'>Nr porozumienia</p>
                 <div className='header31'>
                     <p className='agreementNumber'>DEZ/2/2024</p>
-                    <p>Pracodawca ustalony w Porozumieniu</p>
+                    <p className='p5'>Pracodawca ustalony w Porozumieniu</p>
                     <p className='companyAgreement'>Siemens Energy sp. z o.o.</p>
                 </div>
             </div>
 
             <div className='header3'>
-                <p>Miejsce wykonywania pracy</p>
+                <p className='p4'>Miejsce wykonywania pracy</p>
                 <p className='workPLace'>Tuco 3 - TG Zambrów</p>
             </div>
 
             <div className='header3'>
-                <p>Planowana data rozpoczęcia</p>
+                <p className='p4'>Planowana data rozpoczęcia</p>
                 <div className='header31'>
                     <p className='startData'>15-01-2024</p>
                     <p>Planowana data zakończenia</p>
                     <p className='stopData'>19-01-2024</p>
                 </div>
             </div>
+        </div>
 
+        <div className='headerMain3'>
+            <p className='p6'>1. Osoby wyznaczone do organizowania i nadzorowania pracy</p>
+            <p>Znajdują się na liście osób upoważnionych i uprawnionych.</p>
+            <p>Koordynujący, Koordynator ds. BHP i Dopuszczający zgodnie z wykazem osób upoważnionych do pełnienia danej funkcji.</p>
+            <div className='header3'>
+                <p className='p4'></p>
+                <div className='header31'>
+                    <p className='p12'>Imię Nazwisko / stanowisko</p>
+                    <p className='p13'>Telefon:</p>
+                    <p className='p14'>Podpis:</p>
+                </div>
+            </div>
+
+            <div className='header3'>
+                <div className='header4'>
+                    <p className='p8'>Poleceniodawca</p>
+                    <p className='p9'>imie i nazwisko</p>
+                </div>
+                <div className='header31'>
+                    <p className='p7'>Dariusz Walter</p>
+                    <p className='p10'>603097603</p>
+                    <p className='p11'>alala</p>
+                </div>
+            </div>
         </div>
     </div>
 )

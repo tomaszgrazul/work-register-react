@@ -17,6 +17,14 @@
     margin: 5px 0 0 0;
 }
 
+.headerMain3 {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    margin: -1px 0 0 0;
+    text-align: initial;
+}
+
 .headerMainText {
     width: 100%;
     text-transform: uppercase;
@@ -46,7 +54,7 @@
 
 .companyNameView {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 }
 
 .companyNameView1 {
@@ -90,7 +98,6 @@
 
 .header3 {
     display: flex;
-    justify-content: space-between;
     margin: 0 5px 5px 0;
 }
 
@@ -100,24 +107,80 @@
     width: 80%;
 }
 
+.header4 {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    margin: 0 5px 5px 0;
+}
+
 .p1, .p2 {
-    margin-left: 40px;
+    margin: 0 0 0 40px;
 }
 
 .p3 {
-    margin-left: 95px;
+    margin: 0 0 0 95px;
+}
+
+.p4 {
+    width: 20%;
+}
+
+.p5 {
+    margin: 0 0 0 70px;
+}
+
+.p6 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.p7 {
+    width: 20%;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.p8 {
+    margin: 0 40px 0 0;
+}
+
+.p9 {
+    font-size: small;
+}
+
+.p10{
+    width: 10%;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.p11{
+    width: 15%;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.p12 {
+    margin: 0 0 0 10px;
+}
+
+.p13 {
+    margin: 0 0 0 -55px;
+}
+
+.p14 {
+    margin: 0 55px 0 0;
 }
 
 .agreementNumber, .companyAgreement, .startData, .stopData {
     border: 1px solid black;
-    /* margin: 0 5px 0 0; */
     padding: 0 10px 0 10px;
 }
 
 .workPLace {
     border: 1px solid black;
     width: 80%;
-    /* margin: 0 5px 0 0; */
 }
 
 img {
