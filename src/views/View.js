@@ -194,6 +194,81 @@ return (
             <p className='p15'>................................................................................................................................................................................................................................................................................................................................................................................................................................</p>
             <p className='p15'>................................................................................................................................................................................................................................................................................................................................................................................................................................</p>
         </div>
+
+        <div className='headerMain3'>
+            <p className='p6'>7. Dopuszczenie do prac zasadniczych, przekazanie strefy pracy</p>
+            <div className='header3'>
+                <p className='p6'>Koordynujący</p>
+                <p>Zezwolenie na przygotowanie strefy pracy zgodnie z określonym zakresem oraz kolejnością wykonywanych czynności.</p>
+            </div>
+            <div className='header3'>
+                <div className='header6'>
+                    <p className='p8'>Imię i Nazwisko</p>
+                    <p className='p18'>Antek Policmajster</p>
+                </div>
+                <div className='header7'>
+                    <p>Podpis:</p>
+                    <p className='p7'></p>
+                </div>
+                <div className='header7'>
+                    <p>Data:</p>
+                    <p className='p17'></p>
+                </div>
+                <div className='header7'>
+                    <p>Godzina:</p>
+                    <p className='p17'></p>
+                </div>
+            </div>
+
+            <div className='header3'>
+                <p className='p6'>Dopuszczający</p>
+                <p>Przygotowano strefę pracy zgodnie z pkt 5 polecenia. Poinformowano Kierującego Zespołem o zagrożeniach występujących w strefie pracy i w jej bezpośrednim sąsiedztwie.</p>
+            </div>
+            <div className='header3'>
+                <div className='header6'>
+                    <p className='p8'>Imię i Nazwisko</p>
+                    <p className='p18'>Antek Policmajster</p>
+                </div>
+                <div className='header7'>
+                    <p>Podpis:</p>
+                    <p className='p7'></p>
+                </div>
+                <div className='header7'>
+                    <p>Data:</p>
+                    <p className='p17'></p>
+                </div>
+                <div className='header7'>
+                    <p>Godzina:</p>
+                    <p className='p17'></p>
+                </div>
+            </div>
+
+            <div className='header3'>
+                <p className='p6'>Kierujący zespołem</p>
+                <p>Przejmuje strefę pracy bez uwag. Potwierdzam, że zostałem zapoznany z zagrożeniami występującymi w strefie i w jej bezpośrednim sąsiedztwie.</p>
+            </div>
+            <div className='header3'>
+                <div className='header6'>
+                    <p className='p8'>Imię i Nazwisko</p>
+                    <p className='p18'>Antek Policmajster</p>
+                </div>
+                <div className='header7'>
+                    <p>Podpis:</p>
+                    <p className='p7'></p>
+                </div>
+                <div className='header7'>
+                    <p>Data:</p>
+                    <p className='p17'></p>
+                </div>
+                <div className='header7'>
+                    <p>Godzina:</p>
+                    <p className='p17'></p>
+                </div>
+            </div>
+            
+        </div>
+
+
     </div>
 )
 
