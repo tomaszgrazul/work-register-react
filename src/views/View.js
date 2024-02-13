@@ -254,18 +254,37 @@ return (
                 </div>
                 <div className='header7'>
                     <p>Podpis:</p>
-                    <p className='p7'></p>
+                    <p className='p7'>aaa</p>
                 </div>
                 <div className='header7'>
                     <p>Data:</p>
-                    <p className='p17'></p>
+                    <p className='p17'>28.06.1973</p>
                 </div>
                 <div className='header7'>
                     <p>Godzina:</p>
-                    <p className='p17'></p>
+                    <p className='p17'>10:30</p>
                 </div>
+            </div>            
+        </div>
+
+        <div className='headerMain3'>
+            <p className='p6'>8. Zespół osób upoważnionych i uprawnionych do wykonywania pracy poleconej</p>
+            <p>Przeczytałem i zrozumiałem treść polecenia pisemnego. Oświadczam, że będę wykonywał pracę zgodnie z instrukcją organizacji bezpiecznej pracy przy urzadzeniach energetycznych oraz procedurami i zasadami BHP i ochrony środowiska.</p>
+            <p>Zostałem zapoznany z występującymi zagrożeniami w strefie pracy i w jej bezpośrednim sąsiedztwie oraz z metodami bezpiecznego wykonywania pracy.</p>
+            <div className='header3'>
+                <p className='p19'></p>
+                <p className='p20'>Imię i Nazwisko</p>
+                <p className='p21'></p>
+                <p className='p22'>Podpis:</p>
+                <p className='p23'>Data i godzina:</p>
             </div>
-            
+            <div className='header3'>
+                <p className='p19'>1.</p>
+                <p className='p18'>Antoni Czerwiński</p>
+                <p className='p21'></p>
+                <p className='p11'>aaa</p>
+                <p className='p10'>12.18</p>
+            </div>
         </div>
 
 
