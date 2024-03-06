@@ -187,6 +187,7 @@
     width: 25%;
     border: 1px solid black;
     text-align: center;
+    margin: 0 20px 0 0;
 }
 
 .p12 {
@@ -202,7 +203,7 @@
 }
 
 .p15 {
-    margin: 20px 0 0 0;
+    margin: 0 0 20px 0;
 }
 
 .p16 {
@@ -228,8 +229,8 @@
 }
 
 .p20 {
-    width: 30%;
-    text-align: center;
+    width: 60%;
+    /* text-align: center; */
 }
 
 .p21 {
@@ -237,13 +238,55 @@
 }
 
 .p22 {
-    width: 25%;
+    width: 32%;
     text-align: center;
 }
 
 .p23 {
     width: 15%;
     text-align: center;
+}
+
+.p24 {
+    width: 1%;
+}
+
+.p25 {
+    width: 15%;
+    text-align: center;
+    margin: 0 10px 0 0;
+}
+
+.p26 {
+    width: 25%;
+    text-align: center;
+    margin: 0 10px 0 0;
+}
+
+.p27 {
+    width: 10%;
+    border: 1px solid black;
+    text-align: center;
+    margin: 0 10px 0 0;
+}
+
+.p28 {
+    width: 25%;
+    border: 1px solid black;
+    text-align: center;
+    margin: 0 10px 0 0;
+}
+
+.p29 {
+    width: 10%;
+    margin: 0 10px 0 0;
+}
+
+.p30 {
+    width: 15%;
+    border: 1px solid black;
+    text-align: center;
+    margin: 0 10px 0 0;
 }
 
 .agreementNumber, .companyAgreement, .startData, .stopData {

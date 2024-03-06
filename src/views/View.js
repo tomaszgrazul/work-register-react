@@ -150,8 +150,8 @@ return (
 
         <div className='headerMain3'>
             <p className='p6'>2. Podstawowe wymagania bezpieczeństwa</p>
-            <p>Warunki i środki ochrony niezbędne do zapewnienia bezpiecznego przygotowania i wykonania poleconych prac wynikających z zagrożeń występujących w strefie pracy i w jej bezpośrednim sąsiedztwie.</p>
-            <p className='p15'>Ryzyko prowadzenia prac jest na poziomie akceptowalnym.</p>
+            <p className='p15'>Warunki i środki ochrony niezbędne do zapewnienia bezpiecznego przygotowania i wykonania poleconych prac wynikających z zagrożeń występujących w strefie pracy i w jej bezpośrednim sąsiedztwie.</p>
+            <p>Ryzyko prowadzenia prac jest na poziomie akceptowalnym.</p>
             <p>Omówiono przebieg pracy i zagrożenia mogące wystąpić.</p>
             <p className='p16'>Dodatkowe uzgodnienia/wymagania/środki ostrożności</p>
             <p className='p15'>................................................................................................................................................................................................................................................................................................................................................................................................................................</p>
@@ -270,7 +270,7 @@ return (
         <div className='headerMain3'>
             <p className='p6'>8. Zespół osób upoważnionych i uprawnionych do wykonywania pracy poleconej</p>
             <p>Przeczytałem i zrozumiałem treść polecenia pisemnego. Oświadczam, że będę wykonywał pracę zgodnie z instrukcją organizacji bezpiecznej pracy przy urzadzeniach energetycznych oraz procedurami i zasadami BHP i ochrony środowiska.</p>
-            <p>Zostałem zapoznany z występującymi zagrożeniami w strefie pracy i w jej bezpośrednim sąsiedztwie oraz z metodami bezpiecznego wykonywania pracy.</p>
+            <p className='p15'>Zostałem zapoznany z występującymi zagrożeniami w strefie pracy i w jej bezpośrednim sąsiedztwie oraz z metodami bezpiecznego wykonywania pracy.</p>
             <div className='header3'>
                 <p className='p19'></p>
                 <p className='p20'>Imię i Nazwisko</p>
@@ -285,9 +285,65 @@ return (
                 <p className='p11'>aaa</p>
                 <p className='p10'>12.18</p>
             </div>
+            <div className='header3'>
+                <p className='p19'>2.</p>
+                <p className='p18'>Antoni Czerwiński</p>
+                <p className='p21'></p>
+                <p className='p11'>aaa</p>
+                <p className='p10'>12.18</p>
+            </div>
         </div>
 
+        <div className='headerMain3'>
+            <p className='p6'>9. Przerwy w pracy wymagajace powtórnego dopuszczenia</p>
+            <p className='p15'>Nie wymaga się ponownego dopuszczenia do pracy po przerwie, jeżeli w czasie trwania przerwy nie zostało stwierdzone pogorszenie zabezpieczenia strefy pracy oraz warunków bezpiecznego wykonywania pracy</p>
+            <div className='header3'>
+                <p className='p24'></p>
+                <p className='p29'></p>
+                <p className='p25'>Data i godzina:</p>
+                <p className='p26'>Podpis koordynujacego:</p>
+                <p className='p26'>Podpis dopuszczającego:</p>
+                <p className='p26'>Podpis kierujacego zespołem:</p>
+            </div>
+            <div className='header3'>
+                <p className='p24'>1.</p>
+                <p className='p27'>Przerwanie pracy</p>
+                <p className='p30'></p>
+                <p className='p28'></p>
+                <p className='p28'></p>
+                <p className='p28'></p>
+            </div>
+            <div className='header3'>
+                <p className='p24'></p>
+                <p className='p27'>Wznowienie pracy</p>
+                <p className='p30'></p>
+                <p className='p28'></p>
+                <p className='p28'></p>
+                <p className='p28'></p>
+            </div>
+            <div className='header3'>
+                <p className='p24'>2.</p>
+                <p className='p27'>Przerwanie pracy</p>
+                <p className='p30'></p>
+                <p className='p28'></p>
+                <p className='p28'></p>
+                <p className='p28'></p>
+            </div>
+            <div className='header3'>
+                <p className='p24'></p>
+                <p className='p27'>Wznowienie pracy</p>
+                <p className='p30'></p>
+                <p className='p28'></p>
+                <p className='p28'></p>
+                <p className='p28'></p>
+            </div>
+            <p>* W sytuacji gdy w trakcie prowadzenia prac wystapi wieksza liczba przerw, dozwolone jest dołączenie do polecenia załącznika z zestawieniem kolejnych przerw zgodnie z powyższym wzorem</p>
+        </div>
 
+        <div className='headerMain3'>
+            <p className='p6'>10. Zakończenie prac i likwidacja strefy pracy</p>
+            <p className='p15'></p>
+        </div>
     </div>
 )
 
