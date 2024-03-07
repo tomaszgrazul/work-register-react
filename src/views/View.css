@@ -87,7 +87,7 @@
 .header22 {
     width:100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .header221, .header211, .header23 {
@@ -136,6 +136,14 @@
     display: flex;
     justify-content:flex-end;
     width: 20%;
+}
+
+.header8 {
+    width: 100%;
+    display: flex;
+    /* align-items: flex-end; */
+    justify-content: center;
+    flex-direction: column;
 }
 
 .p1, .p2 {
@@ -265,6 +273,7 @@
 
 .p27 {
     width: 10%;
+    height: 25px;
     border: 1px solid black;
     text-align: center;
     margin: 0 10px 0 0;
@@ -280,6 +289,7 @@
 .p29 {
     width: 10%;
     margin: 0 10px 0 0;
+    text-align: center;
 }
 
 .p30 {

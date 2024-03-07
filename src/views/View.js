@@ -20,7 +20,7 @@ return (
                         <p className='orderNumber'>01/01/2024</p>
                     </div>
                 </div>
-                <div className='header22'>
+                <div className='header21'>
                     <p className='p2'>Wyd. 02</p>
                     <p className='p3'>(wypełnia wykonawca zewnętrzny)</p>
                     <div className='header221'>
@@ -301,9 +301,9 @@ return (
                 <p className='p24'></p>
                 <p className='p29'></p>
                 <p className='p25'>Data i godzina:</p>
-                <p className='p26'>Podpis koordynujacego:</p>
-                <p className='p26'>Podpis dopuszczającego:</p>
-                <p className='p26'>Podpis kierujacego zespołem:</p>
+                <p className='p26'>Podpis Koordynujacego:</p>
+                <p className='p26'>Podpis Dopuszczającego:</p>
+                <p className='p26'>Podpis Kierujacego zespołem:</p>
             </div>
             <div className='header3'>
                 <p className='p24'>1.</p>
@@ -343,7 +343,197 @@ return (
         <div className='headerMain3'>
             <p className='p6'>10. Zakończenie prac i likwidacja strefy pracy</p>
             <p className='p15'></p>
+            <div className='header8'>
+                <p className='p6'>Kierujący zespołem</p>
+                <p className='p15'>Praca została zakończona, materiały i narzędzia usunieto, członków zespołu ze strefy wyprowadzono. Pracę wykonano w pełnym zakresie TAK/NIE (niepotrzebne skreslić). Przyczyny nie wykonania pracy w pełnym zakresie:</p>
+                <p className='p15'>................................................................................................................................................................................................................................................................................................................................................................................................................................</p>
+            </div>
+            <div className='header3'>
+                <div className='header6'>
+                    <p className='p8'>Imię i Nazwisko</p>
+                    <p className='p18'>Antek Policmajster</p>
+                </div>
+                <div className='header7'>
+                    <p>Podpis:</p>
+                    <p className='p7'>aaa</p>
+                </div>
+                <div className='header7'>
+                    <p>Data:</p>
+                    <p className='p17'>28.06.1973</p>
+                </div>
+                <div className='header7'>
+                    <p>Godzina:</p>
+                    <p className='p17'>10:30</p>
+                </div>
+            </div>  
+
+            <div className='header3'>
+                <p className='p6'>Dopuszczający</p>
+                <p>Sprawdzono wykonanie pracy, instalacja jest kompletna, strefa pracy jest bezpieczna i uprzatnięta. Usunieto zastosowane zabezpieczenia.</p>
+            </div>
+            <div className='header3'>
+                <div className='header6'>
+                    <p className='p8'>Imię i Nazwisko</p>
+                    <p className='p18'>Antek Policmajster</p>
+                </div>
+                <div className='header7'>
+                    <p>Podpis:</p>
+                    <p className='p7'></p>
+                </div>
+                <div className='header7'>
+                    <p>Data:</p>
+                    <p className='p17'></p>
+                </div>
+                <div className='header7'>
+                    <p>Godzina:</p>
+                    <p className='p17'></p>
+                </div>
+            </div> 
+
+            <div className='header3'>
+                <p className='p6'>Koordynujący</p>
+                <p>Prace zakonńczono, strefa pracy zlikwidowana. Potwierdzam: [ ] urzadzenie/a trwale wyłączone z ruchu; [ ] gotowość urzadzeń i/lub instalacji do ruchu próbnego lub przekazania do eksploatacji (zaznaczyć odpowiedni kwadrat).</p>
+            </div>
+            <div className='header3'>
+                <div className='header6'>
+                    <p className='p8'>Imię i Nazwisko</p>
+                    <p className='p18'>Antek Policmajster</p>
+                </div>
+                <div className='header7'>
+                    <p>Podpis:</p>
+                    <p className='p7'></p>
+                </div>
+                <div className='header7'>
+                    <p>Data:</p>
+                    <p className='p17'></p>
+                </div>
+                <div className='header7'>
+                    <p>Godzina:</p>
+                    <p className='p17'></p>
+                </div>
+            </div>     
+
+            <div className='header3'>
+                <p className='p6'>Dyspozytor Tłoczni</p>
+                <p>O zakończeniu prac poinformowano: [ ] KDG; [ ] Dyspozytora Działu Dyspozycji EuRoPol GAZ s.a.,(zaznaczyć odpowiedni kwadrat).</p>
+            </div>
+            <div className='header3'>
+                <div className='header6'>
+                    <p className='p8'>Imię i Nazwisko</p>
+                    <p className='p18'>Antek Policmajster</p>
+                </div>
+                <div className='header7'>
+                    <p>Podpis:</p>
+                    <p className='p7'></p>
+                </div>
+                <div className='header7'>
+                    <p>Data:</p>
+                    <p className='p17'></p>
+                </div>
+                <div className='header7'>
+                    <p>Godzina:</p>
+                    <p className='p17'></p>
+                </div>
+            </div>     
         </div>
+
+        <div className='headerMain3'>
+            <p className='p6'>11. Zmiany w poleceniu pisemnym (Poleceniodawca)</p>
+            <div className='header8'>
+                <p className='p15'>Zmianie mogą ulec: data zakończenia pracy, godzina rozpoczecia i zakończenia prac, skład zespołu roboczego</p>
+                <p className='p15'>................................................................................................................................................................................................................................................................................................................................................................................................................................</p>
+            </div>
+            <div className='header3'>
+                <p className='p29'>Data i godzina:</p>
+                <p className='p25'>Podpis Poleceniodawcy:</p>
+                <p className='p26'>Podpis Koordynujacego:</p>
+                <p className='p26'>Podpis Dopuszczającego:</p>
+                <p className='p26'>Podpis Kierujacego zespołem:</p>
+            </div>
+            <div className='header3'>
+                <p className='p27'></p>
+                <p className='p30'></p>
+                <p className='p28'></p>
+                <p className='p28'></p>
+                <p className='p28'></p>
+            </div>
+            <p className='p15'></p>
+            <p className='p15'>................................................................................................................................................................................................................................................................................................................................................................................................................................</p>
+            <div className='header3'>
+                <p className='p29'>Data i godzina:</p>
+                <p className='p25'>Podpis Poleceniodawcy:</p>
+                <p className='p26'>Podpis Koordynujacego:</p>
+                <p className='p26'>Podpis Dopuszczającego:</p>
+                <p className='p26'>Podpis Kierujacego zespołem:</p>
+            </div>
+            <div className='header3'>
+                <p className='p27'></p>
+                <p className='p30'></p>
+                <p className='p28'></p>
+                <p className='p28'></p>
+                <p className='p28'></p>
+            </div>
+        </div>
+
+        <div className='headerMain3'>
+            <p className='p6 p15'>12. Polecenie anulowano (Poleceniodawca)</p>
+            <div className='header3'>
+                <div className='header6'>
+                    <p className='p8'>Imię i Nazwisko</p>
+                    <p className='p18'></p>
+                </div>
+                <div className='header7'>
+                    <p>Podpis:</p>
+                    <p className='p7'></p>
+                </div>
+                <div className='header7'>
+                    <p>Data:</p>
+                    <p className='p17'></p>
+                </div>
+                <div className='header7'>
+                    <p>Godzina:</p>
+                    <p className='p17'></p>
+                </div>
+            </div>  
+            <p className='p15'></p>
+        </div>
+
+        <div className='headerMain3'>
+            <p className='p6 p15'>13. Lista załączników</p>
+            <p>Załącznik nr 1 - Karta pomiarów czynników szkodliwych</p>
+            <p>Załącznik nr 2 - Karta przygotowania strefy pracy, wykonania i zakonczenia pracy</p>
+            <p>Załącznik nr </p>
+            <p className='p15'>Załącznik nr </p>
+            <p className='p15'></p>
+        </div>
+
+        <div className='headerMain3'>
+            <p className='p6 p15'>14. Wymagane środki ochrony indywidualnej, sprzętu ppoż. i bhp</p>
+            <div className='header22'>
+                <div>
+                    <p className='p15'>[ ] Odzież trudnopalna i elektrostatyczna ........................................................................................................................................</p>
+                    <p className='p15'>[ ] Odzież ochronna ..................................................................................................................................................................................</p>
+                    <p className='p15'>[ ] Środki ochrony głowy ........................................................................................................................................................................</p>
+                    <p className='p15'>[ ] Środki ochrony kończyn górnych ..................................................................................................................................................</p>
+                    <p className='p15'>[ ] Środki ochrony kończyn dolnych ..................................................................................................................................................</p>
+                    <p className='p15'>[ ] Środki ochrony twarzy .......................................................................................................................................................................</p>
+                    <p className='p15'>[ ] Środki ochrony oczu ...........................................................................................................................................................................</p>
+                    <p className='p15'>[ ] Środki ochrony słuchu ........................................................................................................................................................................</p>
+                    <p className='p15'>[ ] Inne ............................................................................................................................................................................................................</p>
+                </div>
+                <div>
+                    <p className='p15'>[ ] Środki ochrony układu oddechowego .......................................................................................................................................</p>
+                    <p className='p15'>[ ] Środki ochrony przed upadkiem z wysokości .........................................................................................................................</p>
+                    <p className='p15'>[ ] Środki izolujące cały organizm ......................................................................................................................................................</p>
+                    <p className='p15'>[ ] Gaśnice proszkowe lub śniegowe ................................................................................................................................................</p>
+                    <p className='p15'>[ ] Koc gaśniczy ..........................................................................................................................................................................................</p>
+                    <p className='p15'>[ ] Radiotelefony ........................................................................................................................................................................................</p>
+                    <p className='p15'>[ ] Metanomierz .........................................................................................................................................................................................</p>
+                    <p className='p15'>[ ] Tlenomierz ..............................................................................................................................................................................................</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 )
 
