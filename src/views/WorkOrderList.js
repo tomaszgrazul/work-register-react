@@ -2,9 +2,12 @@ import './workOrderList.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ModalDelete from "../components/ModalDelete";
+import View from "../views/View";
+import { Link, useNavigate } from "react-router-dom";
 
 const WorkOrderList = (props) => {
         
+    const [viewButton, setViewButton] = useState(false);
     const [itemToDelete, setItemToDelete] = useState(null);
     const [openModalDelete, setOpenModalDelete] = useState(false);
     const [error, setError] = useState(false);
@@ -269,6 +272,9 @@ const WorkOrderList = (props) => {
                                                 }}
                                                 className="btnRegistration">Rejestruj
                                             </button>
+                                            <button onClick={() => setViewButton(true)}>
+                                                Widok
+                                            </button>
                                         </td>
                                     </tr>
                                 )      
@@ -276,6 +282,8 @@ const WorkOrderList = (props) => {
                     </tbody>
                 </table>
                 {openModalDelete && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>}
+                {viewButton && <View/>}
+                {/* {viewButton && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>} */}
             </div>
         )
 }
