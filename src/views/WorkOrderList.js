@@ -2,12 +2,10 @@ import './workOrderList.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ModalDelete from "../components/ModalDelete";
-import View from "../views/View";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const WorkOrderList = (props) => {
         
-    const [viewButton, setViewButton] = useState(false);
     const [itemToDelete, setItemToDelete] = useState(null);
     const [openModalDelete, setOpenModalDelete] = useState(false);
     const [error, setError] = useState(false);
@@ -29,6 +27,10 @@ const WorkOrderList = (props) => {
         editBy: ''
     });
 
+const moveWorkRegister = () => {
+props.setMoveWorkRegister(register);
+}
+
     const checkHandler = (i) => {
         setInputDisabled(inputDisabled.map((item, index) => {
               return item = index === i ? !item : item;
@@ -43,7 +45,7 @@ const WorkOrderList = (props) => {
         readWorkOrderList();  
     }, []);
 
-  
+ 
      const handleValueChange = (e) => {
         const target = e.target;
         const name = e.target.name;
@@ -241,7 +243,7 @@ const WorkOrderList = (props) => {
                                         <td className="action">
                                             <button onClick={() => {
                                                     addCopyWorkOrderItem(register.slice(i));
-                                                    readWorkOrderList();        
+                                                    readWorkOrderList();      
                                                 }}
                                                 className="btnCopy">Kopiuj
                                             </button>
@@ -253,7 +255,7 @@ const WorkOrderList = (props) => {
                                             </button>
                                             <button disabled={props.user.user === 'admin' ? false : item.numberRegistration ? true : false} onClick={() => {           
                                                 checkHandler(i);  
-                                                loadReadValue(i);    
+                                                loadReadValue(i);   
                                             }}
                                                 className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
                                             </button>
@@ -262,7 +264,7 @@ const WorkOrderList = (props) => {
                                                                 setEditBy();
                                                                 editWorkOrderList(item);
                                                                 setInputDisabled(false);   
-                                                                readWorkOrderList();      
+                                                                readWorkOrderList();     
                                                                 }}
                                                                 className="btnSendWorkOrderList">Wyślij
                                                                 </button>}
@@ -272,8 +274,8 @@ const WorkOrderList = (props) => {
                                                 }}
                                                 className="btnRegistration">Rejestruj
                                             </button>
-                                            <button onClick={() => setViewButton(true)}>
-                                                Widok
+                                            <button onClick={moveWorkRegister}>
+                                                <Link className="link" to="/view">Pokaż</Link>
                                             </button>
                                         </td>
                                     </tr>
@@ -282,8 +284,6 @@ const WorkOrderList = (props) => {
                     </tbody>
                 </table>
                 {openModalDelete && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>}
-                {viewButton && <View/>}
-                {/* {viewButton && <ModalDelete setOpenModalDelete={setOpenModalDelete} handleModalDelete={handleModalDelete}/>} */}
             </div>
         )
 }

@@ -1,8 +1,65 @@
 import './View.css'
 import logo from "../img/logo_EG.png"
+import axios from "axios";
+import { useState, useEffect } from "react";
+
+const View = (props) => {
 
 
-const View = () => {
+    // const [register1, setRegister1] = useState([]);
+    const [readValue, setReadValue] = useState({
+        companyName: '',
+        officeName: '',
+        principalName: '',
+        coordinatingName: '',
+        coordinatorName: '',
+        managerName: '',
+        supervisorName: '',
+        allowerName: '',
+        startDate: '',
+        stopDate: '',
+        numberRegistration: '',
+        createdBy: '',
+        editBy: ''
+    });
+
+    const loadReadValue = (i) => {
+        setReadValue({
+            companyName: props.moveWorkRegister[i].companyName,
+            officeName: props.moveWorkRegister[i].officeName,
+            principalName: props.moveWorkRegister[i].principalName,
+            coordinatingName: props.moveWorkRegister[i].coordinatingName,
+            coordinatorName: props.moveWorkRegister[i].coordinatorName,
+            managerName: props.moveWorkRegister[i].managerName,
+            supervisorName: props.moveWorkRegister[i].supervisorName,
+            allowerName: props.moveWorkRegister[i].allowerName,
+            startDate: props.moveWorkRegister[i].startDate,
+            stopDate: props.moveWorkRegister[i].stopDate,
+            numberRegistration: props.moveWorkRegister[i].numberRegistration,
+            createdBy: props.moveWorkRegister[i].createdBy,
+            editBy: props.moveWorkRegister[i].editBy
+        }); 
+    }
+
+    // const readWorkOrderList = () => {
+    //     axios
+    //     .get("workOrder/readWorkOrder") 
+    //     .then((res) => { 
+    //         setRegister1(res.data); 
+    //         // console.log(res.data);
+    //         // setError(false);     
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //         // setError(true);
+    //     });   
+    // }
+
+    useEffect(() => {
+        // readWorkOrderList(); 
+        loadReadValue(1); 
+        console.log("ala", props.moveWorkRegister);
+    }, []);
 
 
 return (
@@ -41,10 +98,11 @@ return (
         <div className='headerMain2'>
             <div className='companyNameView'>
                 <p className='p4'>Nazwa firmy</p>
-                <div className='companyNameView1'>     
-                    <p>Siemens Energy Sp. z o.o.</p>
+                <div className='companyNameView1'>  
+                <p>{readValue.companyName}</p>   
+                    {/* <p>Siemens Energy Sp. z o.o.</p>
                     <p>03-821 Warszawa</p>
-                    <p>ul. Żupnicza 11</p>      
+                    <p>ul. Żupnicza 11</p>       */}
                 </div>
             </div>
 
@@ -66,7 +124,7 @@ return (
                 <p className='p4'>Planowana data rozpoczęcia</p>
                 <div className='header31'>
                     <p className='startData'>15-01-2024</p>
-                    <p>Planowana data zakończenia</p>
+                    <p className='p5'>Planowana data zakończenia</p>
                     <p className='stopData'>19-01-2024</p>
                 </div>
             </div>

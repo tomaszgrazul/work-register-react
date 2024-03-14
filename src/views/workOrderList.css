@@ -27,3 +27,9 @@
 .lp {
     width: 50px;
 }
+
+.link {
+    text-decoration: none;
+    color:initial;
+}
+
