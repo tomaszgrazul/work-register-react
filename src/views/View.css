@@ -152,6 +152,7 @@
 
 .p3 {
     margin: 0 0 0 95px;
+    font-size: small;
 }
 
 .p4 {
@@ -312,4 +313,11 @@
 img {
     width: 100%;
     height: auto;
+}
+
+input {
+    outline: none;
+    width: 125px;
+    height: 17px;
+    margin: 0 0 5px 0;
 }

@@ -1,7 +1,15 @@
 import './View.css'
 import logo from "../img/logo_EG.png"
+import { useEffect, useState } from 'react'
 
 const View = (props) => {
+
+    const [orderNumberEnable, setOrderNumberEnable] = useState(false);
+
+    // useEffect(() => {
+    //     console.log("qqq", orderNumberEnable);
+    // }, []);
+
 
 return (
     <div className='headerMain'>
@@ -15,7 +23,16 @@ return (
                     <p className='regNumber'>Nr w rejestrze EuRoPolGaz: 23/DEZ/2024</p>
                     <div className='header211'>
                         <p>Polecenie pisemne nr</p>
-                        <p className='orderNumber'>01/01/2024</p>
+                        {orderNumberEnable && <input onKeyDown={(e) => {
+                            if ( e.key === 'Enter' ) {
+                                setOrderNumberEnable(false);
+                            }
+                        }} type="text" autoFocus/>}
+                        {!orderNumberEnable && <p className='orderNumber' 
+                        onClick={()=> {
+                            setOrderNumberEnable(true);
+                        }}
+                        >01/01/2024</p>}
                     </div>
                 </div>
                 <div className='header21'>
@@ -41,16 +58,13 @@ return (
                 <p className='p4'>Nazwa firmy</p>
                 <div className='companyNameView1'>  
                 <p>{props.moveWorkRegister.companyName}</p>   
-                    {/* <p>Siemens Energy Sp. z o.o.</p>
-                    <p>03-821 Warszawa</p>
-                    <p>ul. Żupnicza 11</p>       */}
                 </div>
             </div>
 
             <div className='header3'>
                 <p className='p4'>Nr porozumienia</p>
                 <div className='header31'>
-                    <p className='agreementNumber'>DEZ/2/2024</p>
+                    <p className='agreementNumber'>{props.moveWorkRegister.numberRegistration}</p>
                     <p className='p5'>Pracodawca ustalony w Porozumieniu</p>
                     <p className='companyAgreement'>Siemens Energy sp. z o.o.</p>
                 </div>
@@ -64,9 +78,9 @@ return (
             <div className='header3'>
                 <p className='p4'>Planowana data rozpoczęcia</p>
                 <div className='header31'>
-                    <p className='startData'>15-01-2024</p>
+                    <p className='startData'>{props.moveWorkRegister.startDate}</p>
                     <p className='p5'>Planowana data zakończenia</p>
-                    <p className='stopData'>19-01-2024</p>
+                    <p className='stopData'>{props.moveWorkRegister.stopDate}</p>
                 </div>
             </div>
         </div>
@@ -90,7 +104,7 @@ return (
                     <p className='p9'>imię i nazwisko</p>
                 </div>
                 <div className='header32'>
-                    <p className='p7'>Dariusz Walter</p>
+                    <p className='p7'>{props.moveWorkRegister.principalName}</p>
                     <p className='p10'>603097603</p>
                     <p className='p11'>alala</p>
                 </div>
@@ -114,7 +128,7 @@ return (
                     <p className='p9'>imię i nazwisko lub stanowisko</p>
                 </div>
                 <div className='header32'>
-                    <p className='p7'></p>
+                    <p className='p7'>{props.moveWorkRegister.coordinatingName}</p>
                     <p className='p10'></p>
                     <p className='p11'></p>
                 </div>
@@ -126,7 +140,7 @@ return (
                     <p className='p9'>imię i nazwisko lub stanowisko</p>
                 </div>
                 <div className='header32'>
-                    <p className='p7'></p>
+                    <p className='p7'>{props.moveWorkRegister.managerName}</p>
                     <p className='p10'></p>
                     <p className='p11'></p>
                 </div>
@@ -138,7 +152,7 @@ return (
                     <p className='p9'>imię i nazwisko</p>
                 </div>
                 <div className='header32'>
-                    <p className='p7'></p>
+                    <p className='p7'>{props.moveWorkRegister.supervisorName}</p>
                     <p className='p10'></p>
                     <p className='p11'></p>
                 </div>
@@ -203,7 +217,7 @@ return (
             <div className='header3'>
                 <div className='header6'>
                     <p className='p8'>Imię i Nazwisko</p>
-                    <p className='p18'>Antek Policmajster</p>
+                    <p className='p18'>{props.moveWorkRegister.coordinatorName}</p>
                 </div>
                 <div className='header7'>
                     <p>Podpis:</p>
@@ -226,7 +240,7 @@ return (
             <div className='header3'>
                 <div className='header6'>
                     <p className='p8'>Imię i Nazwisko</p>
-                    <p className='p18'>Antek Policmajster</p>
+                    <p className='p18'>{props.moveWorkRegister.managerName}</p>
                 </div>
                 <div className='header7'>
                     <p>Podpis:</p>
@@ -249,7 +263,7 @@ return (
             <div className='header3'>
                 <div className='header6'>
                     <p className='p8'>Imię i Nazwisko</p>
-                    <p className='p18'>Antek Policmajster</p>
+                    <p className='p18'>{props.moveWorkRegister.supervisorName}</p>
                 </div>
                 <div className='header7'>
                     <p>Podpis:</p>
@@ -344,13 +358,13 @@ return (
             <p className='p15'></p>
             <div className='header8'>
                 <p className='p6'>Kierujący zespołem</p>
-                <p className='p15'>Praca została zakończona, materiały i narzędzia usunieto, członków zespołu ze strefy wyprowadzono. Pracę wykonano w pełnym zakresie TAK/NIE (niepotrzebne skreslić). Przyczyny nie wykonania pracy w pełnym zakresie:</p>
+                <p className='p15'>Praca została zakończona, materiały i narzędzia usunięto, członków zespołu ze strefy wyprowadzono. Pracę wykonano w pełnym zakresie TAK/NIE (niepotrzebne skreslić). Przyczyny nie wykonania pracy w pełnym zakresie:</p>
                 <p className='p15'>................................................................................................................................................................................................................................................................................................................................................................................................................................</p>
             </div>
             <div className='header3'>
                 <div className='header6'>
                     <p className='p8'>Imię i Nazwisko</p>
-                    <p className='p18'>Antek Policmajster</p>
+                    <p className='p18'>{props.moveWorkRegister.supervisorName}</p>
                 </div>
                 <div className='header7'>
                     <p>Podpis:</p>
@@ -373,7 +387,7 @@ return (
             <div className='header3'>
                 <div className='header6'>
                     <p className='p8'>Imię i Nazwisko</p>
-                    <p className='p18'>Antek Policmajster</p>
+                    <p className='p18'>{props.moveWorkRegister.managerName}</p>
                 </div>
                 <div className='header7'>
                     <p>Podpis:</p>
@@ -396,7 +410,7 @@ return (
             <div className='header3'>
                 <div className='header6'>
                     <p className='p8'>Imię i Nazwisko</p>
-                    <p className='p18'>Antek Policmajster</p>
+                    <p className='p18'>{props.moveWorkRegister.coordinatorName}</p>
                 </div>
                 <div className='header7'>
                     <p>Podpis:</p>

@@ -194,7 +194,7 @@ const WorkRegister = (props) => {
             numberOfAgreement: readValue.numberOfAgreement
         }
 
-        if (newNumberOfAgreement === '') {    
+        if (newNumberOfAgreement.numberOfAgreement === '') {    
             setErrors( {
                 ...errors,
                 numberOfAgreement: "Brak danych !!!"
@@ -604,7 +604,7 @@ const WorkRegister = (props) => {
                     <button onClick={(e) => {
                         e.preventDefault();
                         addNmberOfAgreemnet();
-                    }}>Dodaj</button>
+                    }}>Zapisz</button>
                     <button onClick={(e) => {
                         e.preventDefault();
                         setOpenModal(() => {return {numberOfAgreement: true}});
@@ -626,7 +626,7 @@ const WorkRegister = (props) => {
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCompany();
-                    }}>Dodaj</button>
+                    }}>Zapisz</button>
                     <button onClick={(e) => {
                         e.preventDefault();
                         setOpenModal(() => {return {companyName: true}});
@@ -641,7 +641,7 @@ const WorkRegister = (props) => {
                     <button onClick={(e) => {
                         e.preventDefault();
                         addOffice();
-                    }}>Dodaj</button>
+                    }}>Zapisz</button>
                     <button onClick={(e) => {
                         e.preventDefault();
                         setOpenModal(() => {return {officeName: true}});
@@ -656,7 +656,7 @@ const WorkRegister = (props) => {
                     <button onClick={(e) => {
                         e.preventDefault();
                         addPrincipal();
-                    }}>Dodaj</button>
+                    }}>Zapisz</button>
                     <button onClick={(e) => {
                         e.preventDefault();
                         setOpenModal(() => {return {principalName: true}});
@@ -671,7 +671,7 @@ const WorkRegister = (props) => {
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCoordinating();
-                    }}>Dodaj</button>
+                    }}>Zapisz</button>
                     <button onClick={(e) => {
                         e.preventDefault();
                         setOpenModal(() => {return {coordinatingName: true}});
@@ -686,7 +686,7 @@ const WorkRegister = (props) => {
                     <button onClick={(e) => {
                         e.preventDefault();
                         addCoordinator();
-                    }}>Dodaj</button>
+                    }}>Zapisz</button>
                     <button onClick={(e) => {
                         e.preventDefault();
                         setOpenModal(() => {return {coordinatorName: true}});
@@ -701,7 +701,7 @@ const WorkRegister = (props) => {
                     <button onClick={(e) => {
                         e.preventDefault();
                         addAllower();
-                    }}>Dodaj</button>
+                    }}>Zapisz</button>
                     <button onClick={(e) => {
                         e.preventDefault();
                         setOpenModal(() => {return {allowerName: true}});
@@ -716,7 +716,7 @@ const WorkRegister = (props) => {
                     <button onClick={(e) => {
                         e.preventDefault();
                         addManager();
-                    }}>Dodaj</button>
+                    }}>Zapisz</button>
                     <button onClick={(e) => {
                         e.preventDefault();
                         setOpenModal(() => {return {managerName: true}});
@@ -731,7 +731,7 @@ const WorkRegister = (props) => {
                     <button onClick={(e) => {
                         e.preventDefault();
                         addSupervisor();
-                    }}>Dodaj</button>
+                    }}>Zapisz</button>
                     <button onClick={(e) => {
                         e.preventDefault();
                         setOpenModal(() => {return {supervisorName: true}});
@@ -746,7 +746,7 @@ const WorkRegister = (props) => {
                     <button onClick={(e) => {
                         e.preventDefault();
                         addTeamMember();
-                    }}>Dodaj</button>
+                    }}>Zapisz</button>
                     <button onClick={(e) => {
                         e.preventDefault();
                         setOpenModal(() => {return {teamMember: true}});
