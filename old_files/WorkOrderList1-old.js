@@ -2,7 +2,7 @@ import './workOrderList.css'
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ModalDelete from "../components/ModalDelete";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const WorkOrderList = (props) => {
         
@@ -26,6 +26,7 @@ const WorkOrderList = (props) => {
         createdBy: '',
         editBy: ''
     });
+    // const navigate = useNavigate();
     const [navigateToView, setNavigateToView] = useState(false);
 
     useEffect(() => {
@@ -37,8 +38,18 @@ const WorkOrderList = (props) => {
     }, []);
     
     useEffect(() => {
+        // console.log('eeee', readValue);
         props.setMoveWorkRegister(readValue);
     }, [readValue]);
+
+    const moveWorkRegister = (e) => {
+        // console.log(e.target.dataset.id);
+        loadReadValue(e.target.dataset.id);
+        // props.setMoveWorkRegister(readValue);
+        setNavigateToView(true);
+        // navigate('/view');
+    }
+
 
     const checkHandler = (i) => {
         setInputDisabled(inputDisabled.map((item, index) => {
@@ -90,10 +101,16 @@ const WorkOrderList = (props) => {
     }
   
     const handleError = () => {
+        // if (Object.values(readValue).find(item => item === '') ==='') {
+        //     return true;
+        // } else {
+        //     return false;
+        // }    
         return Object.values(readValue).find(item => item === '') === '' ? true : false;
     }
 
     const editWorkOrderList = (item) => {
+        // console.log('aaa', readValue)
         axios
         .post(`workOrder/editWorkOrder/${item._id}`, readValue) 
         .then(() => {       
@@ -123,7 +140,8 @@ const WorkOrderList = (props) => {
         axios
             .post("workOrder/addWorkOrder ", workOrder )
             .then((res) => {
-                  setError(false);
+                // setAddWorkOrderResponse(res.data.save);
+                setError(false);
             })
             .catch((error) => {
                 console.error(error);
@@ -248,6 +266,7 @@ const WorkOrderList = (props) => {
                                             }}
                                                 className="btnUpdate">{!inputDisabled[i] ? "Edytuj" : 'X'}
                                             </button>
+                                            {/* {inputDisabled[i] && <button disabled={Object.values(readValue).filter((item, index) => {return index !== 10}).find(item => item === '') ==='' ? true : false} onClick={() => {                                      */}
                                             {inputDisabled[i] && <button disabled={Object.values(readValue).find(item => item === '') ==='' ? true : false} onClick={() => { 
                                                                 setEditBy();
                                                                 editWorkOrderList(item);
@@ -262,10 +281,8 @@ const WorkOrderList = (props) => {
                                                 }}
                                                 className="btnRegistration">Rejestruj
                                             </button>
-                                            <button onClick={() => {
-                                                loadReadValue(i);
-                                                setNavigateToView(true);
-                                            }}>Pokaż
+                                            <button data-id={i} onClick={moveWorkRegister}>Pokaż
+                                                {/* <Link className="link" to="/view">Pokaż</Link> */}
                                             </button>
                                         </td>
                                     </tr>

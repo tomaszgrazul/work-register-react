@@ -11,9 +11,9 @@ import { useState, useEffect } from "react";
         const [moveWorkRegister, setMoveWorkRegister] = useState([]);
 
 
-        useEffect(() => {
-            console.log("test", moveWorkRegister) ; 
-        }, [moveWorkRegister]);
+        // useEffect(() => {
+        //     console.log("test", moveWorkRegister) ; 
+        // }, [moveWorkRegister]);
 
 
     return (
