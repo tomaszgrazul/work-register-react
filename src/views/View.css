@@ -146,6 +146,11 @@
     flex-direction: column;
 }
 
+.header9 {
+    display: flex;
+    width: 80%;
+}
+
 .p1, .p2 {
     margin: 0 0 0 40px;
 }
@@ -160,7 +165,7 @@
 }
 
 .p5 {
-    margin: 0 0 0 360px;
+    width: 57%;
 }
 
 .p6 {
@@ -303,6 +308,7 @@
 .agreementNumber, .companyAgreement, .startData, .stopData {
     border: 1px solid black;
     padding: 0 10px 0 10px;
+    width: 20%;
 }
 
 .workPLace {

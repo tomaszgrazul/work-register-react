@@ -4,12 +4,40 @@ import { useEffect, useState } from 'react'
 
 const View = (props) => {
 
-    const [orderNumberEnable, setOrderNumberEnable] = useState(false);
+    const [inputEnable, setInputEnable] = useState({
+        orderNumber: false,
+        orderDate: false,
+        orderTime: false,
+        companyName: false
+    });
 
     // useEffect(() => {
     //     console.log("qqq", orderNumberEnable);
     // }, []);
 
+    const handleValueChange = (e) => {
+        const target = e.target;
+        const name = e.target.name;
+
+        // setReadValue ({
+        //     ...readValue,
+        //     [name]: target.value,
+        // });
+
+        // setErrors( {    
+        //     ...errors, 
+        //     [name]: ""
+        // });
+
+    };
+
+    const handleSetInputEnableTrue = (e) => {
+        const name = e.target.__reactProps$xj3v2jb6dtt.name;
+        setInputEnable({
+            ...inputEnable,
+            [name]: true
+        });
+    }
 
 return (
     <div className='headerMain'>
@@ -20,18 +48,18 @@ return (
             <div className='header2'>
                 <div className='header21'>
                     <p className='p1'>Zał. nr 7 do EG 050801</p>
-                    <p className='regNumber'>Nr w rejestrze EuRoPolGaz: 23/DEZ/2024</p>
+                    <p className='regNumber'>Nr w rejestrze EuRoPolGaz: {props.moveWorkRegister.numberRegistration}</p>
                     <div className='header211'>
                         <p>Polecenie pisemne nr</p>
-                        {orderNumberEnable && <input onKeyDown={(e) => {
+                        {inputEnable.orderNumber && <input onKeyDown={(e) => {
                             if ( e.key === 'Enter' ) {
-                                setOrderNumberEnable(false);
+                                setInputEnable( {
+                                    ...inputEnable,
+                                    orderNumber: false
+                                });
                             }
                         }} type="text" autoFocus/>}
-                        {!orderNumberEnable && <p className='orderNumber' 
-                        onClick={()=> {
-                            setOrderNumberEnable(true);
-                        }}
+                        {!inputEnable.orderNumber && <p className='orderNumber' name='orderNumber' onClick={handleSetInputEnableTrue}
                         >01/01/2024</p>}
                     </div>
                 </div>
@@ -40,7 +68,16 @@ return (
                     <p className='p3'>(wypełnia wykonawca zewnętrzny)</p>
                     <div className='header221'>
                         <p>Data:</p>
-                        <p className='orderDate'>05.01.2024</p>
+                        {inputEnable.orderDate && <input onKeyDown={(e) => {
+                            if ( e.key === 'Enter' ) {
+                                setInputEnable( {
+                                    ...inputEnable,
+                                    orderDate: false
+                                });
+                            }
+                        }} type="date" />}
+                        {!inputEnable.orderDate && <p className='orderDate' name='orderDate' onClick={handleSetInputEnableTrue}
+                        >05.01.2024</p>}
                     </div>
                 </div>
                 <div className='header23'>
@@ -57,14 +94,23 @@ return (
             <div className='companyNameView'>
                 <p className='p4'>Nazwa firmy</p>
                 <div className='companyNameView1'>  
-                <p>{props.moveWorkRegister.companyName}</p>   
+                {inputEnable.companyName && <input onKeyDown={(e) => {
+                            if ( e.key === 'Enter' ) {
+                                setInputEnable( {
+                                    ...inputEnable,
+                                    companyName: false
+                                });
+                            }
+                        }} onChange={handleValueChange} type="text" value={props.moveWorkRegister.companyName} name='companyName' autoFocus/>}
+                {!inputEnable.companyName && <p name='companyName' onClick={handleSetInputEnableTrue}>
+                {props.moveWorkRegister.companyName}</p>} 
                 </div>
             </div>
 
             <div className='header3'>
                 <p className='p4'>Nr porozumienia</p>
-                <div className='header31'>
-                    <p className='agreementNumber'>{props.moveWorkRegister.numberRegistration}</p>
+                <div className='header9'>
+                    <p className='agreementNumber'></p>
                     <p className='p5'>Pracodawca ustalony w Porozumieniu</p>
                     <p className='companyAgreement'>Siemens Energy sp. z o.o.</p>
                 </div>
@@ -77,7 +123,7 @@ return (
 
             <div className='header3'>
                 <p className='p4'>Planowana data rozpoczęcia</p>
-                <div className='header31'>
+                <div className='header9'>
                     <p className='startData'>{props.moveWorkRegister.startDate}</p>
                     <p className='p5'>Planowana data zakończenia</p>
                     <p className='stopData'>{props.moveWorkRegister.stopDate}</p>
