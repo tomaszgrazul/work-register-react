@@ -38,7 +38,13 @@
 .orderNumber {
     width: 130px;
     border: 1px solid black;
-    margin-bottom: 5px;
+    margin: 0 0 5px 0;
+}
+
+.inputOrderNumber {
+    width: 130px;
+    height: 17px;
+    margin: 0 0 5px 0;
 }
 
 .orderDate {
@@ -141,7 +147,6 @@
 .header8 {
     width: 100%;
     display: flex;
-    /* align-items: flex-end; */
     justify-content: center;
     flex-direction: column;
 }
@@ -244,7 +249,6 @@
 
 .p20 {
     width: 60%;
-    /* text-align: center; */
 }
 
 .p21 {
@@ -321,9 +325,17 @@ img {
     height: auto;
 }
 
-input {
-    outline: none;
-    width: 125px;
-    height: 17px;
-    margin: 0 0 5px 0;
+.inputView {
+    outline: none; 
+    border: 1px solid red;
+    padding: initial;
+}
+
+
+
+.inputCompanyName {
+    width: 80%;
+    height: 22px;
+    margin: 5px 5px 5px 0;
+    text-align: center;
 }

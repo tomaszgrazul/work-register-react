@@ -12,8 +12,8 @@ const View = (props) => {
     });
 
     // useEffect(() => {
-    //     console.log("qqq", orderNumberEnable);
-    // }, []);
+    //     console.log("qqq", inputEnable);
+    // }, [inputEnable]);
 
     const handleValueChange = (e) => {
         const target = e.target;
@@ -31,13 +31,35 @@ const View = (props) => {
 
     };
 
-    const handleSetInputEnableTrue = (e) => {
-        const name = e.target.__reactProps$xj3v2jb6dtt.name;
+    const handleSetInputEnableTrue = (name) => {
         setInputEnable({
             ...inputEnable,
             [name]: true
         });
     }
+
+    const handleSetInputEnableFalse = (name) => {
+        setInputEnable({
+            ...inputEnable,
+            [name]: false
+        });
+    }
+
+    // const handleSetInputEnable = (name) => {
+    //     Object.entries(inputEnable).find((value) => {
+    //         if (value[0] === name ) {
+    //             console.log('aaa', value[1])
+    //             setChangeValue(value[1]);
+    //             setChangeValue(prevChangeValue => !prevChangeValue);
+    //             console.log('bbb', changeValue)
+    //             setInputEnable({
+    //                 ...inputEnable,
+    //                 [name]: changeValue
+    //             });
+    //         }     
+    //     })
+    // }   
+            
 
 return (
     <div className='headerMain'>
@@ -51,15 +73,12 @@ return (
                     <p className='regNumber'>Nr w rejestrze EuRoPolGaz: {props.moveWorkRegister.numberRegistration}</p>
                     <div className='header211'>
                         <p>Polecenie pisemne nr</p>
-                        {inputEnable.orderNumber && <input onKeyDown={(e) => {
+                        {inputEnable.orderNumber && <input className='inputView inputOrderNumber' onKeyDown={(e) => {
                             if ( e.key === 'Enter' ) {
-                                setInputEnable( {
-                                    ...inputEnable,
-                                    orderNumber: false
-                                });
+                                handleSetInputEnableFalse('orderNumber')
                             }
                         }} type="text" autoFocus/>}
-                        {!inputEnable.orderNumber && <p className='orderNumber' name='orderNumber' onClick={handleSetInputEnableTrue}
+                        {!inputEnable.orderNumber && <p className='orderNumber' onClick={() => handleSetInputEnableTrue('orderNumber')}
                         >01/01/2024</p>}
                     </div>
                 </div>
@@ -68,7 +87,7 @@ return (
                     <p className='p3'>(wypełnia wykonawca zewnętrzny)</p>
                     <div className='header221'>
                         <p>Data:</p>
-                        {inputEnable.orderDate && <input onKeyDown={(e) => {
+                        {inputEnable.orderDate && <input className='inputView inputOrderNumber' onKeyDown={(e) => {
                             if ( e.key === 'Enter' ) {
                                 setInputEnable( {
                                     ...inputEnable,
@@ -76,7 +95,7 @@ return (
                                 });
                             }
                         }} type="date" />}
-                        {!inputEnable.orderDate && <p className='orderDate' name='orderDate' onClick={handleSetInputEnableTrue}
+                        {!inputEnable.orderDate && <p className='orderDate' onClick={() => handleSetInputEnableTrue('orderDate')}
                         >05.01.2024</p>}
                     </div>
                 </div>
@@ -93,8 +112,8 @@ return (
         <div className='headerMain2'>
             <div className='companyNameView'>
                 <p className='p4'>Nazwa firmy</p>
-                <div className='companyNameView1'>  
-                {inputEnable.companyName && <input onKeyDown={(e) => {
+                {/* <div className={inputEnable.companyName ? '' : 'companyNameView1'}>   */}
+                {inputEnable.companyName && <input className='inputCompanyName inputView' onKeyDown={(e) => {
                             if ( e.key === 'Enter' ) {
                                 setInputEnable( {
                                     ...inputEnable,
@@ -102,9 +121,9 @@ return (
                                 });
                             }
                         }} onChange={handleValueChange} type="text" value={props.moveWorkRegister.companyName} name='companyName' autoFocus/>}
-                {!inputEnable.companyName && <p name='companyName' onClick={handleSetInputEnableTrue}>
+                {!inputEnable.companyName && <p className='companyNameView1' name='companyName' onClick={handleSetInputEnableTrue}>
                 {props.moveWorkRegister.companyName}</p>} 
-                </div>
+                {/* </div> */}
             </div>
 
             <div className='header3'>
