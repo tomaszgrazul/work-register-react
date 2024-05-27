@@ -101,7 +101,17 @@ return (
                 </div>
                 <div className='header23'>
                     <p>Godzina:</p>
-                    <p className='orderHour'>11.00</p>
+                    {inputEnable.orderHour && <input className='inputView inputOrderNumber' onKeyDown={(e) => {
+                            if ( e.key === 'Enter' ) {
+                                setInputEnable( {
+                                    ...inputEnable,
+                                    orderHour: false
+                                });
+                            }
+                        }} type="date" />}
+                        {!inputEnable.orderHour && <p className='orderHour' onClick={() => handleSetInputEnableTrue('orderHour')}
+                        >11:00</p>}
+                    {/* <p className='orderHour'>11.00</p> */}
                 </div>
                 <div className='headerMainText'>
                     <h2>Polecenie pisemne wykonania prac przy urządzeniach energetycznych</h2>
